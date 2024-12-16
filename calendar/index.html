@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>celendar</title>
+    <link rel="stylesheet" href="./css/calendar.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="calendar">
+      <div class="calendarHeader">
+        <div class="calendarTitle">Doable 캘린더</div>
+        <div class="calendarHeaderControls">
+          <div class="calendarYearMonth"></div>
+          <div class="calendarControls">
+            <button type="button" class="calendarPrev">&lt;</button>
+            <button type="button" class="calendarToday">오늘</button>
+            <button type="button" class="calendarNext">&gt;</button>
+            <button type="button" class="addScheduleButton">일정 등록</button>
+          </div>
+        </div>
+      </div>
+      <div id="calendar"></div>
+    </div>
+
+    <!-- S : 일정등록 모당찰  -->
+    <div class="scheduleModal">
+      <div class="modalContent">
+        <h2>일정 등록</h2>
+        <form action="">
+          <label for="scheduleTitle">일정 제목</label>
+          <input
+            type="text"
+            id="scheduleTitle"
+            name="scheduleTitle"
+            placeholder="제목을 입력하세요"
+            required
+          />
+
+          <label for="scheduleStartDate">시작일</label>
+          <input
+            type="datetime-local"
+            id="scheduleStartDate"
+            name="scheduleStartDate"
+            required
+          />
+          <label for="scheduleEndDate">종료일</label>
+          <input
+            type="datetime-local"
+            id="scheduleEndDate"
+            name="scheduleEndDate"
+            required
+          />
+
+          <label for="scheduleRepeat">반복유무</label>
+          <select id="scheduleRepeat" name="scheduleRepeat">
+            <option value="">사용자 선택</option>
+            <option value="0,1,2,3,4">매주 일 ~ 목요일</option>
+            <option value="0,1,2,3,4,5,6">매일</option>
+            <option value="5">매주 금요일</option>
+            <option value="6">매주 토요일</option>
+            <option value="0">매주 일요일</option>
+            <option value="0,6">매주 토~일요일</option>
+          </select>
+
+          <button type="submit" class="submitButton">등록</button>
+          <button type="button" class="closeButton">닫기</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Q : 일정등록 모당찰  -->
+    <script src="./js/calendar.js" defer></script>
+  </body>
+</html>

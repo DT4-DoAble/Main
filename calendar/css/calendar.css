@@ -1,0 +1,237 @@
+.calendar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* margin: 20px 0 100px 0; */
+}
+
+.calendar table {
+  width: 100%;
+  height: 80vh;
+  margin: 20px 0 0 0;
+}
+
+.calendar table > caption {
+  font-size: larger;
+  font-weight: bolder;
+  color: red;
+  text-align: left;
+  padding: 10px 20px;
+}
+
+.calendar table > tbody > tr > td {
+  padding: 30px 10px;
+  text-align: center;
+}
+
+.calendar table > tbody > tr > td > span {
+  display: block;
+  padding: 10px 10px;
+  cursor: pointer;
+  font-size: 23px;
+}
+
+.calendar table > tbody > tr > td > span.today {
+  display: inline-block; /* inline-block을 사용해 너비와 높이 조정 가능 */
+  width: 25px; /* 원하는 크기로 조정 */
+  height: 25px; /* 너비와 동일하게 설정 */
+  line-height: 25px; /* 텍스트를 정중앙에 정렬 */
+  text-align: center;
+  background-color: #3fc9ae; /* 원의 배경색 */
+  color: white; /* 텍스트 색상 */
+  border-radius: 50%; /* 완전한 원 모양 */
+  font-weight: bold;
+}
+
+.calendar > .calendarHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 30px;
+}
+.calendar > .calendarHeader > .calendarTitle {
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+
+.calendar > .calendarHeader > .calendarHeaderControls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar > .calendarHeader > .calendarHeaderControls > .calendarYearMonth {
+  font-size: 24px;
+  font-weight: 700;
+  color: gray;
+}
+
+/* 
+.calendar > .calendarHeader > .calendarHeaderControls > .calendarControls {
+} */
+
+.calendar
+  > .calendarHeader
+  > .calendarHeaderControls
+  > .calendarControls
+  > button {
+  float: left;
+  width: 50px;
+  height: 50px;
+  padding: 1px 4px 0 4px;
+  border: 1px solid #cbcbcb;
+  background-color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.calendar
+  > .calendarHeader
+  > .calendarHeaderControls
+  > .calendarControls
+  > button.calendarToday {
+  width: 80px;
+}
+
+.calendar
+  > .calendarHeader
+  > .calendarHeaderControls
+  > .calendarControls
+  > button.addScheduleButton {
+  width: 120px;
+  margin-left: 10px;
+  font-size: 20px;
+  background-color: #000000;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.calendar
+  > .calendarHeader
+  > .calendarHeaderControls
+  > .calendarControls
+  > button.addScheduleButton:hover {
+  background-color: #000000;
+}
+
+.calendar table > thead > tr > th {
+  padding: 20px 10px;
+  font-size: 23px;
+}
+.calendar table > thead > tr > th.saturday {
+  color: gray;
+}
+
+.calendar table > thead > tr > th.sunday {
+  color: red;
+}
+
+.calendar table > tbody > tr > td > span.saturday {
+  color: gray;
+}
+
+.calendar table > tbody > tr > td > span.sunday {
+  color: red;
+}
+
+/* S : 일정등록 모당찰 */
+/* 모달 오버레이 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 비활성화 색상 */
+  display: none; /* 초기 상태에서 숨김 */
+  z-index: 998; /* 모달보다 낮게 */
+}
+
+.scheduleModal {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: auto; /* 높이 조정 */
+  max-height: 90%; /* 최대 높이 설정 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.2);
+  transition: bottom 0.4s ease-in-out;
+  z-index: 999;
+}
+
+.scheduleModal.active {
+  bottom: 0;
+}
+
+.modalOverlay.active {
+  display: block; /* 오버레이 활성화 */
+}
+
+.modalContent {
+  padding: 20px;
+  text-align: center;
+}
+
+.modalContent h2 {
+  margin: 0 0 30px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #121212;
+}
+
+.modalContent form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modalContent label {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 10px 0;
+}
+
+input,
+button,
+select {
+  padding: 10px;
+  font-size: 20px;
+}
+
+select {
+  -webkit-appearance: none; /* 크롬 화살표 없애기 */
+  -moz-appearance: none; /* 파이어폭스 화살표 없애기 */
+  appearance: none; /* 화살표 없애기 */
+}
+
+.submitButton {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #45a049;
+}
+
+.closeButton {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background-color: #d32f2f;
+}
+/* E : 일정등록 모당찰 */
+
+/* 반응형 처리 */
+@media (max-width: 768px) {
+}
