@@ -209,4 +209,22 @@ document.addEventListener('DOMContentLoaded', function (e) {
     }
   });
   /* E : 일정등록 모당찰 */
+
+  function adjustCalendarHeight() {
+    const header = document.querySelector('header');
+    const footer = document.querySelector('footer');
+    const main = document.querySelector('main');
+
+    const headerHeight = header.offsetHeight;
+    const footerHeight = footer.offsetHeight;
+    const windowHeight = window.innerHeight;
+
+    const calendarHeight = windowHeight - headerHeight - footerHeight;
+    // console.log(calendarHeight);
+    main.style.height = calendarHeight + 'px';
+  }
+
+  // 초기 실행 및 창 크기 변경 시 반응
+  window.addEventListener('DOMContentLoaded', adjustCalendarHeight);
+  window.addEventListener('resize', adjustCalendarHeight);
 });
