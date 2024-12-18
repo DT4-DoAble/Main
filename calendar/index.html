@@ -3,28 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>celendar</title>
+    <title>Doable Calendar</title>
     <link rel="stylesheet" href="./css/calendar.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
-    <div class="calendar">
+    <!-- Header -->
+    <header class="site-header">
+      <button type="button" class="prevPageButton">&lt; 이전</button>
+      <div class="calendarTitle">Doable Calendar</div>
+      <button type="button" class="addScheduleButton">+</button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="calendar">
       <div class="calendarHeader">
-        <div class="calendarTitle">Doable 캘린더</div>
         <div class="calendarHeaderControls">
           <div class="calendarYearMonth"></div>
           <div class="calendarControls">
             <button type="button" class="calendarPrev">&lt;</button>
             <button type="button" class="calendarToday">오늘</button>
             <button type="button" class="calendarNext">&gt;</button>
-            <button type="button" class="addScheduleButton">일정 등록</button>
           </div>
         </div>
       </div>
       <div id="calendar"></div>
-    </div>
+    </main>
 
-    <!-- S : 일정등록 모당찰  -->
+    <!-- Schedule Modal -->
     <div class="scheduleModal">
       <div class="modalContent">
         <h2>일정 등록</h2>
@@ -70,7 +76,11 @@
       </div>
     </div>
 
-    <!-- Q : 일정등록 모당찰  -->
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>하단영역</p>
+    </footer>
+
     <script src="./js/calendar.js" defer></script>
   </body>
 </html>
