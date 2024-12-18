@@ -4,13 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doable Calendar</title>
-    <!-- S : 고용 CSS -->
-    <link rel="stylesheet" href="" />
-    <!-- E : 고용 CSS -->
+    <!-- S : 공통 CSS -->
+    <link rel="stylesheet" href="../css/common.css" />
+    <!-- E : 공통 CSS -->
 
     <!-- S : CALENDAR CSS -->
     <link rel="stylesheet" href="./css/calendar.css" />
     <!-- E : CALENDAR CSS -->
+
+    <!-- S : CSS 리셋 CDN-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css"
+    />
+    <!-- E : CSS 리셋 CDN-->
 
     <!-- S : DB 라이브러리 -->
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
@@ -58,16 +65,10 @@
             id="scheduleStartDate"
             name="scheduleStartDate"
           />
-          <label for="scheduleEndDate">종료일</label>
-          <input
-            type="datetime-local"
-            id="scheduleEndDate"
-            name="scheduleEndDate"
-          />
 
           <label for="scheduleRepeat">반복유무</label>
           <select id="scheduleRepeat" name="scheduleRepeat">
-            <option value="">사용자 선택</option>
+            <option value="">사용하지않음</option>
             <option value="0,1,2,3,4">매주 일 ~ 목요일</option>
             <option value="0,1,2,3,4,5,6">매일</option>
             <option value="5">매주 금요일</option>
@@ -75,6 +76,13 @@
             <option value="0">매주 일요일</option>
             <option value="0,6">매주 토~일요일</option>
           </select>
+
+          <label for="scheduleEndDate">종료일</label>
+          <input
+            type="datetime-local"
+            id="scheduleEndDate"
+            name="scheduleEndDate"
+          />
 
           <button type="submit" class="submitButton">등록</button>
           <button type="button" class="closeButton">닫기</button>

@@ -220,7 +220,47 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 클릭된 날짜 출력
         console.log(`${year}.${month}.${clickedDay}`);
+
+        // 현재 시간을 가져오기 (UTC)
+        const now = new Date();
+        // 대한민국 시간으로 9시간을 더함
+        const koreaTime = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+
+        const currentHours = koreaTime.getHours();
+        const currentMinutes = koreaTime.getMinutes();
+
+        // 시작일에 데이터 클릭한 일자 데이터 넣기
+        const startDate = new Date(
+          year,
+          month,
+          clickedDay,
+          currentHours,
+          currentMinutes
+        );
+
+        // 시간을 포함하여 format 'YYYY-MM-DDTHH:mm'으로 변환
+        const startDateTime = startDate.toISOString().slice(0, 16); // ISO 형식에서 'YYYY-MM-DDTHH:mm'까지 자르기
+        // 시작일을 `scheduleStartDate`에 설정
+        document.querySelector(`#scheduleStartDate`).value = startDateTime;
+        document.querySelector(`#scheduleEndDate`).value = startDateTime;
       }
+    }
+  });
+
+  const scheduleRepeatSelect = document.querySelector('#scheduleRepeat');
+  const scheduleEndDateInput = document.querySelector('#scheduleEndDate');
+
+  // 초기 상태 설정: '사용하지 않음'이 기본값이므로 종료일 비활성화
+  if (scheduleRepeatSelect.value === '') {
+    scheduleEndDateInput.disabled = true; // 종료일 비활성화
+  }
+
+  // 반복유무 변경 시 종료일 활성화/비활성화 처리
+  scheduleRepeatSelect.addEventListener('change', function () {
+    if (scheduleRepeatSelect.value === '') {
+      scheduleEndDateInput.disabled = true; // 종료일 비활성화
+    } else {
+      scheduleEndDateInput.disabled = false; // 종료일 활성화
     }
   });
 
