@@ -4,8 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doable Calendar</title>
+    <!-- S : 고용 CSS -->
+    <link rel="stylesheet" href="" />
+    <!-- E : 고용 CSS -->
+
+    <!-- S : CALENDAR CSS -->
     <link rel="stylesheet" href="./css/calendar.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- E : CALENDAR CSS -->
+
+    <!-- S : DB 라이브러리 -->
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <!-- E : DB 라이브러리 -->
   </head>
   <body>
     <!-- Header -->
@@ -41,7 +50,6 @@
             id="scheduleTitle"
             name="scheduleTitle"
             placeholder="제목을 입력하세요"
-            required
           />
 
           <label for="scheduleStartDate">시작일</label>
@@ -49,14 +57,12 @@
             type="datetime-local"
             id="scheduleStartDate"
             name="scheduleStartDate"
-            required
           />
           <label for="scheduleEndDate">종료일</label>
           <input
             type="datetime-local"
             id="scheduleEndDate"
             name="scheduleEndDate"
-            required
           />
 
           <label for="scheduleRepeat">반복유무</label>

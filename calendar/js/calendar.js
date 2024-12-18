@@ -5,12 +5,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     return `${year}년 ${month}월`;
   }
 
-  const calendarHTML = function calendarHTML(
-    date,
-    showDay,
-    showFullDayName,
-    showToday
-  ) {
+  const calendarHTML = function (date, showDay, showFullDayName, showToday) {
     if (!(date instanceof Date)) {
       // date 값이 Date 인지 체크 아니면 중지
       return '';
@@ -103,7 +98,52 @@ document.addEventListener('DOMContentLoaded', function (e) {
     if (calendarElement) {
       calendarElement.innerHTML = html;
     }
+
+    // Dexie.js
+    // getMonthData(년도, 월) -> 전달
+    // console.log(date.getFullYear(), date.getMonth() + 1);
+    getMonthData(date.getFullYear(), date.getMonth() + 1);
   }
+
+  let getMonthData = async function (year, month) {
+    try {
+      // 데이터베이스 초기화
+      const db = new Dexie('CalendarDatabase');
+      db.version(1).stores({
+        calendars: `
+          ++id, 
+          scheduleTitle, 
+          scheduleStartDate, 
+          scheduleEndDate, 
+          scheduleRepeat
+        `,
+      });
+
+      // 모든 데이터를 가져오고, 해당 월의 데이터만 필터링
+      const calendars = await db.calendars.toArray().then((data) => {
+        // 필터링: 시작 날짜가 특정 연도와 월에 해당하는 데이터만 추출
+        return data.filter((item) => {
+          const startDate = new Date(item.scheduleStartDate);
+          return (
+            startDate.getFullYear() === year &&
+            startDate.getMonth() + 1 === month // JavaScript의 월은 0부터 시작하므로 +1
+          );
+        });
+      });
+
+      // 결과 출력
+      console.log(`Found ${calendars.length} entries for ${year}-${month}`);
+      calendars.forEach((calendar) => {
+        console.log(
+          `Title: ${calendar.scheduleTitle}, Start: ${calendar.scheduleStartDate}, End: ${calendar.scheduleEndDate}`
+        );
+      });
+
+      return calendars; // 필요한 경우 반환
+    } catch (err) {
+      console.error('Error fetching data:', err);
+    }
+  };
 
   // 갤린더 시작
   const date = new Date();
@@ -180,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
   const closeButton = document.querySelector('.closeButton');
 
   // 일정 등록 버튼 클릭 시 모달 표시
-  addScheduleButton.addEventListener('click', () => {
+  addScheduleButton.addEventListener('click', (e) => {
     modal.classList.add('active'); // 모달 활성화
     modalOverlay.classList.add('active'); // 오버레이 활성화
     document.body.style.overflow = 'hidden'; // 스크롤 비활성화
@@ -208,23 +248,70 @@ document.addEventListener('DOMContentLoaded', function (e) {
       modalOverlay.classList.remove('active');
     }
   });
+
+  // 모달 일정 등록 및 파일생성 및 데이터 입력
+  let submitButton = document.querySelector('.submitButton');
+
+  submitButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    // console.log(e);
+
+    // 데이터 INSERT
+    // Dexie 사용
+    // Dexie 데이터베이스 초기화
+    var db = new Dexie('CalendarDatabase');
+    // Dexie 데이터베이스 TABLE 생성
+    db.version(1).stores({
+      calendars: `
+        ++id,             
+        scheduleTitle, 
+        scheduleStartDate, 
+        scheduleEndDate, 
+        scheduleRepeat
+      `,
+    });
+
+    // 데이터 추가
+    let scheduleTitle = document.querySelector('#scheduleTitle').value;
+    let scheduleStartDate = document.querySelector('#scheduleStartDate').value;
+    let scheduleEndDate = document.querySelector('#scheduleEndDate').value;
+    let scheduleRepeat = document.querySelector('#scheduleRepeat').value;
+
+    db.calendars
+      .add({
+        scheduleTitle: scheduleTitle,
+        scheduleStartDate: scheduleStartDate,
+        scheduleEndDate: scheduleEndDate,
+        scheduleRepeat: scheduleRepeat,
+      })
+      .then(() => {
+        alert(
+          `${scheduleTitle} 일정이 ${scheduleStartDate}~${scheduleEndDate} 일정으로 등록되었습니다.`
+        );
+      })
+      .catch((err) => {
+        alert('Ouch... ' + err);
+      });
+  });
   /* E : 일정등록 모당찰 */
 
-  function adjustCalendarHeight() {
-    const header = document.querySelector('header');
-    const footer = document.querySelector('footer');
-    const main = document.querySelector('main');
+  /* S : 브라우저 높이 계산 */
+  // function adjustCalendarHeight() {
+  //   const header = document.querySelector('header');
+  //   const footer = document.querySelector('footer');
+  //   const main = document.querySelector('main');
 
-    const headerHeight = header.offsetHeight;
-    const footerHeight = footer.offsetHeight;
-    const windowHeight = window.innerHeight;
+  //   const headerHeight = header.offsetHeight;
+  //   const footerHeight = footer.offsetHeight;
+  //   const windowHeight = window.innerHeight;
 
-    const calendarHeight = windowHeight - headerHeight - footerHeight;
-    // console.log(calendarHeight);
-    main.style.height = calendarHeight + 'px';
-  }
+  //   const calendarHeight = windowHeight - headerHeight - footerHeight;
+  //   // console.log(calendarHeight);
+  //   main.style.height = calendarHeight + 'px';
+  // }
 
-  // 초기 실행 및 창 크기 변경 시 반응
-  window.addEventListener('DOMContentLoaded', adjustCalendarHeight);
-  window.addEventListener('resize', adjustCalendarHeight);
+  // // 초기 실행 및 창 크기 변경 시 반응
+  // window.addEventListener('DOMContentLoaded', adjustCalendarHeight);
+  // window.addEventListener('resize', adjustCalendarHeight);
+  /* S : 브라우저 높이 계산 */
 });

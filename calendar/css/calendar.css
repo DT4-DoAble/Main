@@ -8,8 +8,8 @@ html {
   font-size: 1rem; /* 16px */
 }
 
-header,
-footer {
+header
+/* , footer */ {
   text-align: center;
   padding: 0.625rem; /* 10px */
   background-color: #f3f3f3;
@@ -40,7 +40,7 @@ footer {
 
 .site-header .addScheduleButton {
   font-size: 1rem;
-  background-color: #4caf50;
+  background-color: #3fc9ae;
   color: white;
   border: none;
   border-radius: 0.25rem;
@@ -48,10 +48,10 @@ footer {
   cursor: pointer;
 }
 
-footer {
-  font-size: 0.875rem; /* 14px */
+/* footer {
+  font-size: 0.875rem; /* 14px
   color: #666;
-}
+} */
 
 /* 캘린더 디자인 */
 .calendar {
@@ -145,6 +145,7 @@ footer {
 .calendar > .calendarHeader > .calendarHeaderControls > .calendarControls {
   display: flex;
   align-items: center;
+  gap: 5px;
 }
 
 .calendarControls > button {
@@ -159,6 +160,8 @@ footer {
 
 .calendarControls > button.calendarToday {
   width: 5rem; /* 80px */
+  background-color: #3fc9ae;
+  color: #fff;
 }
 
 /* 일정 등록 모달 */
@@ -265,7 +268,6 @@ select {
 
 .scheduleModal input[type='text'],
 .scheduleModal input[type='datetime-local'] {
-  width: 100%;
   padding: 10px 15px;
   font-size: 1rem; /* scheduleRepeat와 동일한 폰트 크기 */
   border-radius: 5px; /* 동일한 모서리 둥글기 */
@@ -279,6 +281,12 @@ select {
 .scheduleModal select:focus {
   border-color: #4caf50; /* 포커스 시 테두리 색 변경 */
   outline: none; /* 기본 아웃라인 제거 */
+  color: #333; /* 동일한 글자색 */
+}
+
+.scheduleModal input[type='text']::placeholder,
+.scheduleModal input[type='datetime-local']::placeholder {
+  color: #333;
 }
 
 /* 반응형 웹 적용 */
@@ -323,9 +331,9 @@ select {
     padding: 10px 5px;
   }
 
-  footer {
+  /* footer {
     font-size: 12px;
-  }
+  } */
 
   .modalContent {
     padding: 20px;
@@ -405,10 +413,10 @@ select {
     padding: 8px 3px;
   }
 
-  footer {
+  /* footer {
     font-size: 10px;
     padding: 5px;
-  }
+  } */
 
   .modalContent {
     padding: 15px;
@@ -429,9 +437,9 @@ select {
     font-size: 14px;
   }
 
-  input,
-  button,
-  select {
+  .modalContent input,
+  .modalContent button,
+  .modalContent select {
     font-size: 14px;
     padding: 8px; /* Input 및 버튼 패딩 조정 */
   }
@@ -484,14 +492,14 @@ select {
 
   .modalContent h2,
   .modalContent label,
-  input,
-  button,
-  select {
+  .modalContent input,
+  .modalContent button,
+  .modalContent select {
     font-size: 12px; /* 매우 작은 화면에서 폰트 크기 */
   }
+
   .scheduleModal input[type='text'],
   .scheduleModal input[type='datetime-local'] {
-    font-size: 12px; /* 매우 작은 화면에 최적화 */
     padding: 4px; /* 패딩 최소화 */
   }
 }
