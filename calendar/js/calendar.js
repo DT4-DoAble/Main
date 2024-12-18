@@ -1,50 +1,51 @@
-document.addEventListener('DOMContentLoaded', function (e) {
+document.addEventListener('DOMContentLoaded', function () {
   console.log('Page loading complete');
 
+  // Dexie 데이터베이스 초기화
+  const db = new Dexie('CalendarDatabase');
+  db.version(1).stores({
+    calendars: `
+      ++id,
+      scheduleTitle,
+      scheduleStartDate,
+      scheduleEndDate,
+      scheduleRepeat
+    `,
+  });
+
+  // 날짜 포맷
   function formatYearMonth(year, month) {
     return `${year}년 ${month}월`;
   }
 
-  const calendarHTML = function (date, showDay, showFullDayName, showToday) {
-    if (!(date instanceof Date)) {
-      // date 값이 Date 인지 체크 아니면 중지
-      return '';
-    }
-    showDay = showDay !== undefined ? showDay : true;
-    showFullDayName = showFullDayName !== undefined ? showFullDayName : false;
-    showToday = showToday !== undefined ? showToday : true;
+  // 달력 HTML 생성
+  const calendarHTML = function (
+    date,
+    showDay = true,
+    showFullDayName = false,
+    showToday = true
+  ) {
+    if (!(date instanceof Date)) return ''; // date 값이 Date 인지 체크 아니면 중지
 
     const days = ['일', '월', '화', '수', '목', '금', '토'];
-
     const calendarYear = date.getFullYear();
     const calendarMonth = date.getMonth() + 1;
     const calendarToday = date.getDate();
 
-    const monthLastDate = new Date(calendarYear, calendarMonth, 0);
-    const calendarMonthLastDate = monthLastDate.getDate();
-
-    const monthStartDay = new Date(calendarYear, date.getMonth(), 1);
-    const calendarMonthStartDay = monthStartDay.getDay();
-
-    const calendarWeekCount = Math.ceil(
-      (calendarMonthStartDay + calendarMonthLastDate) / 7
-    );
+    const monthLastDate = new Date(calendarYear, calendarMonth, 0).getDate();
+    const monthStartDay = new Date(calendarYear, date.getMonth(), 1).getDay();
+    const calendarWeekCount = Math.ceil((monthStartDay + monthLastDate) / 7);
 
     const today = new Date();
 
     let html = '<table>';
     if (showDay) {
       html += '<thead><tr>';
-      for (let index = 0; index < days.length; index++) {
+      days.forEach((day, index) => {
         html += `<th class="${
           index === 0 ? 'sunday' : index === 6 ? 'saturday' : ''
-        }">`;
-        html += days[index];
-        if (showFullDayName) {
-          html += '요일';
-        }
-        html += '</th>';
-      }
+        }">${day}${showFullDayName ? '요일' : ''}</th>`;
+      });
       html += '</tr></thead>';
     }
 
@@ -54,11 +55,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
     for (let week = 0; week < calendarWeekCount; week++) {
       html += '<tr>';
       for (let day = 0; day < 7; day++) {
-        html += '<td>';
-        if (
-          calendarMonthStartDay <= calendarPos &&
-          calendarDay < calendarMonthLastDate
-        ) {
+        html += `<td id="td-${calendarDay + 1}">`;
+        if (monthStartDay <= calendarPos && calendarDay < monthLastDate) {
           calendarDay++;
           html += `<span class="${
             showToday &&
@@ -72,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
               ? 'saturday'
               : ''
           }">${calendarDay}</span>`;
+          getDayMemoData(calendarYear, calendarMonth, calendarDay);
         }
         html += '</td>';
         calendarPos++;
@@ -83,6 +82,58 @@ document.addEventListener('DOMContentLoaded', function (e) {
     return html;
   };
 
+  // 일정 메모 리스트 불러오기
+  async function getDayMemoData(calendarYear, calendarMonth, calendarDay) {
+    try {
+      const calendars = await db.calendars.toArray().then((data) => {
+        return data.filter((item) => {
+          const startDate = new Date(item.scheduleStartDate);
+          return (
+            startDate.getFullYear() === calendarYear &&
+            startDate.getMonth() + 1 === calendarMonth &&
+            startDate.getDate() === calendarDay
+          );
+        });
+      });
+
+      if (calendars.length > 0) {
+        calendars.forEach((item) => {
+          const memoTag = document.createElement('p');
+          memoTag.textContent = `${item.scheduleTitle}`;
+          document.querySelector(`#td-${calendarDay}`).append(memoTag);
+        });
+      }
+    } catch (e) {
+      console.error('Error fetching data:', e);
+    }
+  }
+
+  // 월별 데이터 불러오기
+  async function getMonthData(year, month) {
+    try {
+      const calendars = await db.calendars.toArray().then((data) => {
+        return data.filter((item) => {
+          const startDate = new Date(item.scheduleStartDate);
+          return (
+            startDate.getFullYear() === year &&
+            startDate.getMonth() + 1 === month
+          );
+        });
+      });
+
+      calendars.forEach((calendar) => {
+        console.log(
+          `Title: ${calendar.scheduleTitle}, Start: ${calendar.scheduleStartDate}, End: ${calendar.scheduleEndDate}`
+        );
+      });
+
+      return calendars;
+    } catch (err) {
+      console.error('Error fetching data:', err);
+    }
+  }
+
+  // 달력 초기화
   function calendar(date) {
     const yearMonthElement = document.querySelector('.calendarYearMonth');
     const calendarElement = document.querySelector('#calendar');
@@ -99,88 +150,22 @@ document.addEventListener('DOMContentLoaded', function (e) {
       calendarElement.innerHTML = html;
     }
 
-    // Dexie.js
-    // getMonthData(년도, 월) -> 전달
-    // console.log(date.getFullYear(), date.getMonth() + 1);
     getMonthData(date.getFullYear(), date.getMonth() + 1);
   }
 
-  let getMonthData = async function (year, month) {
-    try {
-      // 데이터베이스 초기화
-      const db = new Dexie('CalendarDatabase');
-      db.version(1).stores({
-        calendars: `
-          ++id, 
-          scheduleTitle, 
-          scheduleStartDate, 
-          scheduleEndDate, 
-          scheduleRepeat
-        `,
-      });
-
-      // 모든 데이터를 가져오고, 해당 월의 데이터만 필터링
-      const calendars = await db.calendars.toArray().then((data) => {
-        // 필터링: 시작 날짜가 특정 연도와 월에 해당하는 데이터만 추출
-        return data.filter((item) => {
-          const startDate = new Date(item.scheduleStartDate);
-          return (
-            startDate.getFullYear() === year &&
-            startDate.getMonth() + 1 === month // JavaScript의 월은 0부터 시작하므로 +1
-          );
-        });
-      });
-
-      // 결과 출력
-      console.log(`Found ${calendars.length} entries for ${year}-${month}`);
-      calendars.forEach((calendar) => {
-        console.log(
-          `Title: ${calendar.scheduleTitle}, Start: ${calendar.scheduleStartDate}, End: ${calendar.scheduleEndDate}`
-        );
-      });
-
-      return calendars; // 필요한 경우 반환
-    } catch (err) {
-      console.error('Error fetching data:', err);
-    }
-  };
-
-  // 갤린더 시작
-  const date = new Date();
-  calendar(date);
-
-  const prevButton = document.querySelector(
-    '.calendarControls > .calendarPrev'
-  );
-  if (prevButton) {
-    prevButton.addEventListener('click', () => {
-      const yearMonthText =
-        document.querySelector('.calendarYearMonth').textContent;
-      const [year, month] = yearMonthText
-        .replace('년 ', '.')
-        .replace('월', '')
-        .split('.')
-        .map(Number);
-      calendar(new Date(year, month - 2, 1));
-    });
+  // 이전, 다음 버튼 이벤트
+  function navigateCalendar(direction) {
+    const yearMonthText =
+      document.querySelector('.calendarYearMonth').textContent;
+    const [year, month] = yearMonthText
+      .replace('년 ', '.')
+      .replace('월', '')
+      .split('.')
+      .map(Number);
+    calendar(new Date(year, month - 1 + direction, 1));
   }
 
-  const nextButton = document.querySelector(
-    '.calendarControls > .calendarNext'
-  );
-  if (nextButton) {
-    nextButton.addEventListener('click', () => {
-      const yearMonthText =
-        document.querySelector('.calendarYearMonth').textContent;
-      const [year, month] = yearMonthText
-        .replace('년 ', '.')
-        .replace('월', '')
-        .split('.')
-        .map(Number);
-      calendar(new Date(year, month, 1));
-    });
-  }
-
+  // 오늘 버튼 이벤트
   const todayButton = document.querySelector(
     '.calendarControls > .calendarToday'
   );
@@ -190,48 +175,64 @@ document.addEventListener('DOMContentLoaded', function (e) {
     });
   }
 
-  // 일정등록 버튼 클릭시
-  document.addEventListener('click', (event) => {
-    if (event.target.closest('.calendar table > tbody > tr > td > span')) {
-      const target = event.target;
-      const yearMonthText =
-        document.querySelector('.calendarYearMonth').textContent;
-      const [year, month] = yearMonthText.split('.').map(Number);
-
-      modal.classList.add('active'); // 모달 활성화
-      modalOverlay.classList.add('active'); // 오버레이 활성화
-      document.body.style.overflow = 'hidden'; // 스크롤 비활성화
-
-      console.log(`${year}.${month}.${target.textContent}`);
-    }
-  });
-
-  /* S : 일정등록 버튼 */
-  const addScheduleButton = document.querySelector('.addScheduleButton');
-  /* E : 일정등록 버튼 */
-
-  /* S : 일정등록 모당찰 */
+  // 일정 등록 모달 열기
   const modal = document.querySelector('.scheduleModal');
-
   const modalOverlay = document.createElement('div'); // 모달 오버레이 생성
   modalOverlay.classList.add('modalOverlay');
   document.body.appendChild(modalOverlay);
 
-  const closeButton = document.querySelector('.closeButton');
-
   // 일정 등록 버튼 클릭 시 모달 표시
-  addScheduleButton.addEventListener('click', (e) => {
-    modal.classList.add('active'); // 모달 활성화
-    modalOverlay.classList.add('active'); // 오버레이 활성화
-    document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+  const addScheduleButton = document.querySelector('.addScheduleButton');
+  if (addScheduleButton) {
+    addScheduleButton.addEventListener('click', () => {
+      modal.classList.add('active'); // 모달 활성화
+      modalOverlay.classList.add('active'); // 오버레이 활성화
+      document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+    });
+  }
+
+  // 날짜 클릭 시 모달 열기
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('.calendar table > tbody > tr > td')) {
+      const target = event.target.closest('.calendar table > tbody > tr > td');
+      const clickedDay = target.querySelector('span')
+        ? target.querySelector('span').textContent
+        : '';
+
+      // 달력 연도 및 월 가져오기
+      const yearMonthText =
+        document.querySelector('.calendarYearMonth').textContent;
+      // const [year, month] = yearMonthText.split('.').map(Number);
+      const [year, month] = yearMonthText
+        .replace('년', '')
+        .replace('월', '')
+        .split(' ')
+        .map(Number);
+      // console.log(year, month);
+      // 월을 0부터 시작하는 인덱스에서 1부터 시작하도록 보정
+      const adjustedMonth = month - 1;
+
+      // 값이 잘 나오면 모달 활성화
+      if (clickedDay) {
+        modal.classList.add('active'); // 모달 활성화
+        modalOverlay.classList.add('active'); // 오버레이 활성화
+        document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+
+        // 클릭된 날짜 출력
+        console.log(`${year}.${month}.${clickedDay}`);
+      }
+    }
   });
 
-  // 닫기 버튼 클릭 시 모달 숨기기
-  closeButton.addEventListener('click', () => {
-    modal.classList.remove('active'); // 모달 비활성화
-    modalOverlay.classList.remove('active'); // 오버레이 비활성화
-    document.body.style.overflow = ''; // 스크롤 다시 활성화
-  });
+  // 모달 닫기
+  const closeButton = document.querySelector('.closeButton');
+  if (closeButton) {
+    closeButton.addEventListener('click', () => {
+      modal.classList.remove('active'); // 모달 비활성화
+      modalOverlay.classList.remove('active'); // 오버레이 비활성화
+      document.body.style.overflow = ''; // 스크롤 다시 활성화
+    });
+  }
 
   // 오버레이 클릭 시 모달 닫기
   modalOverlay.addEventListener('click', () => {
@@ -243,35 +244,19 @@ document.addEventListener('DOMContentLoaded', function (e) {
   // 모달 외부 클릭 시 닫기 (옵션)
   window.addEventListener('click', (event) => {
     if (event.target === modalOverlay) {
-      // overlay 클릭시만 닫히도록
       modal.classList.remove('active');
       modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
     }
   });
 
-  // 모달 일정 등록 및 파일생성 및 데이터 입력
+  // 일정 추가 처리
   let submitButton = document.querySelector('.submitButton');
 
   submitButton.addEventListener('click', (e) => {
     e.preventDefault();
-    // console.log(e);
 
     // 데이터 INSERT
-    // Dexie 사용
-    // Dexie 데이터베이스 초기화
-    var db = new Dexie('CalendarDatabase');
-    // Dexie 데이터베이스 TABLE 생성
-    db.version(1).stores({
-      calendars: `
-        ++id,             
-        scheduleTitle, 
-        scheduleStartDate, 
-        scheduleEndDate, 
-        scheduleRepeat
-      `,
-    });
-
-    // 데이터 추가
     let scheduleTitle = document.querySelector('#scheduleTitle').value;
     let scheduleStartDate = document.querySelector('#scheduleStartDate').value;
     let scheduleEndDate = document.querySelector('#scheduleEndDate').value;
@@ -290,28 +275,22 @@ document.addEventListener('DOMContentLoaded', function (e) {
         );
       })
       .catch((err) => {
-        alert('Ouch... ' + err);
+        alert('Error: ' + err);
       });
   });
-  /* E : 일정등록 모당찰 */
 
-  /* S : 브라우저 높이 계산 */
-  // function adjustCalendarHeight() {
-  //   const header = document.querySelector('header');
-  //   const footer = document.querySelector('footer');
-  //   const main = document.querySelector('main');
+  // 달력 초기화
+  const date = new Date();
+  calendar(date);
 
-  //   const headerHeight = header.offsetHeight;
-  //   const footerHeight = footer.offsetHeight;
-  //   const windowHeight = window.innerHeight;
+  // 이전/다음 버튼
+  const prevButton = document.querySelector(
+    '.calendarControls > .calendarPrev'
+  );
+  prevButton?.addEventListener('click', () => navigateCalendar(-1));
 
-  //   const calendarHeight = windowHeight - headerHeight - footerHeight;
-  //   // console.log(calendarHeight);
-  //   main.style.height = calendarHeight + 'px';
-  // }
-
-  // // 초기 실행 및 창 크기 변경 시 반응
-  // window.addEventListener('DOMContentLoaded', adjustCalendarHeight);
-  // window.addEventListener('resize', adjustCalendarHeight);
-  /* S : 브라우저 높이 계산 */
+  const nextButton = document.querySelector(
+    '.calendarControls > .calendarNext'
+  );
+  nextButton?.addEventListener('click', () => navigateCalendar(1));
 });
