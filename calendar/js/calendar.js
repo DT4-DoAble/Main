@@ -188,12 +188,40 @@ document.addEventListener('DOMContentLoaded', function () {
       modal.classList.add('active'); // 모달 활성화
       modalOverlay.classList.add('active'); // 오버레이 활성화
       document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+
+      // 현재 날짜를 가져오기 (한국 시간 기준)
+      const now = new Date();
+
+      // 대한민국 시간으로 9시간을 더함
+      const koreaTime = new Date(now.getTime() + 9 * 60 * 60 * 1000); // UTC +9시간
+
+      const currentYear = koreaTime.getFullYear();
+      const currentMonth = koreaTime.getMonth() + 1; // 0-based, 그래서 1 더해줌
+      const currentDay = koreaTime.getDate();
+      const currentHours = koreaTime.getHours();
+      const currentMinutes = koreaTime.getMinutes();
+
+      // 'YYYY-MM-DDTHH:mm' 형식으로 변환
+      const startDateTime = `${currentYear}-${currentMonth
+        .toString()
+        .padStart(2, '0')}-${currentDay
+        .toString()
+        .padStart(2, '0')}T${currentHours
+        .toString()
+        .padStart(2, '0')}:${currentMinutes.toString().padStart(2, '0')}`;
+
+      // 시작일과 종료일에 오늘 날짜를 자동으로 입력
+      document.querySelector(`#scheduleStartDate`).value = startDateTime;
+      document.querySelector(`#scheduleEndDate`).value = startDateTime;
     });
   }
 
   // 날짜 클릭 시 모달 열기
-  document.addEventListener('click', (event) => {
-    if (event.target.closest('.calendar table > tbody > tr > td')) {
+  const calendarDayClick = document.querySelector('.calendar'); // .calendar 요소 선택
+  const calendarTdSelector = '.calendar table > tbody > tr > td';
+
+  calendarDayClick.addEventListener('click', (event) => {
+    if (event.target.closest(calendarTdSelector)) {
       const target = event.target.closest('.calendar table > tbody > tr > td');
       const clickedDay = target.querySelector('span')
         ? target.querySelector('span').textContent
@@ -210,7 +238,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .map(Number);
       // console.log(year, month);
       // 월을 0부터 시작하는 인덱스에서 1부터 시작하도록 보정
-      const adjustedMonth = month - 1;
 
       // 값이 잘 나오면 모달 활성화
       if (clickedDay) {
@@ -232,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 시작일에 데이터 클릭한 일자 데이터 넣기
         const startDate = new Date(
           year,
-          month,
+          month - 1,
           clickedDay,
           currentHours,
           currentMinutes
@@ -271,52 +298,133 @@ document.addEventListener('DOMContentLoaded', function () {
       modal.classList.remove('active'); // 모달 비활성화
       modalOverlay.classList.remove('active'); // 오버레이 비활성화
       document.body.style.overflow = ''; // 스크롤 다시 활성화
+
+      // input, select 초기화
+      document.querySelector('#scheduleTitle').value = '';
+      document.querySelector('#scheduleStartDate').value = '';
+      document.querySelector('#scheduleEndDate').value = '';
+      document.querySelector('#scheduleRepeat').value = '';
     });
   }
 
   // 오버레이 클릭 시 모달 닫기
   modalOverlay.addEventListener('click', () => {
+    // 모달 닫기
     modal.classList.remove('active');
     modalOverlay.classList.remove('active');
-    document.body.style.overflow = '';
+    document.body.style.overflow = ''; // 스크롤 활성화
+
+    // input, select 초기화
+    document.querySelector('#scheduleTitle').value = '';
+    document.querySelector('#scheduleStartDate').value = '';
+    document.querySelector('#scheduleEndDate').value = '';
+    document.querySelector('#scheduleRepeat').value = '';
   });
 
   // 모달 외부 클릭 시 닫기 (옵션)
   window.addEventListener('click', (event) => {
     if (event.target === modalOverlay) {
+      // 모달 닫기
       modal.classList.remove('active');
       modalOverlay.classList.remove('active');
-      document.body.style.overflow = '';
+      document.body.style.overflow = ''; // 스크롤 활성화
+
+      // input, select 초기화
+      document.querySelector('#scheduleTitle').value = '';
+      document.querySelector('#scheduleStartDate').value = '';
+      document.querySelector('#scheduleEndDate').value = '';
+      document.querySelector('#scheduleRepeat').value = '';
     }
   });
 
   // 일정 추가 처리
   let submitButton = document.querySelector('.submitButton');
 
-  submitButton.addEventListener('click', (e) => {
+  submitButton.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    // 데이터 INSERT
-    let scheduleTitle = document.querySelector('#scheduleTitle').value;
-    let scheduleStartDate = document.querySelector('#scheduleStartDate').value;
-    let scheduleEndDate = document.querySelector('#scheduleEndDate').value;
-    let scheduleRepeat = document.querySelector('#scheduleRepeat').value;
+    // 입력 데이터 가져오기
+    const scheduleTitle = document.querySelector('#scheduleTitle').value;
+    const scheduleStartDate =
+      document.querySelector('#scheduleStartDate').value;
+    const scheduleEndDate = document.querySelector('#scheduleEndDate').value;
+    const scheduleRepeat = document.querySelector('#scheduleRepeat').value;
 
-    db.calendars
-      .add({
-        scheduleTitle: scheduleTitle,
-        scheduleStartDate: scheduleStartDate,
-        scheduleEndDate: scheduleEndDate,
-        scheduleRepeat: scheduleRepeat,
-      })
-      .then(() => {
-        alert(
-          `${scheduleTitle} 일정이 ${scheduleStartDate}~${scheduleEndDate} 일정으로 등록되었습니다.`
-        );
-      })
-      .catch((err) => {
-        alert('Error: ' + err);
-      });
+    // 시작일과 종료일을 Date 객체로 변환 (입력된 날짜가 로컬 시간)
+    const startDate = new Date(scheduleStartDate);
+    const endDate = new Date(scheduleEndDate);
+
+    // 한국 표준시로 변환 (UTC+9) => Date 객체에서 9시간을 더함
+    const koreaStartDate = new Date(startDate.getTime() + 9 * 60 * 60 * 1000); // UTC+9
+    const koreaEndDate = new Date(endDate.getTime() + 9 * 60 * 60 * 1000); // UTC+9
+
+    // 시작일과 종료일을 UTC로 변환 (toISOString() 사용)
+    const startDateTime = koreaStartDate.toISOString();
+    const endDateTime = koreaEndDate.toISOString();
+
+    // 반복 요일 파싱 (예: "0,1,2" -> [0, 1, 2])
+    const repeatDays = scheduleRepeat
+      ? scheduleRepeat.split(',').map(Number)
+      : [];
+
+    let currentDate = new Date(koreaStartDate);
+
+    // 반복되는 날짜 계산
+    if (repeatDays.length === 0) {
+      // 반복유무가 "사용하지 않음"일 경우
+      try {
+        // 단 한번의 일정 등록
+        await db.calendars.add({
+          scheduleTitle: scheduleTitle,
+          scheduleStartDate: startDateTime, // UTC 시간으로 저장
+          scheduleEndDate: endDateTime, // UTC 시간으로 저장
+          scheduleRepeat: scheduleRepeat,
+        });
+        alert(`${scheduleTitle} 일정이 등록되었습니다.`);
+      } catch (error) {
+        console.error('Error adding event:', error);
+      }
+    } else {
+      // 반복 설정이 있는 경우
+      while (currentDate <= koreaEndDate) {
+        // 현재 날짜의 요일을 구함
+        const currentDay = currentDate.getDay();
+
+        // 반복 요일 목록에 현재 요일이 포함되어 있다면
+        if (repeatDays.includes(currentDay)) {
+          try {
+            // 반복되는 날짜에 맞는 일정 추가
+            await db.calendars.add({
+              scheduleTitle: scheduleTitle,
+              scheduleStartDate: currentDate.toISOString(), // UTC 시간으로 저장
+              scheduleEndDate: currentDate.toISOString(), // UTC 시간으로 저장
+              scheduleRepeat: scheduleRepeat,
+            });
+          } catch (error) {
+            console.error('Error adding event:', error);
+          }
+        }
+
+        // 하루를 더함 (다음 날짜로 이동)
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+
+      alert(`${scheduleTitle} 일정이 반복되어 등록되었습니다.`);
+
+      // 모달 닫기
+      modal.classList.remove('active');
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = ''; // 스크롤 활성화
+
+      // input, select 초기화
+      document.querySelector('#scheduleTitle').value = '';
+      document.querySelector('#scheduleStartDate').value = '';
+      document.querySelector('#scheduleEndDate').value = '';
+      document.querySelector('#scheduleRepeat').value = '';
+
+      // 페이지 리프레시
+      location.reload();
+    }
   });
 
   // 달력 초기화
