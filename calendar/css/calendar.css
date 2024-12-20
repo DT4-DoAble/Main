@@ -103,6 +103,8 @@ header
   padding: 1.875rem 0.625rem;
   text-align: center;
   vertical-align: top; /* 상단 정렬 */
+  /* z-index: 999; */
+  /* background-color: #00796b; */
 }
 
 /* 각 날짜 셀에 추가되는 p 태그 스타일 */
@@ -116,6 +118,8 @@ header
   white-space: nowrap; /* 한 줄로 유지 */
   overflow: hidden;
   text-overflow: ellipsis; /* 넘치는 텍스트에 '...' 표시 */
+  /* z-index: 998; */
+  /* background-color: #3fc9ae; */
 }
 
 /* 추가적인 스타일 */
@@ -594,6 +598,10 @@ select {
   .modalContent input,
   .modalContent button,
   .modalContent select {
+    font-size: 12px; /* 매우 작은 화면에서 폰트 크기 */
+  }
+
+  .modalContentView button {
     font-size: 12px; /* 매우 작은 화면에서 폰트 크기 */
   }
 
