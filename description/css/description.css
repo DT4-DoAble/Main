@@ -1,0 +1,359 @@
+body {
+  margin: 0; /* 기본 여백 제거 */
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(180deg, #ffffff 10%, #b7ebe5 100%);
+  font-family: pretendard;
+  overflow-y: hidden;
+}
+
+.all {
+  margin: 0 auto;
+  padding: 0 360px; /* 좌우 여백 */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+  height: 100vh; /* 화면 높이에 맞게 설정 */
+  justify-content: space-between;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  width: 100%;
+  max-width: none; /* 최대 너비 제한 없애기 */
+}
+
+.navbar {
+  width: 100%;
+  height: 80px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  padding: 0 360px; /* 좌우 여백 */
+}
+
+ul {
+  display: flex;
+  display: flex; /* 메뉴를 가로로 나열 */
+  gap: 40px; /* 메뉴 간 여백 */
+  margin: 0; /* 기본 마진 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+  list-style: none; /* 목록 스타일 제거 */
+  flex-wrap: nowrap;
+}
+
+li {
+  list-style: none; /* 목록 앞 기호 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+  text-decoration: none; /* 밑줄 제거 */
+}
+
+a {
+  text-decoration: none; /* 밑줄 제거 */
+  color: var(--Gray-40, #676774);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+  overflow: hiddlen;
+  white-space: nowrap;
+}
+
+.logo {
+  color: var(--Gray-20, #303036);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.navbar ul {
+  display: flex; /* 메뉴를 가로로 나열 */
+  gap: 40px; /* 메뉴 간 여백 */
+  margin: 0; /* 기본 마진 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+  list-style: none; /* 목록 스타일 제거 */
+  flex-wrap: nowrap;
+}
+
+.ment {
+  display: flex;
+  flex-direction: column; /* 세로로 정렬 */
+  justify-content: center; /* 수평 가운데 정렬 (필요시) */
+  height: 60vh; /* 화면 전체 높이를 사용 */
+}
+
+.des {
+  margin: 10px 0;
+  white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.txt1 {
+  color: var(--Mint-50, #3fc9ae);
+  /* text-3xl/Bold */
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 46px; /* 115% */
+  letter-spacing: -0.8px;
+}
+
+.txt2 {
+  color: var(--Gray-20, #303036);
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 70px; /* 116.667% */
+}
+
+.txt3 {
+  color: var(--Gray-40, #676774);
+
+  /* text-2xl/Medium */
+  font-size: 27px;
+  font-weight: 500;
+  line-height: 38px; /* 118.75% */
+  letter-spacing: -0.64px;
+}
+
+.btn {
+  border: none;
+  border-radius: 16px;
+  background: var(--Mint-50, #3fc9ae);
+  display: flex;
+  width: 590px;
+  height: 60px;
+  padding: 35px 52px;
+  justify-content: center;
+  align-items: center;
+  color: var(--White, #fff);
+  text-align: center;
+  font-size: 25px;
+}
+
+.btn:active {
+  transform: scale(0.98); /* 클릭 시 버튼이 눌리는 효과 */
+  background: var(--Mint-70, #248f74); /* 눌렀을 때 배경 색상 변경 */
+}
+
+.container {
+  display: flex; /* 가로로 나란히 배치 */
+  justify-content: space-between; /* 양쪽 정렬 */
+  height: 100vh; /* 화면 높이를 꽉 채우도록 설정 */
+}
+
+.left {
+  margin-top: 50px; /* 왼쪽 요소만 이동 */
+}
+
+.right {
+  position: relative; /* 부모 기준 설정 */
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.main1 {
+  position: absolute; /* 고정 위치 */
+  width: 490px;
+  height: auto;
+  top: 50%; /* .right 기준 중앙 */
+  left: 60%; /* .right 내부 중앙 */
+  transform: translate(-50%, -50%); /* 완벽한 중앙 정렬 */
+}
+
+img,
+.icon-container,
+button,
+.bb {
+  outline: none;
+  user-select: none; /* 텍스트 선택 방지 */
+  -webkit-user-drag: none; /* 이미지 드래그 방지 */
+  -webkit-tap-highlight-color: transparent; /* 모바일 클릭 시 파란 효과 제거 */
+}
+
+.bb {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  border: none;
+  background-color: transparent;
+  font-size: 35px;
+  color: #a6a6b0;
+}
+
+.bb.active {
+  color: #50e6c8; /* 활성화 상태 (초록색) */
+}
+
+.icon-container {
+  position: fixed; /* 절대 위치 설정 */
+  right: 150px; /* 오른쪽에서 360px 떨어진 위치 */
+  top: 50%; /* 세로 중앙 */
+  transform: translateY(-50%); /* 정확히 중앙 정렬 */
+}
+
+.bi {
+  font-size: 80px; /* 아이콘 크기 */
+  color: #a6a6b0; /* 아이콘 색상 */
+}
+
+.iphone-layout {
+  display: none; /* 기본적으로 안보이게 설정 */
+}
+
+@media (max-width: 1600px) {
+  .all,
+  .navbar {
+    padding: 0 240px; /* 좌우 여백 */
+  }
+
+  .txt1 {
+    font-size: 24px;
+  }
+  .txt2 {
+    font-size: 48px;
+  }
+  .txt3 {
+    font-size: 22px;
+  }
+
+  .des {
+    margin: 8px 0;
+    white-space: nowrap; /* 줄바꿈 방지 */
+  }
+
+  .btn {
+    width: 510px;
+    height: 50px;
+    padding: 32px 48px;
+    font-size: 22px;
+  }
+
+  .left,
+  .right {
+    justify-content: space-between;
+  }
+
+  .right {
+    position: relative;
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .main1 {
+    position: absolute; /* 고정 위치 */
+    width: 400px;
+    height: auto;
+    top: 49%; /* .right 기준 중앙 */
+    left: 60%; /* .right 내부 중앙 */
+    transform: translate(-50%, -50%); /* 완벽한 중앙 정렬 */
+  }
+
+  .icon-container {
+    right: 80px;
+    position: fixed;
+  }
+}
+@media screen and (max-width: 500px) {
+  .all,
+  .navbar {
+    display: none; /* 기존 디자인 숨기기 */
+  }
+
+  .iphone {
+    font-family: pretendard;
+    width: 393px;
+    height: 852px;
+    display: flex;
+    flex-direction: column; /* 세로로 배치 */
+    justify-content: flex-start; /* 상단 정렬 */
+    padding: 24px; /* 좌우 여백 */
+    box-sizing: border-box;
+    overflow-y: hidden;
+  }
+
+  .ttt {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 30px;
+  }
+  .pe {
+    margin: -8px; /* 위아래 간격 */
+  }
+
+  .txtt1 {
+    color: var(--Mint-50, #3fc9ae);
+    font-weight: 400;
+    font-size: 17px;
+    margin-bottom: -10px;
+  }
+  .txtt2 {
+    color: var(--Gray-20, #303036);
+    font-size: 28px;
+    font-weight: 600;
+  line-height: 70px; /* 116.667% */
+  }
+  .txtt3 {
+    color: var(--Gray-40, #676774);
+    font-size: 16px;
+    font-weight: 380;
+  }
+
+  .m1 {
+    display: flex;
+    width: 330px;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* 가로 중앙 정렬 */
+  }
+
+  .phone_btn {
+    
+    justify-content: flex-end;
+    border: none;
+    border-radius: 15px;
+    background: var(--Mint-50, #3fc9ae);
+    display: flex;
+    width: 345px;
+    height: 30px;
+    padding: 25px 20px;
+    justify-content: center;
+    align-items: center;
+    color: var(--White, #fff);
+    text-align: center;
+    font-size: 18px;
+    margin-top: -17px;
+    
+    
+  }
+
+  .phone_b {
+  display: flex;
+  flex-direction: row; /* 세로로 배치 */
+  align-items: flex-end; /* 가로 가운데 정렬 */
+  justify-content: center; /* 세로 가운데 정렬 */
+}
+
+  .ip{
+    margin-top: 15px;
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    color: #a6a6b0;
+    cursor: pointer;
+
+  }
+
+  .ip.active {
+    color: #ffffff; /* 활성화 상태 (초록색) */
+  }
+  
+}
+
+  
