@@ -271,15 +271,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // (() => {
-  //   const currMemoList = await db.calendars
-  //   .where('scheduleStartDate')
-  //   .between(startOfDay, endOfDay) // 해당 날짜 범위로 조건 설정
-  //   .toArray();
-
-  //   console.log(currMemoList)
-  // })();
-
   // 날짜 클릭 시 모달 열기
   document
     .querySelector('.calendar')
@@ -476,33 +467,33 @@ document.addEventListener('DOMContentLoaded', function () {
   let submitButton = document.querySelector('.submitButton');
   submitButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    if (confirm('반복 일정입니다. 반복된 일정을 모두 수정를 하시겠습니까?')) {
-      alert('현재 개발중 입니다. 기다려 주세요.');
-    } else {
-      // 입력 데이터 가져오기
-      const scheduleTitle = document.querySelector('#scheduleTitle').value;
-      const scheduleStartDate =
-        document.querySelector('#scheduleStartDate').value;
-      const scheduleEndDate = document.querySelector('#scheduleEndDate').value;
-      const scheduleRepeat = document.querySelector('#scheduleRepeat').value;
 
-      // 시작일과 종료일을 Date 객체로 변환 (입력된 날짜가 로컬 시간)
-      const startDate = new Date(scheduleStartDate);
-      const endDate = new Date(scheduleEndDate);
+    // 입력 데이터 가져오기
+    const scheduleTitle = document.querySelector('#scheduleTitle').value;
+    const scheduleStartDate =
+      document.querySelector('#scheduleStartDate').value;
+    const scheduleEndDate = document.querySelector('#scheduleEndDate').value;
+    const scheduleRepeat = document.querySelector('#scheduleRepeat').value;
 
-      // 반복 요일 파싱 (예: "0,1,2" -> [0, 1, 2])
-      const repeatDays = scheduleRepeat
-        ? scheduleRepeat.split(',').map(Number)
-        : [];
+    // 시작일과 종료일을 Date 객체로 변환 (입력된 날짜가 로컬 시간)
+    const startDate = new Date(scheduleStartDate);
+    const endDate = new Date(scheduleEndDate);
 
-      let currentDate = new Date(startDate);
+    // 반복 요일 파싱 (예: "0,1,2" -> [0, 1, 2])
+    const repeatDays = scheduleRepeat
+      ? scheduleRepeat.split(',').map(Number)
+      : [];
 
-      const memoId = parseInt(e.target.dataset.idx);
-      // console.log(memoId);
+    let currentDate = new Date(startDate);
 
-      if (memoId) {
-        // edit - 아 문제여
+    const memoId = parseInt(e.target.dataset.idx);
+    // console.log(memoId);
 
+    if (memoId) {
+      // edit - 아 문제여
+      if (confirm('반복 일정입니다. 반복된 일정을 모두 수정를 하시겠습니까?')) {
+        alert('현재 개발중 입니다. 기다려 주세요.');
+      } else {
         const deleteMemoLists = await db.calendars
           .update(memoId, {
             scheduleTitle: scheduleTitle,
@@ -513,52 +504,53 @@ document.addEventListener('DOMContentLoaded', function () {
           .then(function (updated) {
             if (updated) console.log(updated);
           });
-      } else {
-        // 등록페이지
-        // 반복되는 날짜 계산
-        if (repeatDays.length === 0) {
-          // 반복유무가 "사용하지 않음"일 경우
-          try {
-            // 단 한번의 일정 등록
-            await db.calendars.add({
-              scheduleTitle: scheduleTitle,
-              scheduleStartDate: startDate.toISOString(), // 이 값은 UTC로 저장
-              scheduleEndDate: endDate.toISOString(), // 이 값은 UTC로 저장
-              scheduleRepeat: scheduleRepeat,
-            });
-            alert(`${scheduleTitle} 일정이 등록되었습니다.`);
-          } catch (error) {
-            console.error('Error adding event:', error);
-          }
-        } else {
-          // 반복 설정이 있는 경우
-          while (currentDate <= endDate) {
-            // 현재 날짜의 요일을 구함
-            const currentDay = currentDate.getDay();
-
-            // 반복 요일 목록에 현재 요일이 포함되어 있다면
-            if (repeatDays.includes(currentDay)) {
-              try {
-                // 반복되는 날짜에 맞는 일정 추가
-                await db.calendars.add({
-                  scheduleTitle: scheduleTitle,
-                  scheduleStartDate: currentDate.toISOString(), // 이 값은 UTC로 저장
-                  scheduleEndDate: currentDate.toISOString(), // 이 값은 UTC로 저장
-                  scheduleRepeat: scheduleRepeat,
-                });
-              } catch (error) {
-                console.error('Error adding event:', error);
-              }
-            }
-
-            // 하루를 더함 (다음 날짜로 이동)
-            currentDate.setDate(currentDate.getDate() + 1);
-          }
-
-          alert(`${scheduleTitle} 일정이 반복되어 등록되었습니다.`);
+      }
+    } else {
+      // 등록페이지
+      // 반복되는 날짜 계산
+      if (repeatDays.length === 0) {
+        // 반복유무가 "사용하지 않음"일 경우
+        try {
+          // 단 한번의 일정 등록
+          await db.calendars.add({
+            scheduleTitle: scheduleTitle,
+            scheduleStartDate: startDate.toISOString(), // 이 값은 UTC로 저장
+            scheduleEndDate: endDate.toISOString(), // 이 값은 UTC로 저장
+            scheduleRepeat: scheduleRepeat,
+          });
+          alert(`${scheduleTitle} 일정이 등록되었습니다.`);
+        } catch (error) {
+          console.error('Error adding event:', error);
         }
+      } else {
+        // 반복 설정이 있는 경우
+        while (currentDate <= endDate) {
+          // 현재 날짜의 요일을 구함
+          const currentDay = currentDate.getDay();
+
+          // 반복 요일 목록에 현재 요일이 포함되어 있다면
+          if (repeatDays.includes(currentDay)) {
+            try {
+              // 반복되는 날짜에 맞는 일정 추가
+              await db.calendars.add({
+                scheduleTitle: scheduleTitle,
+                scheduleStartDate: currentDate.toISOString(), // 이 값은 UTC로 저장
+                scheduleEndDate: currentDate.toISOString(), // 이 값은 UTC로 저장
+                scheduleRepeat: scheduleRepeat,
+              });
+            } catch (error) {
+              console.error('Error adding event:', error);
+            }
+          }
+
+          // 하루를 더함 (다음 날짜로 이동)
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        alert(`${scheduleTitle} 일정이 반복되어 등록되었습니다.`);
       }
     }
+
     // 모달 닫기 및 페이지 리프레시
     document.querySelector('.scheduleModal').classList.remove('active');
     document.querySelector('.modalOverlay').classList.remove('active');
