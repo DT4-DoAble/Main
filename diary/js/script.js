@@ -1,10 +1,11 @@
 // IndexedDB 초기화
 const db = new Dexie("DailyLogDatabase");
 
-// Dexie 데이터 베이스 스키마 정의
+// Dexie 데이터베이스 스키마 정의
 db.version(1).stores({
-  dailyLogs: "++id ,date,diary,selectedEmoji,selectedEmotion", // 스토어 정의
+  dailyLogs: "++id,date,diary,selectedEmoji,selectedEmotion", // 스토어 정의
 });
+
 // 더미 데이터
 const dummyData = [
   {
@@ -37,21 +38,25 @@ const dummyData = [
     diary:
       "길 가다가 이상한 사람을 만난 오늘 진짜 세상에는 다양한 사람이 있는 것 같다",
     selectedEmoji: "anger",
-    selectedEmotion: "anger:분노한한",
+    selectedEmotion: "anger:분노한",
   },
 ];
 
-// 데이터베이스 초기화
-db.on("populate", () => {
-  db.data.bulkAdd(dummyData); // bulkAdd로 한 번에 데이터 추가
-});
-
-// 데이터베이스 열기
-db.open().catch((err) => {
-  console.error("Failed to open database:", err);
-});
-
-
+// 데이터베이스 초기화 또는 데이터 추가
+db.open()
+  .then(async () => {
+    const count = await db.dailyLogs.count(); // 기존 데이터 확인
+    if (count === 0) {
+      // 데이터가 없으면 추가
+      await db.dailyLogs.bulkAdd(dummyData);
+      console.log("Dummy data added!");
+    } else {
+      console.log("Data already exists in the database.");
+    }
+  })
+  .catch((err) => {
+    console.error("Failed to open database:", err);
+  });
 
 document.addEventListener("DOMContentLoaded", () => {
   const openModalButton = document.getElementById("openModal");
@@ -86,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
     modalOverlay.style.display = "none"; // 모달을 숨김
   }
 });
-
 
 // 날짜 정보 설정
 const today = new Date();
@@ -236,7 +240,7 @@ btnSave.addEventListener("click", async () => {
       selectedEmotion,
     });
     alert("하루가 성공적으로 저장되었습니다!");
-    
+
     // 저장 후 버튼 및 텍스트 박스 비활성화
     btnSave.disabled = true;
     document.querySelector(".txtDiary").disabled = true;
