@@ -17,13 +17,6 @@ function goToMain() {
   location.assign(link);
 }
 
-// diaryMain 페이지로 이동
-link = "../html/diaryMain.html";
-
-function goToMain() {
-  location.assign(link);
-}
-
 // 날짜 정보 설정
 const today = new Date();
 const year = today.getFullYear();
@@ -172,8 +165,13 @@ btnSave.addEventListener("click", async () => {
       selectedEmotion,
     });
     alert("하루가 성공적으로 저장되었습니다!");
-    btnSave.disabled = true; // 저장 버튼 비활성화
-    txtDiary.disabled = true; // 텍스트 박스 비활성화
+
+    // 저장 후 버튼 및 입력창 비활성화
+    btnSave.disabled = true;
+    document.querySelector(".txtDiary").disabled = true;scroll
+
+    // 메인 페이지로 이동
+    window.location.href = "../html/diary1.html"; // 이동할 메인 페이지의 경로
   } catch (err) {
     console.error("Failed to save daily log:", err);
     alert("저장 중 오류가 발생했습니다.");

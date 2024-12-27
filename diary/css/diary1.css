@@ -24,6 +24,10 @@
   transform: translateY(-50%); /* 수직 중앙 정렬을 위한 보정 */
 }
 
+.modal.hidden {
+  display: none; /* 모달 숨기기 */
+}
+
 /* 모달 활성화 */
 .modal-overlay.active {
   display: flex; /* Flex로 활성화된 상태에서 표시 */
@@ -194,4 +198,3 @@ input[data-emotion-type="sad"]{
 .mt16 {margin-top:16px;}
 .mt32 {margin-top:32px;}
 .mt65 {margin-top:65px;}
-
