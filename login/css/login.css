@@ -132,6 +132,12 @@ a {
 
 
 @media (max-width: 1500px) {
+  .all {
+    margin-left: 0;
+    margin-right: 0; /* 불필요한 margin-right 제거 */
+    padding-left: 0;
+    padding-right: 0;
+  }
   .navbar {
   
       padding: 0 240px; /* 좌우 여백 */
@@ -178,6 +184,12 @@ a {
 
 
 @media (max-width: 500px) {
+  .all {
+    margin-left: 0;
+    margin-right: 0; /* 불필요한 margin-right 제거 */
+    padding-left: 0;
+    padding-right: 0;
+  }
 
     .navbar{
         display: none;

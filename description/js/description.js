@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // 버튼이 존재하는 경우에만 이벤트 추가
   if (button) {
     button.addEventListener("click", function () {
-      window.location.href = "http://127.0.0.1:5500/Main/login/html/login.html"; // 이동할 URL
+      window.location.href = "../../login/html/login.html"; // 이동할 URL
     });
   }
 });

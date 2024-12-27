@@ -8,4 +8,3 @@ function loginWithKakao() {
     redirectUri: "http://127.0.0.1:5500/nickname/html/nickname.html", // 카카오 로그인 후 연결되는 홈페이지 - 꼭 링크 바꿀것 //
   });
 }
-
