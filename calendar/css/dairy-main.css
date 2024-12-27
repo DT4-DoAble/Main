@@ -22,6 +22,30 @@ body {
   align-items: center;
 }
 
+.dairy-main {
+  align-items: center;
+}
+
+.dairy-main-wrapper {
+  flex-grow: 1;
+  width: 100%;
+  min-width: 393px;
+  max-width: 1200px;
+  padding-left: 24px;
+  padding-right: 24px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dairy-main-header {
+  min-width: auto;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 24px;
+  align-items: center;
+}
+
 .register-modal {
   min-width: 393px;
   max-width: 1920px;
@@ -52,6 +76,10 @@ body {
   justify-content: center;
 }
 
+.dairy-main .calendar-header-wrapper {
+  width: 100%;
+}
+
 /* ----------------------------------------------------------
     header
 ---------------------------------------------------------- */
@@ -64,6 +92,10 @@ body {
 
 header {
   height: 60px;
+}
+
+.dairy-main-header {
+  border-bottom: 2px solid var(--color-gray-30);
 }
 
 .page-title {
@@ -133,65 +165,24 @@ header {
   stroke: var(--color-gray-30);
 }
 
+.main-header-button-wrapper {
+  display: none;
+}
+
 /* 테이블 크기 고정 */
-#calendar {
-  flex-grow: 1;
-  display: flex;
+.dairy-item-list-wrapper {
+  overflow-y: scroll;
 }
 
-.calendar table {
+.dairy-item-list {
+  padding-top: 24px;
+  padding-bottom: 40px;
   display: flex;
-  flex-direction: column;
-  /* 텍스트가 셀을 넘치지 않도록 처리 */
-  white-space: nowrap; /* 텍스트가 한 줄로 유지 */
-  overflow: hidden; /* 넘치는 텍스트는 숨기기 */
-  text-overflow: ellipsis; /* 넘치는 텍스트에 '...' 표시 */
-}
-
-/* 캘린더의 요일 헤더 스타일링 */
-.day-of-weeks-item {
-  flex-grow: 1;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-gray-40);
-  /* text-2xs-r */
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 14px;
-}
-
-tbody {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.week {
-  flex-grow: 1;
-  margin-left: auto;
-  margin-right: auto;
-  border-top: 1px solid var(--color-gray-80);
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 /* 토요일 및 일요일 색상 변경 */
-.day-number {
-  width: 20px;
-  height: 20px;
-  margin-bottom: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-
-  /* text-xs-r */
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-}
-
 .day-number {
   color: var(--color-gray-40);
 }
@@ -206,12 +197,35 @@ tbody {
   color: var(--color-red-60);
 }
 
-.day-sell {
-  width: calc(100% / 7);
-  padding: 6px 4px;
+.dairy-main .day-sell {
+  width: 100%;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 8px;
+  background-color: var(--color-white);
+  border-radius: 16px;
+  border: 1px solid var(--color-gray-80);
+}
+
+.dairy-item-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.emoji-img {
+  width: 28px;
+  height: 28px;
+}
+
+.dairy-main .day-sell .tag {
+  align-self: flex-start;
+}
+
+.dairy-main .day-sell .contents {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .day-sell:hover,
@@ -220,7 +234,7 @@ tbody {
 }
 
 .day-number.today {
-  background-color: var(--color-gray-90);
+  border-bottom: 2px solid var(--color-gray-40);;
 }
 
 /* 각 날짜 셀에 추가되는 p 태그 스타일 */
@@ -231,11 +245,6 @@ tbody {
   white-space: nowrap; /* 한 줄로 유지 */
   overflow: hidden;
   text-overflow: ellipsis; /* 넘치는 텍스트에 '...' 표시 */
-
-  /* text-2xs-m */
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 14px;
 }
 
 .todo-item-mt {
@@ -305,13 +314,12 @@ tbody {
 ---------------------------------------------------------- */
 .modalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
+  bottom: 106px;
   width: 100%;
   height: 100%;
   display: none;
-  z-index: 10;
   background-color: var(--color-white);
+  z-index: 10;
 }
 
 .bg-blur {
@@ -450,25 +458,54 @@ tbody {
 }
 
 /* Media Query */
-@media screen and (min-width: 1025px) {
-  .day-of-weeks-item {
-    height: 48px;
-    font-size: 14px;
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+    background: linear-gradient(180deg, #FFF 0%, #F0F6FF 100%);
   }
 
-  .day-number {
-    width: 32px;
-    height: 32px;
-    font-size: 16px;
+  .dairy-item-list {
+    justify-content: space-between;
+    flex-direction: row;
   }
   
-  .todo-item {
-    padding: 4px 6px;
-    border-radius: 4px;
-
-    /* text-xs-m */
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 16px;
+  .dairy-main .day-sell {
+    width: 49%;
   }
+  
+}
+
+@media screen and (min-width: 1025px) {
+  body {
+    background: linear-gradient(180deg, #FFF 0%, #F0F6FF 100%);
+    flex-direction: column-reverse;
+  }
+
+  .header-wrapper {
+    display: none;
+  }
+
+  .dairy-main-header {
+    /* justify-content: space-between; */
+    border-bottom: 1px solid var(--color-gray-80);
+  }
+
+  .calendarYearMonth {
+    /* flex-grow: 0; */
+  }
+
+
+  .main-header-button-wrapper {
+    margin-left: 16px;
+    display: block;
+  }
+  
+  .dairy-item-list {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .dairy-main .day-sell {
+    width: 32.5%;
+  }
+
 }

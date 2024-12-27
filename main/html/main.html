@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="../css/common.css" /> -->
+    <link rel="stylesheet" href="../css/main.css" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css"
+    /> -->
+
+    <script
+      src="https://kit.fontawesome.com/a426e1c310.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/main.js" defer></script>
+  </head>
+  <body>
+    <!-- header -->
+    <header class="navbar">
+      <a href="#" class="logo">:Doable</a>
+      <nav>
+        <ul>
+          <li class="menu btn1"><a href="#service">서비스 소개</a></li>
+          <li class="menu btn2"><a href="#contact">고객센터</a></li>
+          <li class="menu btn3"><a href="#QA">자주 묻는 질문</a></li>
+          <li class="menu btn4"><a href="#login">로그인</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- main -->
+    <main class="contentContainer">
+      <!-- banner -->
+      <div class="banner">
+        <div class="bannerFrame">
+          <div class="subTitle Bold" id="message">Do it, able!</div>
+          <div class="Name">
+            <span class="title Bold">최지영</span>
+            <span class="subTitle Medium">님, 안녕하세요:D</span>
+          </div>
+          <div class="semiTitle Regular">일정을 효율적으로 관리해보세요!</div>
+        </div>
+        <div class="bannerImg">
+          <img src="../img/main_img.png" />
+        </div>
+      </div>
+
+      <!-- content -->
+      <div class="content">
+        <!-- 왼쪽영역-->
+        <div class="leftArea">
+          <!-- 콘텐츠1 -->
+          <div class="content1">
+            <div class="content1Top">
+              <div class="content1Title">
+                <i class="fa-solid fa-thumbtack fa-sm"></i>
+                <div class="semiTitle Bold">주요 일정</div>
+              </div>
+              <div class="buttonList">
+                <button class="circle-button"></button>
+                <button class="circle-button"></button>
+                <button class="circle-button"></button>
+              </div>
+            </div>
+            <div class="content1Bottom">
+              <div class="outer">
+                <div class="innerArea">
+                  <div class="innerContent 1">
+                    <div class="inner">
+                      <div class="D-day">D-9</div>
+                      <div class="semiTitle Regular">자격증 시험</div>
+                    </div>
+                    <div class="inner">
+                      <div class="D-day">D-9</div>
+                      <div class="semiTitle Regular">자격증 시험</div>
+                    </div>
+                    <div class="inner">
+                      <div class="D-day">D-9</div>
+                      <div class="semiTitle Regular">자격증 시험</div>
+                    </div>
+                  </div>
+                  <div class="innerContent 2">
+                    <div class="inner">
+                      <div class="D-day">D-9</div>
+                      <div class="semiTitle Regular">크리스마스스</div>
+                    </div>
+                    <div class="inner">
+                      <div class="D-day">D-9</div>
+                      <div class="semiTitle Regular">크리스마스이브</div>
+                    </div>
+                    <div class="inner">
+                      <div class="D-day">D-9</div>
+                      <div class="semiTitle Regular">자격증 시험</div>
+                    </div>
+                  </div>
+                  <div class="innerContent 3">
+                    <div class="inner">
+                      <div class="D-day">D-9</div>
+                      <div class="semiTitle Regular">자격증 시험</div>
+                    </div>
+                    <div class="inner">
+                      <div class="D-day">D-9</div>
+                      <div class="semiTitle Regular">자격증 시험</div>
+                    </div>
+                    <div class="inner">
+                      <div class="D-day">D-9</div>
+                      <div class="semiTitle Regular">자격증 시험</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="buttonSchedule">
+                <button class="left">&lt;</button>
+                <button class="right">&gt;</button>
+              </div>
+            </div>
+          </div>
+          <div class="content2">
+            <div class="content2Top">
+              <i class="fa-solid fa-chart-simple fa-flip-horizontal fa-sm"></i>
+              <div class="semiTitle Bold">이번 달 감정 트레커</div>
+            </div>
+            <div id="graph">
+              <div class="happy">
+                <img src="../img/smile.svg" class="face" />
+                <div class="barGraph one">
+                  <span>3번</span>
+                </div>
+              </div>
+              <div class="normal">
+                <img src="../img/normal.svg" class="face" />
+                <div class="barGraph two">
+                  <span>3번</span>
+                </div>
+              </div>
+              <div class="angry">
+                <img src="../img/anger.svg" class="face" />
+                <div class="barGraph three">
+                  <span>3번</span>
+                </div>
+              </div>
+              <div class="sad">
+                <img src="../img/sad.svg" class="face" />
+                <div class="barGraph four">
+                  <span>3번</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- calendar -->
+        <div class="rightArea">
+          <div class="mainCalendar"></div>
+          <button class="plus">새로운 일정을 등록해보세요 +</button>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
