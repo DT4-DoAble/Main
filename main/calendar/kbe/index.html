@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doable Calendar (kbe)</title>
+    <!-- S : 공통 CSS -->
+    <link rel="stylesheet" href="../css/common.css" />
+    <!-- E : 공통 CSS -->
+
+    <!-- S : CALENDAR CSS -->
+    <link rel="stylesheet" href="./css/calendar.css" />
+    <!-- E : CALENDAR CSS -->
+
+    <!-- S : CSS 리셋 CDN-->
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css"
+    /> -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- E : CSS 리셋 CDN-->
+
+    <!-- 컬러 / 타이포그라피 / 컴포넌트 CSS -->
+    <link rel="stylesheet" href="./css/001_root.css">
+    <link rel="stylesheet" href="./css/002_typygraphy.css">
+    <link rel="stylesheet" href="./css/003_components.css">
+
+    <!-- S : DB 라이브러리 -->
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <!-- E : DB 라이브러리 -->
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header-wrapper">
+      <header class="site-header site-header-align">
+        <h2 class="calendarTitle page-title text-l-b">일정</h2>
+        <button class="addScheduleButton button btn-add-schedule text-s-b bs-t-f bs-c-m bs-s-base-ti" type="button">추가
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 3.75V14.25M3.75 9H14.25" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </header>
+    </div>
+
+    <!-- Main Content -->
+    <main class="calendar">
+      <div class="calendar-header-wrapper">
+        <div class="calendarHeader top-area">
+          <h2 class="calendarYearMonth text-xl-b"></h2>
+          <div class="calendarControls date-controller">
+            <button type="button" class="calendarPrev button-prev-month">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path d="M13.75 16.5L8.25 11L13.75 5.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <span class="divide-bar vt-1"></span>
+            <button type="button" class="calendarToday button-today text-s-b">오늘</button>
+            <span class="divide-bar vt-1"></span>
+            <button type="button" class="calendarNext button-next-month">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path d="M8.25 16.5L13.75 11L8.25 5.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="calendar"></div>
+    </main>
+
+    <!-- new todo item register Modal -->
+    <div class="scheduleModal register-modal">
+      <div class="modalContent">
+        <!-- Header -->
+        <div class="header-wrapper">
+          <header class="site-header modal-header">
+            <button class="closeButton addScheduleButton button btn-add-schedule text-s-b bs-t-t bs-c-r bs-s-base" type="button">취소</button>
+            <h2 class="bs-title text-l-b">새로운 일정</h2>
+            <button class="submitButton addScheduleButton button btn-add-schedule text-s-b bs-t-t bs-c-r bs-s-base" type="submit">추가</button>
+          </header>
+        </div>
+        <form action="" class="form-area">
+          <div class="form-item-wrapper title-input">
+            <label for="scheduleTitle" class="scheduleTitle">일정 제목</label>
+            <input
+              type="text"
+              id="scheduleTitle"
+              name="scheduleTitle"
+              placeholder="제목을 입력해주세요."
+              autocomplete="off"
+              class="text-m-r"
+            />
+          </div>
+          <div class="list-wrapper">
+            <div class="form-item-wrapper">
+              <label for="scheduleStartDate" class="text-m-m">시작일</label>
+              <input
+                type="datetime-local"
+                id="scheduleStartDate"
+                name="scheduleStartDate"
+                autocomplete="off"
+                class="text-m-r"
+              />
+            </div>
+            <div class="form-item-wrapper">
+              <label for="scheduleRepeat" class="text-m-m">반복유무</label>
+              <select id="scheduleRepeat" name="scheduleRepeat" class="text-m-r">
+                <option value="">사용하지않음</option>
+                <option value="0,1,2,3,4">매주 일 ~ 목요일</option>
+                <option value="0,1,2,3,4,5,6">매일</option>
+                <option value="5">매주 금요일</option>
+                <option value="6">매주 토요일</option>
+                <option value="0">매주 일요일</option>
+                <option value="0,6">매주 토~일요일</option>
+              </select>
+            </div>
+            <div class="form-item-wrapper">
+              <label for="scheduleEndDate" class="text-m-m">종료일</label>
+              <input
+                type="datetime-local"
+                id="scheduleEndDate"
+                name="scheduleEndDate"
+                autocomplete="off"
+                class="text-m-r"
+              />
+            </div>
+          </div>
+            
+          <button type="button" class="deleteButton">삭제</button>
+        </form>
+      </div>
+    </div>
+
+     <!-- Tabs -->
+    <div class="tabs-wrapper">
+      <nav class="tabs">
+        <a href="#" target="_blank" class="tab-item text-2xs-b">
+          <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
+            <path d="M12.125 29.3333V16H20.125V29.3333M4.125 12L16.125 2.66663L28.125 12V26.6666C28.125 27.3739 27.844 28.0521 27.344 28.5522C26.8439 29.0523 26.1656 29.3333 25.4583 29.3333H6.79167C6.08442 29.3333 5.40615 29.0523 4.90605 28.5522C4.40595 28.0521 4.125 27.3739 4.125 26.6666V12Z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          홈
+        </a>
+        <a href="#" target="_blank" class="tab-item text-2xs-b">
+          <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
+            <path d="M21.7083 2.66663V7.99996M11.0417 2.66663V7.99996M4.375 13.3333H28.375M7.04167 5.33329H25.7083C27.1811 5.33329 28.375 6.5272 28.375 7.99996V26.6666C28.375 28.1394 27.1811 29.3333 25.7083 29.3333H7.04167C5.56891 29.3333 4.375 28.1394 4.375 26.6666V7.99996C4.375 6.5272 5.56891 5.33329 7.04167 5.33329Z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          일정
+        </a>
+        <a href="#" target="_blank" class="tab-item text-2xs-b">
+          <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
+            <path d="M5.95831 26C5.95831 25.1159 6.3095 24.2681 6.93462 23.6429C7.55974 23.0178 8.40759 22.6666 9.29165 22.6666H27.2916M5.95831 26C5.95831 26.884 6.3095 27.7319 6.93462 28.357C7.55974 28.9821 8.40759 29.3333 9.29165 29.3333H27.2916V2.66663H9.29165C8.40759 2.66663 7.55974 3.01782 6.93462 3.64294C6.3095 4.26806 5.95831 5.1159 5.95831 5.99996V26Z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          일기
+        </a>
+        <a href="#" target="_blank" class="tab-item text-2xs-b">
+          <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
+            <path d="M27.5417 28V25.3333C27.5417 23.9188 26.9798 22.5623 25.9796 21.5621C24.9794 20.5619 23.6229 20 22.2084 20H11.5417C10.1272 20 8.77066 20.5619 7.77047 21.5621C6.77028 22.5623 6.20837 23.9188 6.20837 25.3333V28M22.2084 9.33333C22.2084 12.2789 19.8206 14.6667 16.875 14.6667C13.9295 14.6667 11.5417 12.2789 11.5417 9.33333C11.5417 6.38781 13.9295 4 16.875 4C19.8206 4 22.2084 6.38781 22.2084 9.33333Z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          마이
+        </a>
+      </nav>
+    </div>
+    <script src="./js/calendar.js" defer></script>
+  </body>
+</html>
