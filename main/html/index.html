@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Main page</title>
     <!-- <link rel="stylesheet" href="../css/common.css" /> -->
     <link rel="stylesheet" href="../css/main.css" />
     <!-- <link
@@ -15,9 +15,11 @@
       src="https://kit.fontawesome.com/a426e1c310.js"
       crossorigin="anonymous"
     ></script>
-    <script src="../js/main.js" defer></script>
+
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
   </head>
   <body>
+    <!-- header -->
     <!-- header -->
     <header class="navbar">
       <a href="../../main/html/index.html" class="logo">:Doable</a>
@@ -170,10 +172,75 @@
         </div>
         <!-- calendar -->
         <div class="rightArea">
-          <div class="mainCalendar"></div>
-          <button class="plus">새로운 일정을 등록해보세요 +</button>
+          <div class="mainCalendar">
+            <div class="calendarHeader top-area">
+              <div class="calendarControls date-controller">
+                <button type="button" class="calendarPrev button-prev-month">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 22 22"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M13.75 16.5L8.25 11L13.75 5.5"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+                <span class="divide-bar vt-1"></span>
+                <button
+                  type="button"
+                  class="calendarToday button-today text-s-b"
+                >
+                  12월
+                </button>
+                <span class="divide-bar vt-1"></span>
+                <button type="button" class="calendarNext button-next-month">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 22 22"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M8.25 16.5L13.75 11L8.25 5.5"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div id="calendar"></div>
+          </div>
+          <button
+            class="plus"
+            onclick="location.href='../../calendar/html/index.html'"
+          >
+            새로운 일정을 등록해보세요 +
+          </button>
         </div>
       </div>
     </main>
+    <!-- S: 모달 -->
+    <div id="random-modal" class="modal">
+      <div class="modal-content">
+        <img src="../img/Bullet.png" />
+        <span>오늘의 Doable이 추천드리는 작은 습관은 </span>
+        <p id="random-value"></p>
+        <span> 입니다. 오늘 하루</span>
+        <span class="once">딱 한 번만</span>
+        <span>해보시길 바라요!</span>
+        <img class="close" src="../img/X.svg" />
+      </div>
+    </div>
+    <!-- E: 모달-->
+    <script src="../js/main.js" defer></script>
   </body>
 </html>
