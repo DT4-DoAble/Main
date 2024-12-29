@@ -1,0 +1,197 @@
+/* Main */
+.modal-overlay {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50; /* 다른 요소 위에 표시 */
+}
+
+/* 모달 창 */
+label {
+  font-size: 12px;
+  color: #303036;
+}
+
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.line {
+  width: 416px;
+  height: 2px;
+  background-color: #838391;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.title h3 {
+  flex-grow: 1;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.close {
+  padding: 8px;  
+}
+
+.contents-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.box-contents-wrapper {
+  flex-grow: 1;
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  overflow-y: auto;
+}
+
+.box-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.box-wrapper:nth-child(2) {
+  flex-grow: 1;
+}
+
+.semiTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4d4d56;
+}
+
+.divDays {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 3px solid var(--color-gray-20);
+}
+
+.ftMon, .ftDay {
+  line-height: 1;
+}
+
+.ftMon {
+  font-size: 56px;
+  font-weight: bold;
+  color: #c6c6cd;
+  margin-right: 3px;
+}
+
+.mon {
+  color: #c6c6cd;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.ftDay {
+  font-size: 56px;
+  font-weight: bold;
+  margin-right: 3px;
+}
+
+.day {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.divFeeling {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border: 1px solid #e1e1e5;
+  border-radius: 16px;
+}
+
+.divEmoji {
+  display: flex;
+  justify-content: space-between;
+}
+
+.emotions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between; /* 아이템 간의 공간 균등 배분 */
+  gap: 12px; /* 아이템 간의 간격 */
+}
+
+.item {
+  display: flex; /* 내부 요소 정렬을 위해 flex 사용 */
+  align-items: center;
+  gap: 5px; /* 체크박스와 라벨 간 간격 */
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+/* 각 유형에 따른 색상 */
+input[data-emotion-type="smile"] {
+  accent-color: #c3eee6;
+}
+input[data-emotion-type="anger"] {
+  accent-color: #ffc2bd;
+}
+input[data-emotion-type="normal"] {
+  accent-color: #ffec82;
+}
+input[data-emotion-type="sad"] {
+  accent-color: #d6e7ff;
+}
+
+.txtDiary {
+  min-height: 120px;
+  max-height: 200px;
+  padding: 16px;
+  flex-grow: 1;
+  font-size: 16px;
+  border: 1px solid #e1e1e5;
+  border-radius: 16px;
+  background-color: #fafafa;
+  outline: none;
+  resize: none;
+}
+
+.txtDiary::placeholder {
+  color: #a6a6b0;
+}
+
+.btnSave {
+  min-height: 64px;
+  color: white;
+  font-size: 18px;
+  background-color: #18181b;
+  border-radius: 16px;
+}
+
+.mt16 {
+  margin-top: 16px;
+}
+.mt32 {
+  margin-top: 32px;
+}
+.mt65 {
+  margin-top: 65px;
+}
