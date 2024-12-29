@@ -37,6 +37,8 @@ body {
   top: 0;
   left: 0;
   padding: 0 360px; /* 좌우 여백 */
+  position: relative;
+  z-index: 10; /* 메뉴가 다른 요소보다 위에 오도록 설정 */
 }
 
 ul {
@@ -61,8 +63,10 @@ a {
   font-family: Pretendard;
   font-size: 16px;
   font-weight: 400;
-  overflow: hiddlen;
+  overflow: hidden;
   white-space: nowrap;
+  z-index: 10; /* 메뉴가 다른 요소보다 위에 오도록 설정 */
+
 }
 
 .logo {
