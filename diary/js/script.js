@@ -1,66 +1,21 @@
 // IndexedDB 초기화
 const db = new Dexie("DailyLogDatabase");
 
-// Dexie 데이터베이스 스키마 정의
+// Dexie 데이터 베이스 스키마 정의
 db.version(1).stores({
-  dailyLogs: "++id,date,diary,selectedEmoji,selectedEmotion", // 스토어 정의
+  dailyLogs: "++id ,date,diary,selectedEmoji,selectedEmotion", // 스토어 정의
 });
-
-// 더미 데이터
-const dummyData = [
-  {
-    date: "2024-12-01",
-    diary: "오늘은 아무 일 없이 잘 지나감",
-    selectedEmoji: "normal",
-    selectedEmotion: "normal:평범한",
-  },
-  {
-    date: "2024-12-02",
-    diary: "산책 갔다가 턱시도 고양이를 만났다! 너무 귀여워서 행복했다,,,",
-    selectedEmoji: "smile",
-    selectedEmotion: "smile:행복한",
-  },
-  {
-    date: "2024-12-04",
-    diary: "무난했던 오늘 하루 무탈하게 잘 지나가서 다행이다",
-    selectedEmoji: "normal",
-    selectedEmotion: "normal:따분한",
-  },
-  {
-    date: "2024-12-08",
-    diary:
-      "오늘 하루 너무 힘들다 . 회사에서도 일이 마음대로 진행되지 않아서 속상했는데 친구랑  싸우기까지,, 언제 화해하려나 ",
-    selectedEmoji: "sad",
-    selectedEmotion: "sad:실망한",
-  },
-  {
-    date: "2024-12-14",
-    diary:
-      "길 가다가 이상한 사람을 만난 오늘 진짜 세상에는 다양한 사람이 있는 것 같다",
-    selectedEmoji: "anger",
-    selectedEmotion: "anger:분노한",
-  },
-];
-
-// 데이터베이스 초기화 또는 데이터 추가
-db.open()
-  .then(async () => {
-    const count = await db.dailyLogs.count(); // 기존 데이터 확인
-    if (count === 0) {
-      // 데이터가 없으면 추가
-      await db.dailyLogs.bulkAdd(dummyData);
-      console.log("Dummy data added!");
-    } else {
-      console.log("Data already exists in the database.");
-    }
-  })
-  .catch((err) => {
-    console.error("Failed to open database:", err);
-  });
+// 데이터베이스 열기
+db.open().catch((err) => {
+  console.error("Failed to open database:", err);
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const openModalButton = document.getElementById("openModal");
+  const openModalButtonWeb = document.getElementById("openModalWeb");
   const closeModalButton = document.querySelector(".close");
+  const modalOverlay = document.querySelector(".modal-overlay");
+  const modal = document.querySelector(".modal");
 
   // 화면 크기 조건
   const maxMobileWidth = 393;
@@ -76,21 +31,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  openModalButtonWeb.addEventListener("click", () => {
+    if (window.innerWidth <= maxMobileWidth) {
+      window.location.href = "../html/diaryStore.html";
+    } else {
+      openModal();
+    }
+  });
+
   // 모달 닫기 버튼 클릭 이벤트
   closeModalButton.addEventListener("click", () => {
     closeModal();
   });
 
+  modalOverlay.addEventListener("click", () => {
+    closeModal();
+  });
+
   function openModal() {
-    const modalOverlay = document.querySelector(".modal-overlay");
-    modalOverlay.style.display = "block"; // 모달을 보이게 함
+    modalOverlay.style.top = "0"; // 모달을 보이게 함
+    modal.style.top = "0"; // 모달을 보이게 함
   }
 
   function closeModal() {
-    const modalOverlay = document.querySelector(".modal-overlay");
-    modalOverlay.style.display = "none"; // 모달을 숨김
+    modalOverlay.style.top = "-150%"; // 모달을 숨김
+    modal.style.top = "-150%"; // 모달을 숨김
   }
 });
+
+// diaryMain 페이지로 이동
+link = "../html/diary1.html";
+
+function goToMain() {
+  location.assign(link);
+}
 
 // 날짜 정보 설정
 const today = new Date();
@@ -240,18 +214,12 @@ btnSave.addEventListener("click", async () => {
       selectedEmotion,
     });
     alert("하루가 성공적으로 저장되었습니다!");
-
-    // 저장 후 버튼 및 텍스트 박스 비활성화
-    btnSave.disabled = true;
-    document.querySelector(".txtDiary").disabled = true;
-
-    // 모달 닫기 (예: 모달 요소에 'hidden' 클래스 추가)
-    const modal = document.querySelector(".modal"); // 모달 창 선택
-    if (modal) {
-      modal.classList.add("hidden"); // 'hidden' 클래스 추가로 닫기
-    }
+    btnSave.disabled = true; // 저장 버튼 비활성화
+    txtDiary.disabled = true; // 텍스트 박스 비활성화
   } catch (err) {
     console.error("Failed to save daily log:", err);
     alert("저장 중 오류가 발생했습니다.");
   }
 });
+
+console.log(db);
