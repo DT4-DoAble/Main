@@ -216,22 +216,6 @@ header {
     display: none;
   }
 
-  .nav .tab-item-login .tab-icon {
-    display: block;
-    width: 20px;
-  }
-
-  .nav .tab-item-login {
-    gap: 2px;
-  }
-
-  .nav .tab-item-login .tab-icon path {
-    stroke-width: 2;
-  }
-
-  .nav .tab-item-login:hover .tab-icon path {
-    stroke: var(--color-mint-50);
-  }
 
   .main-header-button-wrapper {
     margin-left: 16px;
