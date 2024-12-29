@@ -1,0 +1,185 @@
+/* 
+button:focus {
+  outline: 1px solid var(--color-blue-50);
+  box-shadow: 0px 0px 0px 4px rgba(92, 149, 255, 0.4);
+} */
+
+/* Components */
+/* Button || Type | Size | Color | Icon(Leading/Trailing)
+  
+  1. Type
+    1)Filled
+    2)Outlined
+    
+  2. Color
+    1)mint
+    2)red
+    3)yellow
+    4)green
+    5)blue
+    6)purple
+    7)gray
+    7)black
+
+  3. Size
+    1)2xs
+    2)xs
+    3)base
+    4)s
+    5)m
+    6)l
+    7)xl
+    
+  4. Icon
+    1)Leading
+    2)Trailing
+
+*/
+
+/* 0. Base */
+.button {
+  min-width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 1. Type */
+.bs-t-f {
+  color: var(--color-white);
+}
+
+.bs-t-o {
+}
+
+.bs-t-t {
+  background-color: none;
+}
+
+/* 2. Color */
+.bs-c-m {
+  background-color: var(--color-mint-50);
+}
+
+.bs-c-m:hover,
+.bs-c-m:active {
+  background-color: var(--color-mint-40);
+}
+
+.bs-c-bk {
+  background-color: var(--color-black);
+}
+
+.bs-c-bk:hover,
+.bs-c-bk:active {
+  background-color: var(--color-gray-80);
+}
+
+.bs-c-r {
+  color: var(--color-red-50);
+}
+
+.bs-c-r:hover,
+.bs-c-r:active {
+  background-color: var(--color-red-80);
+}
+
+/* 3. Size */
+.bs-s-base-ti {
+  padding: 8px 8px 8px 12px;
+  gap: 4px;
+  border-radius: 8px;
+}
+
+.bs-s-base {
+  padding: 8px;
+  gap: 4px;
+  border-radius: 8px;
+}
+
+.bs-s-xl {
+  flex-grow: 1;
+  padding: 20px 24px;
+  border-radius: 16px;
+}
+
+/* 4. Icon */
+.bs-i-t {
+}
+
+/* Divide bar || direction(vertical, horizontal) | width(1, 2) */
+
+.divide-bar {
+  display: block;
+  background-color: var(--color-gray-80);
+}
+
+.vt-1 {
+  width: 1px;
+  height: 24px;
+}
+.vt-2 {
+  width: 1px;
+  height: 24px;
+}
+
+.hr-1 {
+  width: 24px;
+  height: 1px;
+}
+
+.hr-2 {
+  width: 24px;
+  height: 2px;
+}
+
+/* Form */
+/* Input */
+input[type="text"],
+input[type="datetime-local"],
+select {
+  padding: 12px 16px;
+  color: var(--color-gray-40);
+  cursor: pointer; /* 커서를 손가락 모양으로 변경 */
+  border: 1px solid var(--color-gray-90);
+  border-radius: 8px;
+  background-color: var(--color-gray-bg);
+}
+
+/* 일정 등록 모달 내의 select 스타일링 */
+.scheduleModal select {
+  padding: 12px 16px;
+  appearance: none; /* 기본 디자인 제거 */
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M2%204L6%208L10%204%22%20stroke%3D%22%23333%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* 배경 이미지 위치 조정 */
+}
+
+input[type="text"]:focus,
+input[type="datetime-local"]:focus,
+select:focus {
+  border-color: var(--color-blue-50);
+  outline: 4px solid rgba(92, 149, 255, 0.3);
+}
+
+input[type="text"]::placeholder,
+input[type="datetime-local"]::placeholder {
+  color: var(--color-gray-60);
+}
+
+/* Tag */
+.tag-s-s {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.tag-c-m {
+  color: var(--color-mint-50);
+  background-color: var(--color-mint-bg);
+}
+
+.tag-c-r {
+  color: var(--color-red-50);
+  background-color: var(--color-red-bg);
+}

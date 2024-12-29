@@ -1,0 +1,612 @@
+header
+/* , footer */ {
+  text-align: center;
+  padding: 0.625rem; /* 10px */
+  background-color: #f3f3f3;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem;
+  background-color: #f3f3f3;
+}
+
+.site-header .prevPageButton {
+  font-size: 1rem; /* 폰트 크기 */
+  color: #333; /* 글자색 */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.site-header .calendarTitle {
+  flex: 1; /* 가운데 정렬을 위해 공간 차지 */
+  text-align: center; /* 가운데 정렬 */
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.site-header .addScheduleButton {
+  font-size: 1rem;
+  background-color: #3fc9ae;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  cursor: pointer;
+}
+
+/* footer {
+  font-size: 0.875rem; /* 14px
+  color: #666;
+} */
+
+/* 캘린더 디자인 */
+.calendar {
+  width: 90%;
+  margin: 1.25rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 테이블 크기 고정 */
+.calendar table {
+  width: 100%;
+  max-width: 1200px; /* 최대 너비 설정 (예: 900px) */
+  height: auto; /* 고정 높이 */
+  margin: 1rem auto;
+  table-layout: fixed; /* 고정된 테이블 레이아웃 */
+  border-collapse: collapse; /* 테두리 겹침 제거 */
+
+  /* 텍스트가 셀을 넘치지 않도록 처리 */
+  white-space: nowrap; /* 텍스트가 한 줄로 유지 */
+  overflow: hidden; /* 넘치는 텍스트는 숨기기 */
+  text-overflow: ellipsis; /* 넘치는 텍스트에 '...' 표시 */
+}
+
+/* .calendar table {
+  width: 100%;
+  height: 80vh;
+  margin: 1.25rem 0;
+} */
+
+.calendar table > caption {
+  font-size: 1.25rem; /* 20px */
+  font-weight: bolder;
+  color: red;
+  text-align: left;
+  padding: 0.625rem 1.25rem;
+}
+
+/* 캘린더의 요일 헤더 스타일링 */
+.calendar table > thead > tr > th {
+  font-size: 1.4375rem; /* 23px, 일자 폰트 크기와 동일하게 설정 */
+  padding: 1.25rem 0.625rem;
+  text-align: center;
+  color: #333; /* 기본 색상 */
+}
+
+/* 토요일 및 일요일 색상 변경 */
+.calendar table > thead > tr > th.saturday {
+  color: blue; /* 토요일은 파란색 */
+}
+
+.calendar table > thead > tr > th.sunday {
+  color: red; /* 일요일은 빨간색 */
+}
+
+.calendar table > tbody > tr > td {
+  position: relative; /* 상위 요소에 상대적인 위치를 지정 */
+  padding: 1.875rem 0.625rem;
+  text-align: center;
+  vertical-align: top; /* 상단 정렬 */
+  /* z-index: 999; */
+  /* background-color: #00796b; */
+}
+
+/* 각 날짜 셀에 추가되는 p 태그 스타일 */
+.calendar table > tbody > tr > td > p {
+  font-size: 1rem; /* 기본 폰트 크기 */
+  background-color: #e0f7fa; /* 배경 색 */
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  border-radius: 0.25rem;
+  color: #00796b; /* 글자 색 */
+  white-space: nowrap; /* 한 줄로 유지 */
+  overflow: hidden;
+  text-overflow: ellipsis; /* 넘치는 텍스트에 '...' 표시 */
+  /* z-index: 998; */
+  /* background-color: #3fc9ae; */
+}
+
+/* 추가적인 스타일 */
+.calendar table > tbody > tr > td > p:hover {
+  background-color: #b2dfdb; /* hover 시 배경 색 변경 */
+}
+
+.calendar table > tbody > tr > td > span {
+  padding: 0.625rem 0.625rem;
+  cursor: pointer;
+  font-size: 1.4375rem;
+  display: inline-block;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.calendar table > tbody > tr > td > span.today {
+  display: inline-block;
+  width: 1.5625rem; /* 25px */
+  height: 1.5625rem; /* 25px */
+  line-height: 1.5625rem;
+  text-align: center;
+  background-color: #3fc9ae;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.calendar > .calendarHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.875rem; /* 30px */
+}
+
+/* .calendar > .calendarHeader > .calendarTitle {
+  text-align: center;
+  margin: 0 0 1.25rem 0;
+} */
+
+.calendar > .calendarHeader > .calendarHeaderControls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar > .calendarHeader > .calendarHeaderControls > .calendarYearMonth {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 700;
+  color: gray;
+}
+
+.calendar > .calendarHeader > .calendarHeaderControls > .calendarControls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.calendarControls > button {
+  width: 3.125rem; /* 50px */
+  height: 3.125rem; /* 50px */
+  padding: 0.0625rem 0.25rem;
+  border: 0.0625rem solid #cbcbcb;
+  background-color: #fff;
+  font-size: 1.25rem; /* 20px */
+  cursor: pointer;
+}
+
+.calendarControls > button.calendarToday {
+  width: 5rem; /* 80px */
+  background-color: #3fc9ae;
+  color: #fff;
+}
+
+/* 일정 등록 모달 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 998;
+}
+
+.scheduleModal {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  max-height: 90%;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.2);
+  transition: bottom 0.4s ease-in-out;
+  z-index: 999;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.scheduleModal.active {
+  bottom: 0;
+}
+
+.modalOverlay.active {
+  display: block;
+}
+
+.modalContent {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.modalContent h2 {
+  font-size: 1.375rem; /* 기본 폰트 크기 */
+  font-weight: bold; /* 글자 두께 */
+  margin: 0 0 1.875rem 0; /* 하단 여백 설정 */
+  padding: 0.625rem 0;
+  border-bottom: 0.0625rem solid #121212; /* 아래 테두리 추가 */
+}
+
+.modalContent form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9375rem;
+}
+
+.modalContent label {
+  font-size: 1.2rem; /* 기본 폰트 크기 */
+  font-weight: 500; /* 일반 굵기 */
+  margin: 0.625rem 0; /* 여백 설정 */
+  color: #333; /* 텍스트 색상 설정 */
+}
+
+input,
+button,
+select {
+  padding: 0.625rem;
+  font-size: 1.25rem; /* 20px */
+}
+
+.submitButton {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #45a049;
+}
+
+.closeButton {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background-color: #d32f2f;
+}
+
+/* 일정 등록 모달 내의 select 스타일링 */
+.scheduleModal select {
+  width: 100%; /* 너비를 부모 요소에 맞춤 */
+  padding: 10px 15px; /* 패딩을 추가하여 더 크게 만듦 */
+  font-size: 1rem; /* 폰트 크기 설정 */
+  border-radius: 5px; /* 모서리를 둥글게 처리 */
+  border: 1px solid #ccc; /* 경계선 설정 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+  background-color: white; /* 배경색 설정 */
+  color: #333; /* 글자색 설정 */
+  appearance: none; /* 기본 디자인 제거 */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M2%204L6%208L10%204%22%20stroke%3D%22%23333%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* 배경 이미지 위치 조정 */
+  cursor: pointer; /* 커서를 손가락 모양으로 변경 */
+}
+
+.scheduleModal input[type='text'],
+.scheduleModal input[type='datetime-local'] {
+  padding: 10px 15px;
+  font-size: 1rem; /* scheduleRepeat와 동일한 폰트 크기 */
+  border-radius: 5px; /* 동일한 모서리 둥글기 */
+  border: 1px solid #ccc; /* 동일한 테두리 설정 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 동일한 그림자 효과 */
+  background-color: white;
+  color: #333; /* 동일한 글자색 */
+}
+
+/* select 요소에 포커스 되었을 때의 스타일 */
+.scheduleModal select:focus {
+  border-color: #4caf50; /* 포커스 시 테두리 색 변경 */
+  outline: none; /* 기본 아웃라인 제거 */
+  color: #333; /* 동일한 글자색 */
+}
+
+.scheduleModal input[type='text']::placeholder,
+.scheduleModal input[type='datetime-local']::placeholder {
+  color: #333;
+}
+
+/* 반응형 웹 적용 */
+@media (max-width: 768px) {
+  .site-header .prevPageButton {
+    font-size: 0.875rem; /* 폰트 크기 줄임 */
+    padding: 0.2rem 0.5rem; /* 버튼 패딩 조정 */
+  }
+
+  .site-header .calendarTitle {
+    font-size: 1.2rem; /* 타이틀 크기 줄임 */
+  }
+
+  .site-header .addScheduleButton {
+    font-size: 0.875rem; /* 폰트 크기 줄임 */
+    padding: 0.2rem 0.5rem;
+  }
+
+  .calendarControls > button {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+    padding: 5px; /* 버튼 여백 조정 */
+  }
+
+  .calendarControls > button.calendarToday {
+    width: 70px; /* 오늘 버튼 크기 조정 */
+    font-size: 14px;
+  }
+
+  /* 테이블 크기 조정 */
+  .calendar table {
+    max-width: 100%; /* 작은 화면에서 테이블 너비를 100%로 */
+    height: auto; /* 높이는 자동으로 조정 */
+  }
+
+  .calendar table > tbody > tr > td > span.today {
+    width: 1.25rem; /* 모바일에서 동그라미 크기 축소 */
+    height: 1.25rem; /* 모바일에서 동그라미 크기 축소 */
+    line-height: 1.25rem;
+    margin-bottom: 0.5rem; /* 간격을 좁혀서 일자와 일정을 잘 배치 */
+  }
+
+  /* 날짜 셀의 p 태그 크기 및 여백 조정 */
+  .calendar table > tbody > tr > td > p {
+    font-size: 0.875rem; /* 폰트 크기 축소 */
+    padding: 0.375rem; /* 패딩 조정 */
+    width: 100%; /* 테이블 셀의 너비를 100%로 설정 */
+    white-space: nowrap; /* 한 줄로 유지 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 넘치는 텍스트에 '...' 표시 */
+  }
+
+  .calendar table > thead > tr > th {
+    font-size: 1.2rem; /* 화면 크기 감소 시 폰트 크기 감소 */
+  }
+
+  .calendar table > tbody > tr > td > span {
+    font-size: 14px; /* 날짜 텍스트 크기 조정 */
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+
+  .calendar table > thead > tr > th {
+    font-size: 12px;
+    padding: 10px 5px;
+  }
+
+  /* footer {
+    font-size: 12px;
+  } */
+
+  .modalContent {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .modalContent h2 {
+    font-size: 1.225rem; /* 모바일 화면에서 폰트 크기 축소 */
+    margin: 0 0 1.25rem 0; /* 하단 여백 줄이기 */
+  }
+
+  .modalContent form {
+    gap: 10px;
+  }
+
+  .modalContent label {
+    font-size: 1.1rem; /* 모바일 화면에서 폰트 크기 축소 */
+    font-weight: 500;
+  }
+
+  input,
+  button,
+  select {
+    font-size: 16px;
+  }
+
+  .submitButton,
+  .closeButton {
+    padding: 10px 20px;
+  }
+
+  .scheduleModal input[type='text'],
+  .scheduleModal input[type='datetime-local'] {
+    font-size: 16px; /* 폰트 크기 */
+    padding: 8px; /* 패딩 조정 */
+  }
+}
+
+/* 비활성화된 종료일 입력창 스타일 */
+.scheduleModal input[disabled] {
+  background-color: #f0f0f0; /* 회색 배경 */
+  color: #999; /* 텍스트 색상 회색 */
+  cursor: not-allowed; /* 비활성화된 요소에 대한 커서 */
+}
+
+@media (max-width: 480px) {
+  .site-header .prevPageButton {
+    font-size: 0.75rem; /* 더 작은 폰트 크기 */
+    padding: 0.1rem 0.3rem; /* 최소 패딩 */
+  }
+
+  .site-header .calendarTitle {
+    font-size: 1rem; /* 타이틀 폰트 크기 축소 */
+  }
+
+  .site-header .addScheduleButton {
+    font-size: 0.75rem;
+    padding: 0.1rem 0.3rem; /* 버튼 최소 패딩 */
+  }
+
+  .calendarControls > button {
+    width: 35px;
+    height: 35px;
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  .calendarControls > button.calendarToday {
+    width: 60px; /* 작은 화면에서도 오늘 버튼 보기 좋게 조정 */
+    font-size: 12px;
+  }
+
+  /* 더 작은 화면에서 추가적인 폰트 및 여백 조정 */
+  .calendar table {
+    height: auto;
+  }
+  .calendar table > thead > tr > th {
+    font-size: 1rem; /* 더 작은 화면에서 더 작은 폰트 크기 */
+  }
+
+  .calendar table > tbody > tr > td > span {
+    font-size: 12px;
+    padding: 3px;
+    margin-bottom: 10px;
+  }
+
+  .calendar table > tbody > tr > td > span.today {
+    width: 1rem; /* 더 작은 화면에서 동그라미 크기 축소 */
+    height: 1rem; /* 동그라미 크기 축소 */
+    line-height: 1rem;
+    margin-bottom: 0.25rem; /* 작은 화면에서 일정과 동그라미 간격 좁힘 */
+  }
+
+  .calendar table > tbody > tr > td > p {
+    font-size: 0.75rem; /* 더 작은 폰트 크기 */
+    padding: 0.25rem; /* 더 작은 패딩 */
+    width: 100%; /* 셀 너비를 100%로 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* '...' 표시 */
+  }
+  .calendar table > thead > tr > th {
+    font-size: 10px;
+    padding: 8px 3px;
+  }
+
+  /* footer {
+    font-size: 10px;
+    padding: 5px;
+  } */
+
+  .modalContent {
+    padding: 15px;
+    text-align: center;
+  }
+
+  .modalContent h2 {
+    font-size: 1rem; /* 더 작은 화면에서 폰트 크기 추가 축소 */
+    margin: 0 0 1rem 0; /* 하단 여백 더 줄이기 */
+  }
+
+  .modalContent form {
+    gap: 8px;
+  }
+
+  .modalContent label {
+    font-size: 0.95rem; /* 더 작은 화면에서 폰트 크기 더 축소 */
+    font-weight: 500;
+  }
+
+  .modalContent input,
+  .modalContent button,
+  .modalContent select {
+    font-size: 14px;
+    padding: 8px; /* Input 및 버튼 패딩 조정 */
+  }
+
+  .submitButton,
+  .closeButton {
+    padding: 8px 16px;
+  }
+
+  .scheduleModal {
+    padding: 10px; /* 모달 패딩 조정 */
+    width: 95%; /* 모달 너비 조정 */
+  }
+
+  .scheduleModal input[type='text'],
+  .scheduleModal input[type='datetime-local'] {
+    font-size: 14px; /* 더 작은 화면에 맞게 폰트 조정 */
+    padding: 6px; /* 패딩 감소 */
+  }
+}
+
+@media (max-width: 320px) {
+  .site-header .prevPageButton {
+    font-size: 0.625rem; /* 폰트 더 작게 */
+    padding: 0.1rem 0.2rem; /* 패딩 최소화 */
+  }
+
+  .site-header .calendarTitle {
+    font-size: 0.875rem; /* 가장 작은 폰트 크기 */
+  }
+
+  .site-header .addScheduleButton {
+    font-size: 0.625rem;
+    padding: 0.1rem 0.2rem;
+  }
+
+  .calendarControls > button {
+    width: 30px; /* 매우 작은 화면에서 버튼 크기 */
+    height: 30px;
+    font-size: 10px;
+  }
+
+  .calendarControls > button.calendarToday {
+    width: 80px; /* 매우 작은 화면에서 특정 버튼 너비 */
+  }
+
+  .calendar table > thead > tr > th {
+    font-size: 0.875rem; /* 가장 작은 화면에서의 폰트 크기 */
+  }
+
+  .calendar table > tbody > tr > td > span.today {
+    width: 1rem; /* 더 작은 화면에서 동그라미 크기 축소 */
+    height: 1rem; /* 동그라미 크기 축소 */
+    line-height: 1rem;
+    margin-bottom: 0.25rem; /* 작은 화면에서 일정과 동그라미 간격 좁힘 */
+  }
+
+  .calendar table > tbody > tr > td > p {
+    font-size: 0.75rem; /* 더 작은 폰트 크기 */
+    padding: 0.25rem; /* 더 작은 패딩 */
+    width: 100%; /* 셀 너비를 100%로 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* '...' 표시 */
+  }
+
+  .modalContent h2,
+  .modalContent label,
+  .modalContent input,
+  .modalContent button,
+  .modalContent select {
+    font-size: 12px; /* 매우 작은 화면에서 폰트 크기 */
+  }
+
+  .modalContentView button {
+    font-size: 12px; /* 매우 작은 화면에서 폰트 크기 */
+  }
+
+  .scheduleModal input[type='text'],
+  .scheduleModal input[type='datetime-local'] {
+    padding: 4px; /* 패딩 최소화 */
+  }
+}
