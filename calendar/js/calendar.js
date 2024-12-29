@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 날짜 포맷
   function formatYearMonth(year, month) {
-    return `${year}년 ${month}월`;
+    return `${year}.${month}`;
   }
 
   // 달력 HTML 생성
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let html = "<table>";
     if (showDay) {
-      html += `<thead><tr>`;
+      html += "<thead><tr>";
       days.forEach((day, index) => {
         html += `<th class="${
           index === 0 ? "sunday" : index === 6 ? "saturday" : ""
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let calendarPos = 0;
     let calendarDay = 0;
     for (let week = 0; week < calendarWeekCount; week++) {
-      html += `<tr>`;
+      html += "<tr>";
       for (let day = 0; day < 7; day++) {
         html += `<td id="td-${calendarDay + 1}" class="day-sell">`;
         if (monthStartDay <= calendarPos && calendarDay < monthLastDate) {
@@ -72,6 +72,9 @@ document.addEventListener("DOMContentLoaded", function () {
           }">${calendarDay}</span>`;
           getDayMemoData(calendarYear, calendarMonth, calendarDay);
         }
+        html += `<div class="memoListWrapper memoListWrapper-${calendarDay + 1}"></div>`;
+        html += `<button class="button-day-sell-add button-day-sell-add-${calendarDay + 1}" type="button"><span class=button-label>추가</span>
+            <img src="../img/icon-plus.svg"></button>`;
         html += "</td>";
         calendarPos++;
       }
@@ -108,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
           memoTag.textContent = `${item.scheduleTitle}`;
           memoTag.setAttribute("data-idx", `${item.id}`);
           memoTag.setAttribute("class", `memoList todo-item todo-item-mt`);
-          document.querySelector(`#td-${calendarDay}`).append(memoTag);
+          document.querySelector(`.memoListWrapper-${calendarDay + 1}`).append(memoTag);
         });
       }
     } catch (e) {
@@ -138,34 +141,34 @@ document.addEventListener("DOMContentLoaded", function () {
           if (!dummyData) {
             // 반복되는 날짜에 맞는 일정 추가
             await db.calendars.add({
-              scheduleTitle: "새싹 교육",
+              scheduleTitle: "🆚 새싹 교육",
               scheduleStartDate: "2024-12-20T10:00:00.000Z",
               scheduleEndDate: "2024-12-20T18:00:00.000Z",
               scheduleRepeat: "",
             });
 
             await db.calendars.add({
-              scheduleTitle: "새싹 프로젝트 (디자인 작업)",
+              scheduleTitle: "🖋 새싹 프로젝트 (디자인 작업)",
               scheduleStartDate: "2024-12-07T10:00:00.000Z",
               scheduleEndDate: "2024-12-07T18:00:00.000Z",
               scheduleRepeat: "",
             });
 
             await db.calendars.add({
-              scheduleTitle: "점심 약속",
+              scheduleTitle: "🍱 점심 약속",
               scheduleStartDate: "2024-12-14T12:30:00.000Z",
               scheduleEndDate: "2024-12-14T14:00:00.000Z",
               scheduleRepeat: "",
             });
 
             await db.calendars.add({
-              scheduleTitle: "코딩 연습",
+              scheduleTitle: "🤪 코딩 연습",
               scheduleStartDate: "2024-12-21T18:00:00.000Z",
               scheduleEndDate: "2024-12-21T19:00:00.000Z",
               scheduleRepeat: "",
             });
             await db.calendars.add({
-              scheduleTitle: "한판 어떄",
+              scheduleTitle: "🤬 한판 어떄",
               scheduleStartDate: "2024-12-28T19:14:00.000Z",
               scheduleEndDate: "2024-12-28T22:00:00.000Z",
               scheduleRepeat: "",
@@ -232,11 +235,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 일정 등록 모달 열기
-  const modal = document.querySelector(".scheduleModal");
+  const mainArea = document.querySelector(".main-wrapper");
   const modalOverlay = document.createElement("div"); // 모달 오버레이 생성
+  const modal = document.querySelector(".scheduleModal");
   modalOverlay.classList.add("modalOverlay");
   modalOverlay.classList.add("bg-blur");
-  document.body.appendChild(modalOverlay);
+  mainArea.append(modalOverlay);
 
   // 일정 등록 버튼 클릭 시 모달 표시
   const addScheduleButton = document.querySelector(".addScheduleButton");
@@ -281,119 +285,104 @@ document.addEventListener("DOMContentLoaded", function () {
   // })();
 
   // 날짜 클릭 시 모달 열기
-  const calendarDayClick = document.querySelector(".calendar"); // .calendar 요소 선택
-  const calendarTdSelector = ".calendar table > tbody > tr > td";
-  const memoListSelector = ".memoList"; // 일정 내용이 있는 <p> 태그 선택
+  document
+    .querySelector(".calendar")
+    .addEventListener("click", async (event) => {
+      // 클릭된 요소가 .calendar 안의 <td> 또는 .memoList일 때만 모달 열기
+      const target = event.target;
 
-  calendarDayClick.addEventListener("click", async (event) => {
-    modal.classList.add("active"); // 모달 활성화
-    modalOverlay.classList.add("active"); // 오버레이 활성화
-    document.body.style.overflow = "hidden"; // 스크롤 비활성화
+      if (target.closest(".calendar table > tbody > tr > td")) {
+        modal.classList.add("active");
+        modalOverlay.classList.add("active");
+        document.body.style.overflow = "hidden";
 
-    // console.log(event.target);
+        const tdElement = target.closest("td"); // <td> 요소를 정확히 찾기
+        const clickedDay = tdElement.querySelector("span")
+          ? parseInt(tdElement.querySelector("span").textContent)
+          : "";
 
-    if (event.target.closest(calendarTdSelector)) {
-      const target = event.target.closest(".calendar table > tbody > tr > td");
-      const clickedDay = target.querySelector("span")
-        ? parseInt(target.querySelector("span").textContent)
-        : "";
+        console.log("Clicked Day:", clickedDay); // clickedDay 값을 콘솔에 출력
 
-      // 달력 연도 및 월 가져오기
-      const yearMonthText =
-        document.querySelector(".calendarYearMonth").textContent;
-      // const [year, month] = yearMonthText.split('.').map(Number);
-      const [year, month] = yearMonthText
-        .replace("년", "")
-        .replace("월", "")
-        .split(" ")
-        .map(Number);
-      console.log(year, month, clickedDay);
-      // 월을 0부터 시작하는 인덱스에서 1부터 시작하도록 보정
+        if (clickedDay) {
+          // 달력 연도 및 월 가져오기
+          const yearMonthText =
+            document.querySelector(".calendarYearMonth").textContent;
+          const [year, month] = yearMonthText
+            .replace("년", "")
+            .replace("월", "")
+            .split(" ")
+            .map(Number);
 
-      // 값이 잘 나오면 모달 활성화
-      if (clickedDay) {
-        // 현재 시간을 가져오기 (UTC)
-        const now = new Date();
-        // 대한민국 시간으로 9시간을 더함
-        const koreaTime = new Date(now.getTime() + 9 * 60 * 60 * 1000);
-        const currentHours = koreaTime.getHours();
-        const currentMinutes = koreaTime.getMinutes();
+          const now = new Date();
+          const koreaTime = new Date(now.getTime() + 9 * 60 * 60 * 1000); // 대한민국 시간으로 보정
+          const currentHours = koreaTime.getHours();
+          const currentMinutes = koreaTime.getMinutes();
 
-        // 시작일에 데이터 클릭한 일자 데이터 넣기
-        const startDate = new Date(
-          year,
-          month - 1,
-          clickedDay + 1,
-          currentHours,
-          currentMinutes
-        );
+          // 클릭한 날짜의 시간 설정
+          const startDate = new Date(
+            year,
+            month - 1,
+            clickedDay,
+            currentHours,
+            currentMinutes
+          );
+          const startDateTime = startDate.toISOString().slice(0, 16); // 'YYYY-MM-DDTHH:mm' 형식으로 변환
 
-        // 시간을 포함하여 format 'YYYY-MM-DDTHH:mm'으로 변환
-        const startDateTime = startDate.toISOString().slice(0, 16);
-        // 시작일을 `scheduleStartDate`에 설정
-        document.querySelector(`#scheduleStartDate`).value = startDateTime;
-        document.querySelector(`#scheduleEndDate`).value = startDateTime;
+          document.querySelector("#scheduleStartDate").value = startDateTime;
+          document.querySelector("#scheduleEndDate").value = startDateTime;
+        }
       }
-    }
 
-    // p 태그 클릭 처리 (일정 내용 보기)
-    if (event.target.closest(memoListSelector)) {
-      const target = event.target.closest(memoListSelector);
-      const memoId = parseInt(target.dataset.idx);
-      console.log(typeof memoId);
-      const currMemoLists = await db.calendars
-        .where("id")
-        .equals(memoId)
-        .toArray();
+      // p 태그 클릭 시 (일정 내용 보기)
+      if (target.closest(".memoList")) {
+        const memoId = parseInt(target.dataset.idx);
+        console.log(typeof memoId);
 
-      // 등록 버튼 수정으로 변경 data-idx 추가
-      document.querySelector(".submitButton").textContent = "수정";
-      document.querySelector(".bs-title").textContent = "일정 상세";
-      document
-        .querySelector(".submitButton")
-        .setAttribute("data-idx", `${memoId}`);
-      // document.querySelector(".submitButton").style.backgroundColor = "blue";
+        const currMemoLists = await db.calendars
+          .where("id")
+          .equals(memoId)
+          .toArray();
 
-      deleteButtonButton.setAttribute("data-idx", `${memoId}`);
+        document.querySelector(".submitButton").textContent = "수정";
+        document.querySelector(".bs-title").textContent = "일정 상세";
+        document
+          .querySelector(".submitButton")
+          .setAttribute("data-idx", `${memoId}`);
 
-      deleteButtonButton.style.display = "flex"; // 삭제 버튼 생성
-      deleteButtonButton.classList.add("button");
-      deleteButtonButton.classList.add("text-m-b");
-      deleteButtonButton.classList.add("bs-t-f");
-      deleteButtonButton.classList.add("bs-s-xl");
-      deleteButtonButton.classList.add("bs-c-bk");
-      // deleteButtonButton.style.backgroundColor = "#333"; // 삭제 버튼 색상
-      // deleteButtonButton.style.color = "#fff"; // 삭제 버튼 색상
+        const deleteButtonButton = document.querySelector(".deleteButton");
+        deleteButtonButton.setAttribute("data-idx", `${memoId}`);
+        deleteButtonButton.style.display = "block";
+        deleteButtonButton.classList.add("button");
+        deleteButtonButton.classList.add("text-m-b");
+        deleteButtonButton.classList.add("bs-t-f");
+        deleteButtonButton.classList.add("bs-s-xl");
+        deleteButtonButton.classList.add("bs-c-bk");
 
-      currMemoLists.forEach(function (currMemoList) {
-        // 일정 제목 업데이트
-        document.querySelector(`#scheduleTitle`).value =
-          currMemoList.scheduleTitle;
-        // 일정 시작일 업데이트
-        document.querySelector(`#scheduleStartDate`).value =
-          currMemoList.scheduleStartDate.slice(0, 16);
-        // 일정 종료일 업데이트
-        document.querySelector(`#scheduleEndDate`).value =
-          currMemoList.scheduleEndDate.slice(0, 16);
-        // 일정 반복유무 checked 업데이트
-        let scheduleRepeat = document.querySelector(
-          "select[name=scheduleRepeat]"
-        ).options;
-        for (let i = 0; i < scheduleRepeat.length; i++) {
-          if (scheduleRepeat[i].value == currMemoList.scheduleRepeat)
-            scheduleRepeat[i].selected = true;
-        }
+        currMemoLists.forEach((currMemoList) => {
+          document.querySelector("#scheduleTitle").value =
+            currMemoList.scheduleTitle;
+          document.querySelector("#scheduleStartDate").value =
+            currMemoList.scheduleStartDate.slice(0, 16);
+          document.querySelector("#scheduleEndDate").value =
+            currMemoList.scheduleEndDate.slice(0, 16);
 
-        // 일정 반복유무 유무에 따라 종료일 활성/비활성
-        if (currMemoList.scheduleRepeat === "") {
-          // console.log(currMemoList.scheduleRepeat === '');
-          scheduleEndDateInput.disabled = true; // 종료일 비활성화
-        } else {
-          scheduleEndDateInput.disabled = false; // 종료일 비활성화
-        }
-      });
-    }
-  });
+          const scheduleRepeat = document.querySelector(
+            "select[name=scheduleRepeat]"
+          ).options;
+          for (let i = 0; i < scheduleRepeat.length; i++) {
+            if (scheduleRepeat[i].value == currMemoList.scheduleRepeat) {
+              scheduleRepeat[i].selected = true;
+            }
+          }
+
+          if (currMemoList.scheduleRepeat === "") {
+            document.querySelector("#scheduleEndDate").disabled = true;
+          } else {
+            document.querySelector("#scheduleEndDate").disabled = false;
+          }
+        });
+      }
+    });
 
   const scheduleRepeatSelect = document.querySelector("#scheduleRepeat");
   const scheduleEndDateInput = document.querySelector("#scheduleEndDate");
@@ -494,33 +483,33 @@ document.addEventListener("DOMContentLoaded", function () {
   let submitButton = document.querySelector(".submitButton");
   submitButton.addEventListener("click", async (e) => {
     e.preventDefault();
-    if (confirm("반복 일정입니다. 반복된 일정을 모두 수정를 하시겠습니까?")) {
-      alert("현재 개발중 입니다. 기다려 주세요.");
-    } else {
-      // 입력 데이터 가져오기
-      const scheduleTitle = document.querySelector("#scheduleTitle").value;
-      const scheduleStartDate =
-        document.querySelector("#scheduleStartDate").value;
-      const scheduleEndDate = document.querySelector("#scheduleEndDate").value;
-      const scheduleRepeat = document.querySelector("#scheduleRepeat").value;
 
-      // 시작일과 종료일을 Date 객체로 변환 (입력된 날짜가 로컬 시간)
-      const startDate = new Date(scheduleStartDate);
-      const endDate = new Date(scheduleEndDate);
+    // 입력 데이터 가져오기
+    const scheduleTitle = document.querySelector("#scheduleTitle").value;
+    const scheduleStartDate =
+      document.querySelector("#scheduleStartDate").value;
+    const scheduleEndDate = document.querySelector("#scheduleEndDate").value;
+    const scheduleRepeat = document.querySelector("#scheduleRepeat").value;
 
-      // 반복 요일 파싱 (예: "0,1,2" -> [0, 1, 2])
-      const repeatDays = scheduleRepeat
-        ? scheduleRepeat.split(",").map(Number)
-        : [];
+    // 시작일과 종료일을 Date 객체로 변환 (입력된 날짜가 로컬 시간)
+    const startDate = new Date(scheduleStartDate);
+    const endDate = new Date(scheduleEndDate);
 
-      let currentDate = new Date(startDate);
+    // 반복 요일 파싱 (예: "0,1,2" -> [0, 1, 2])
+    const repeatDays = scheduleRepeat
+      ? scheduleRepeat.split(",").map(Number)
+      : [];
 
-      const memoId = parseInt(e.target.dataset.idx);
-      // console.log(memoId);
+    let currentDate = new Date(startDate);
 
-      if (memoId) {
-        // edit - 아 문제여
+    const memoId = parseInt(e.target.dataset.idx);
+    // console.log(memoId);
 
+    if (memoId) {
+      // edit - 아 문제여
+      if (confirm("반복 일정입니다. 반복된 일정을 모두 수정를 하시겠습니까?")) {
+        alert("현재 개발중 입니다. 기다려 주세요.");
+      } else {
         const deleteMemoLists = await db.calendars
           .update(memoId, {
             scheduleTitle: scheduleTitle,
@@ -531,52 +520,53 @@ document.addEventListener("DOMContentLoaded", function () {
           .then(function (updated) {
             if (updated) console.log(updated);
           });
-      } else {
-        // 등록페이지
-        // 반복되는 날짜 계산
-        if (repeatDays.length === 0) {
-          // 반복유무가 "사용하지 않음"일 경우
-          try {
-            // 단 한번의 일정 등록
-            await db.calendars.add({
-              scheduleTitle: scheduleTitle,
-              scheduleStartDate: startDate.toISOString(), // 이 값은 UTC로 저장
-              scheduleEndDate: endDate.toISOString(), // 이 값은 UTC로 저장
-              scheduleRepeat: scheduleRepeat,
-            });
-            alert(`${scheduleTitle} 일정이 등록되었습니다.`);
-          } catch (error) {
-            console.error("Error adding event:", error);
-          }
-        } else {
-          // 반복 설정이 있는 경우
-          while (currentDate <= endDate) {
-            // 현재 날짜의 요일을 구함
-            const currentDay = currentDate.getDay();
-
-            // 반복 요일 목록에 현재 요일이 포함되어 있다면
-            if (repeatDays.includes(currentDay)) {
-              try {
-                // 반복되는 날짜에 맞는 일정 추가
-                await db.calendars.add({
-                  scheduleTitle: scheduleTitle,
-                  scheduleStartDate: currentDate.toISOString(), // 이 값은 UTC로 저장
-                  scheduleEndDate: currentDate.toISOString(), // 이 값은 UTC로 저장
-                  scheduleRepeat: scheduleRepeat,
-                });
-              } catch (error) {
-                console.error("Error adding event:", error);
-              }
-            }
-
-            // 하루를 더함 (다음 날짜로 이동)
-            currentDate.setDate(currentDate.getDate() + 1);
-          }
-
-          alert(`${scheduleTitle} 일정이 반복되어 등록되었습니다.`);
+      }
+    } else {
+      // 등록페이지
+      // 반복되는 날짜 계산
+      if (repeatDays.length === 0) {
+        // 반복유무가 "사용하지 않음"일 경우
+        try {
+          // 단 한번의 일정 등록
+          await db.calendars.add({
+            scheduleTitle: scheduleTitle,
+            scheduleStartDate: startDate.toISOString(), // 이 값은 UTC로 저장
+            scheduleEndDate: endDate.toISOString(), // 이 값은 UTC로 저장
+            scheduleRepeat: scheduleRepeat,
+          });
+          alert(`${scheduleTitle} 일정이 등록되었습니다.`);
+        } catch (error) {
+          console.error("Error adding event:", error);
         }
+      } else {
+        // 반복 설정이 있는 경우
+        while (currentDate <= endDate) {
+          // 현재 날짜의 요일을 구함
+          const currentDay = currentDate.getDay();
+
+          // 반복 요일 목록에 현재 요일이 포함되어 있다면
+          if (repeatDays.includes(currentDay)) {
+            try {
+              // 반복되는 날짜에 맞는 일정 추가
+              await db.calendars.add({
+                scheduleTitle: scheduleTitle,
+                scheduleStartDate: currentDate.toISOString(), // 이 값은 UTC로 저장
+                scheduleEndDate: currentDate.toISOString(), // 이 값은 UTC로 저장
+                scheduleRepeat: scheduleRepeat,
+              });
+            } catch (error) {
+              console.error("Error adding event:", error);
+            }
+          }
+
+          // 하루를 더함 (다음 날짜로 이동)
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        alert(`${scheduleTitle} 일정이 반복되어 등록되었습니다.`);
       }
     }
+
     // 모달 닫기 및 페이지 리프레시
     document.querySelector(".scheduleModal").classList.remove("active");
     document.querySelector(".modalOverlay").classList.remove("active");
