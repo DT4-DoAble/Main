@@ -26,6 +26,27 @@
       <!-- Header -->
       <div class="center-align-wrapper header-wrapper">
         <header class="header site-header">
+          <button
+            class="button btn-header-prev"
+            type="button"
+            onclick="javascript:history.go(-1)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M15 12H1M1 12L8 19M1 12L8 5"
+                stroke="#18181B"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
           <h2 class="calendarTitle page-title text-l-b">일기</h2>
           <button
             id="openModal"
@@ -215,26 +236,9 @@
       <!-- Tabs -->
       <div class="center-align-wrapper tabs-wrapper">
         <div class="tabs">
-          <a href="#" target="_blank" class="logo">
-            <span class="logo-point-color">:D</span>oable
-          </a>
+          <a href="../../main/html/index.html" class="logo"> :Doable </a>
           <nav class="nav">
-            <a href="#" target="_blank" class="tab-item">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="tab-icon"
-                viewBox="0 0 32 32"
-                fill="none"
-              >
-                <path
-                  d="M12.125 29.3333V16H20.125V29.3333M4.125 12L16.125 2.66663L28.125 12V26.6666C28.125 27.3739 27.844 28.0521 27.344 28.5522C26.8439 29.0523 26.1656 29.3333 25.4583 29.3333H6.79167C6.08442 29.3333 5.40615 29.0523 4.90605 28.5522C4.40595 28.0521 4.125 27.3739 4.125 26.6666V12Z"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              홈
-            </a>
-            <a href="#" target="_blank" class="tab-item">
+            <a href="../../calendar/html/index.html" class="tab-item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="tab-icon"
@@ -249,7 +253,7 @@
               </svg>
               일정
             </a>
-            <a href="#" target="_blank" class="tab-item">
+            <a href="../../diary/html/diary_main.html" class="tab-item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="tab-icon"
@@ -264,7 +268,7 @@
               </svg>
               일기
             </a>
-            <a href="#" target="_blank" class="tab-item">
+            <a href="../../nickname/html/nickname.html" class="tab-item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="tab-icon"
@@ -277,7 +281,27 @@
                   stroke-linejoin="round"
                 />
               </svg>
-              마이
+              마이페이지
+            </a>
+            <a
+              href="../../login/html/login.html"
+              class="tab-item tab-item-login"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="tab-icon"
+                viewBox="0 0 32 32"
+                fill="none"
+              >
+                <path
+                  d="M20.9 4H26.2334C26.9406 4 27.6189 4.28095 28.119 4.78105C28.6191 5.28115 28.9 5.95942 28.9 6.66667V25.3333C28.9 26.0406 28.6191 26.7189 28.119 27.219C27.6189 27.719 26.9406 28 26.2334 28H20.9M14.2334 22.6667L20.9 16M20.9 16L14.2334 9.33333M20.9 16H4.90002"
+                  stroke="#A6A6B0"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              로그인
             </a>
           </nav>
         </div>
