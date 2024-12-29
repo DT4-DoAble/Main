@@ -1,0 +1,170 @@
+/* ----------------------------------------------------------
+  Main
+---------------------------------------------------------- */
+.diary-main-area {
+  padding-top: 24px;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.diary-header {
+  padding-bottom: 24px;
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--color-gray-30);
+}
+
+.page-title span {
+  color: var(--color-gray-20);
+}
+
+/* calendarControls */
+.date-controller {
+  height: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1.5px solid var(--color-gray-90);
+}
+
+.date-controller button {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.date-controller button:hover,
+.date-controller button:active {
+  background-color: var(--color-gray-bg);
+}
+
+.date-controller .button-prev-month {
+  padding-left: 8px;
+  padding-right: 6px;
+}
+
+.date-controller .button-today {
+  padding-left: 12px;
+  padding-right: 12px;
+  color: var(--color-gray-30);
+}
+
+.date-controller .button-next-month {
+  padding-left: 6px;
+  padding-right: 8px;
+}
+
+.date-controller .divide-bar {
+  height: 16px;
+}
+
+.date-controller button svg path {
+  stroke: var(--color-gray-30);
+}
+
+/* 테이블 크기 고정 */
+.diary-item-list-area {
+  flex-grow: 1;
+  padding-top: 24px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* 토요일 및 일요일 색상 변경 */
+.day-number {
+  color: var(--color-gray-40);
+}
+
+.day-number.saturday,
+.day-of-weeks-item.saturday {
+  color: var(--color-blue-60);
+}
+
+.day-number.sunday,
+.day-of-weeks-item.sunday {
+  color: var(--color-red-60);
+}
+
+.diary-main-area .diary-item {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: var(--color-white);
+  border-radius: 16px;
+  border: 1px solid var(--color-gray-80);
+}
+
+.diary-item-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.emoji-img {
+  width: 28px;
+  height: 28px;
+}
+
+.diary-main-area .diary-item .tag {
+  align-self: flex-start;
+}
+
+.diary-main-area .diary-item .diary-contents {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.diary-item:hover,
+.diary-item:active {
+  background-color: var(--color-gray-bg);
+}
+
+.diary-day-number.today {
+  border-bottom: 2px solid var(--color-gray-40);
+}
+
+/* ----------------------------------------------------------
+    일정 등록 모달
+---------------------------------------------------------- */
+.modalOverlay {
+  display: none;
+}
+
+.scheduleModal {
+  position: fixed;
+  bottom: -100%;
+}
+
+/* Media Query */
+
+@media screen and (min-width: 768px) {
+  body {
+    background: linear-gradient(180deg, #fff 0%, #f0f6ff 100%);
+  }
+
+  .diary-item-list {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .diary-main-area .diary-item {
+    width: 49%;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .diary-item-list {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .diary-main-area .diary-item {
+    width: 32.5%;
+  }
+}

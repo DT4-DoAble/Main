@@ -1,86 +1,26 @@
 /* ----------------------------------------------------------
-    body
+  Main
 ---------------------------------------------------------- */
-body {
-  min-width: 393px;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ----------------------------------------------------------
-    Center align / Layout
----------------------------------------------------------- */
-.site-header,
-.calendarHeader,
-.tabs {
-  width: 100%;
-  min-width: 393px;
-  max-width: 1200px;
-  padding-left: 24px;
-  padding-right: 24px;
-  display: flex;
-  align-items: center;
-}
-
-.register-modal {
-  min-width: 393px;
-  max-width: 1920px;
-}
-
-.modal-header {
-  min-width: calc(393px - 48px);
-  max-width: calc(1920px - 48px);
-}
-
-.days-of-weeks tr,
-.week {
-  width: 100%;
-  min-width: 393px;
-  max-width: 1200px;
-  padding-left: 16px;
-  padding-right: 16px;
-  display: flex;
-}
-
-.header-wrapper,
-.calendar-header-wrapper,
-.days-of-weeks,
-.week-wrapper,
-.form-area,
-.tabs-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-/* ----------------------------------------------------------
-    header
----------------------------------------------------------- */
-.header-wrapper {
-  max-height: 119px;
-  padding-top: 59px;
-  border-bottom: 1px solid var(--color-gray-80);
-  box-shadow: var(--shadow-1);
-}
-
-header {
-  height: 60px;
-}
-
-.page-title {
-  flex-grow: 1;
-}
-
-/* ----------------------------------------------------------
-  main - 캘린더 디자인
----------------------------------------------------------- */
-.calendar {
+main {
   flex-grow: 1;
   width: 100%;
   padding-top: 24px;
+  padding-left: 0;
+  padding-right: 0;
   display: flex;
   flex-direction: column;
   gap: 24px;
   overflow: hidden;
+}
+
+/* ----------------------------------------------------------
+  Calendar Header
+---------------------------------------------------------- */
+.calendarHeader {
+  padding-left: 24px;
+  padding-right: 24px;
+  display: flex;
+  align-items: center;
 }
 
 .calendarYearMonth {
@@ -133,23 +73,32 @@ header {
   stroke: var(--color-gray-30);
 }
 
-/* 테이블 크기 고정 */
+/* ----------------------------------------------------------
+  Calendar Table
+---------------------------------------------------------- */
 #calendar {
   flex-grow: 1;
   display: flex;
+  flex-direction: column;
 }
 
-.calendar table {
+#calendar table {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  /* 텍스트가 셀을 넘치지 않도록 처리 */
-  white-space: nowrap; /* 텍스트가 한 줄로 유지 */
-  overflow: hidden; /* 넘치는 텍스트는 숨기기 */
-  text-overflow: ellipsis; /* 넘치는 텍스트에 '...' 표시 */
+}
+
+#calendar table tr {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+#calendar table thead tr {
+  display: flex;
 }
 
 /* 캘린더의 요일 헤더 스타일링 */
-.day-of-weeks-item {
+#calendar table thead th {
   flex-grow: 1;
   height: 32px;
   display: flex;
@@ -162,17 +111,19 @@ header {
   line-height: 14px;
 }
 
-tbody {
+#calendar table tbody {
   flex-grow: 1;
   display: flex;
-  justify-content: center;
   flex-direction: column;
 }
 
-.week {
+#calendar table tbody tr {
   flex-grow: 1;
+  width: 100%;
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
+  display: flex;
   border-top: 1px solid var(--color-gray-80);
 }
 
@@ -184,25 +135,21 @@ tbody {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
-
+  color: var(--color-gray-40);
   /* text-xs-r */
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;
+  border-radius: 50%;
 }
 
-.day-number {
-  color: var(--color-gray-40);
-}
-
-.day-number.saturday,
-.day-of-weeks-item.saturday {
+#calendar table thead th.saturday,
+.day-number.saturday {
   color: var(--color-blue-60);
 }
 
-.day-number.sunday,
-.day-of-weeks-item.sunday {
+#calendar table thead th.sunday,
+.day-number.sunday {
   color: var(--color-red-60);
 }
 
@@ -254,53 +201,6 @@ tbody {
 }
 
 /* ----------------------------------------------------------
-    Tabs
----------------------------------------------------------- */
-.tabs-wrapper {
-  height: 106px;
-  padding-top: 8px;
-  padding-bottom: 34px;
-  border-top: 1px solid var(--color-gray-80);
-  background-color: var(--color-white);
-  z-index: 30;
-}
-
-.tabs {
-  align-items: center;
-  gap: 16px;
-}
-
-.tabs .tab-item {
-  height: 64px;
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  color: var(--color-gray-60);
-  border-radius: 8px;
-}
-
-.tabs .tab-item svg path {
-  stroke-width: 1.5;
-  stroke: var(--color-gray-60);
-}
-
-.tabs .tab-item:hover {
-  background-color: var(--color-gray-bg);
-}
-
-.tabs .tab-item:active {
-  color: var(--color-gray-30);
-}
-
-.tabs .tab-item:active svg path {
-  stroke-width: 2;
-  stroke: var(--color-gray-30);
-}
-
-/* ----------------------------------------------------------
     일정 등록 모달
 ---------------------------------------------------------- */
 .modalOverlay {
@@ -314,97 +214,84 @@ tbody {
   background-color: var(--color-white);
 }
 
-.bg-blur {
-  -webkit-backdrop-filter: blur(1.5px) brightness(0.5);
-  backdrop-filter: blur(1.5px) brightness(0.5);
-  mix-blend-mode: overlay;
-  transition: all 0.2s;
-}
-
 .scheduleModal {
+  width: 100%;
+  min-width: 360px;
+  min-height: 50%;
+  max-height: 90%;
   position: fixed;
   bottom: -100%;
-  left: 0;
-  width: 100%;
-  max-height: 90%;
-  overflow-y: auto;
-  transition: bottom 0.4s ease-in-out;
-  border: 1px solid var(--color-gray-90);
-  border-bottom: none;
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
-  box-shadow: 0px -8px 16px 0px rgba(0, 0, 0, 0.04);
-  z-index: 20;
+  display: flex;
+  background-color: var(--color-white);
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  box-shadow: 0px -8px 16px 0px rgba(0, 0, 0, 0.06);
+  z-index: 200;
 }
 
-.register-modal .modalContent {
+.scheduleModal .modalContent {
+  flex-grow: 1;
+  padding: 24px 24px 34px 24px;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-white);
+  gap: 32px;
 }
 
-.register-modal .header-wrapper {
-  padding-top: 0;
-  border-bottom: none;
-  box-shadow: none;
+.scheduleModal .site-header {
+  height: auto;
+  padding-left: 0;
+  padding-right: 0;
 }
 
-.register-modal .site-header {
-  height: 64px;
-  display: flex;
-}
-
-.register-modal .bs-title {
+.scheduleModal .bs-title {
   flex-grow: 1;
   text-align: center;
 }
 
 .scheduleModal.active {
-  bottom: 106px;
+  bottom: 0;
 }
 
 .modalOverlay.active {
   display: block;
 }
 
-.register-modal form {
-  margin-top: 16px;
-  margin-bottom: 24px;
-  padding-left: 24px;
-  padding-right: 24px;
+.scheduleModal form {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.register-modal form .scheduleTitle {
+.scheduleModal form .scheduleTitle {
   display: none;
 }
 
-.register-modal form .form-item-wrapper {
+.scheduleModal form .form-item-wrapper {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 16px;
 }
-.register-modal form .form-item-wrapper.title-input {
-  margin-bottom: 16px;
-}
 
-.register-modal form label {
+.scheduleModal form label {
   width: 20%;
 }
 
-.register-modal form input {
-  width: 50%;
-}
-
-.register-modal form input,
-.register-modal form select {
+.scheduleModal form input,
+.scheduleModal form select {
   flex-grow: 1;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.register-modal form .list-wrapper {
+.scheduleModal form input:disabled {
+  color: var(--color-gray-70);
+}
+
+.scheduleModal form .list-wrapper {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -434,24 +321,31 @@ tbody {
   color: var(--color-gray-30);
 }
 
-.modalContent form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9375rem;
-}
-
-.register-modal .modalContent form {
-  gap: 0;
-}
-
 .deleteButton {
-  margin-top: 24px;
   display: none;
 }
 
 /* Media Query */
+@media screen and (min-width: 768px) {
+  .scheduleModal {
+    max-width: 520px;
+    min-height: 100%;
+    padding: 40px 48px 56px 48px;
+    position: absolute;
+    right: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: -8px 0px 16px 4px rgba(0, 0, 0, 0.06);
+    z-index: 100;
+  }
+
+  .scheduleModal .modalContent {
+    padding: 0;
+  }
+}
+
 @media screen and (min-width: 1025px) {
-  .day-of-weeks-item {
+  #calendar table thead th {
     height: 48px;
     font-size: 14px;
   }
@@ -461,11 +355,10 @@ tbody {
     height: 32px;
     font-size: 16px;
   }
-  
+
   .todo-item {
     padding: 4px 6px;
     border-radius: 4px;
-
     /* text-xs-m */
     font-size: 12px;
     font-weight: 500;
