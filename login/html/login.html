@@ -8,18 +8,25 @@
     <script src="../js/login.js" defer></script>
     <!-- 카카오 API 스크립트 -->
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"></script>
-  
   </head>
   <body>
     <header>
       <div class="navbar">
-        <a href="#" class="logo">:Doable</a>
+        <a href="/main/html/index.html" class="logo">:Doable</a>
         <nav>
           <ul>
-            <li class="menu btn1"><a href="#service">서비스 소개</a></li>
-            <li class="menu btn2"><a href="#contact">고객센터</a></li>
-            <li class="menu btn3"><a href="#QA">자주 묻는 질문</a></li>
-            <li class="menu btn4"><a href="#login">로그인</a></li>
+            <li class="menu btn1">
+              <a href="/calendar/html/index.html">일정</a>
+            </li>
+            <li class="menu btn2">
+              <a href="/diary/html/diary1.html">일기</a>
+            </li>
+            <li class="menu btn3">
+              <a href="/nickname/html/nickname.html">마이페이지</a>
+            </li>
+            <li class="menu btn4">
+              <a href="/login/html/login.html">로그인</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -31,10 +38,11 @@
         <p class="third_ment">카카오 계정으로 간편 가입하기</p>
         <div class="login_btn">
           <a href="javascript:loginWithKakao()" class="kakao">
-            <img class="kakao" src="../img/kakao_login.png" alt="카카오 로그인" />
-
-        
-            
+            <img
+              class="kakao"
+              src="../img/kakao_login.png"
+              alt="카카오 로그인"
+            />
           </a>
         </div>
       </div>
