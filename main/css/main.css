@@ -148,6 +148,12 @@ a {
   transition: transform 0.3s ease;
   transform-origin: bottom right;
 }
+
+.bannerImg .main_img {
+  width: 100%; /* 기본값 */
+  height: auto;
+}
+
 .bannerImg:hover {
   transform: scale(1.2);
 }
@@ -668,11 +674,17 @@ a {
     background-color: #fff;
   }
   .bannerImg {
-    width: 70%;
+    height: 250px; /* 변경된 높이 */
+    width: 250px;  /* 변경된 너비 */
     position: absolute;
     left: 130px;
     top: 100px;
   }
+  .bannerImg .main_img{
+  width: 100%; /* 이미지가 배너 크기에 맞도록 조정 */
+  height: auto;
+  }
+ 
   img {
     width: 100%;
     opacity: 0.7;
@@ -788,6 +800,7 @@ a {
     gap: 3px;
   }
   .face {
+    width: 30px;
     height: 30px;
   }
   .navbar {
