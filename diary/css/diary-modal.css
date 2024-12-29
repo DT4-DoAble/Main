@@ -9,19 +9,19 @@
 }
 
 /* 모달 창 */
-.modal {
+/* .modal {
   width: 100%;
   position: relative;
   top: 0;
   left: 0;
-}
+} */
 
 label {
   font-size: 12px;
   color: #303036;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   width: 16px;
   height: 16px;
   margin: 0;
@@ -46,7 +46,7 @@ input[type="checkbox"] {
 }
 
 .close {
-  padding: 8px;  
+  padding: 8px;
 }
 
 .contents-area {
@@ -88,7 +88,8 @@ input[type="checkbox"] {
   border-bottom: 3px solid var(--color-gray-20);
 }
 
-.ftMon, .ftDay {
+.ftMon,
+.ftDay {
   line-height: 1;
 }
 
@@ -155,16 +156,16 @@ label {
 }
 
 /* 각 유형에 따른 색상 */
-input[data-emotion-type="smile"] {
+input[data-emotion-type='smile'] {
   accent-color: #c3eee6;
 }
-input[data-emotion-type="anger"] {
+input[data-emotion-type='anger'] {
   accent-color: #ffc2bd;
 }
-input[data-emotion-type="normal"] {
+input[data-emotion-type='normal'] {
   accent-color: #ffec82;
 }
-input[data-emotion-type="sad"] {
+input[data-emotion-type='sad'] {
   accent-color: #d6e7ff;
 }
 

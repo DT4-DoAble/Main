@@ -12,14 +12,14 @@
     <link rel="stylesheet" href="../css/gui/typography.css" />
     <link rel="stylesheet" href="../css/gui/components.css" />
     <link rel="stylesheet" href="../css/gui/layout_base.css" />
-    <!-- Page CSS -->    
-    <link rel="stylesheet" href="../css/diary-main.css"/>
-    <link rel="stylesheet" href="../css/diary-modal.css"/>
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="../css/diary-main.css" />
+    <link rel="stylesheet" href="../css/diary-modal.css" />
     <!-- S : DB 라이브러리 -->
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
-    <script src="../js/script.js" defer></script>
-    <script src="../js/diaryList.js" defer></script>
-    <script src="../js/dateController.js" defer></script>
+    <script type="module" src="../js/script.js" defer></script>
+    <script type="module" src="../js/diaryList.js" defer></script>
+    <script type="module" src="../js/dateController.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -66,7 +66,7 @@
             </div>
           </div>
           <!--main-->
-          
+
           <!--divFeeling-->
           <div class="contents-area">
             <div class="divDays">
@@ -85,39 +85,39 @@
               <div class="box-wrapper">
                 <h4 class="semiTitle">내가 느낀 감정을 선택해 본다면?</h4>
                 <div class="divFeeling">
-                <!--divEmoji-->
-                <div class="divEmoji">
-                  <img
-                    class="emoji smile"
-                    src="../img/smile.svg"
-                    data-value="smile"
-                    data-default="../img/smile.svg"
-                    data-selected="../img/smileSt.svg"
-                  />
-                  <img
-                    class="emoji normal"
-                    src="../img/normal.svg"
-                    data-value="normal"
-                    data-default="../img/normal.svg"
-                    data-selected="../img/normalSt.svg"
-                  />
-                  <img
-                    class="emoji anger"
-                    src="../img/anger.svg"
-                    data-value="anger"
-                    data-default="../img/anger.svg"
-                    data-selected="../img/angerSt.svg"
-                  />
-                  <img
-                    class="emoji sad"
-                    src="../img/sad.svg"
-                    data-value="sad"
-                    data-default="../img/sad.svg"
-                    data-selected="../img/sadSt.svg"
-                  />
-                </div>
-                <!--//divEmoji-->
-                <div class="emotions"></div>
+                  <!--divEmoji-->
+                  <div class="divEmoji">
+                    <img
+                      class="emoji smile"
+                      src="../img/smile.svg"
+                      data-value="smile"
+                      data-default="../img/smile.svg"
+                      data-selected="../img/smileSt.svg"
+                    />
+                    <img
+                      class="emoji normal"
+                      src="../img/normal.svg"
+                      data-value="normal"
+                      data-default="../img/normal.svg"
+                      data-selected="../img/normalSt.svg"
+                    />
+                    <img
+                      class="emoji anger"
+                      src="../img/anger.svg"
+                      data-value="anger"
+                      data-default="../img/anger.svg"
+                      data-selected="../img/angerSt.svg"
+                    />
+                    <img
+                      class="emoji sad"
+                      src="../img/sad.svg"
+                      data-value="sad"
+                      data-default="../img/sad.svg"
+                      data-selected="../img/sadSt.svg"
+                    />
+                  </div>
+                  <!--//divEmoji-->
+                  <div class="emotions"></div>
                 </div>
                 <!--//divFeeling-->
               </div>
@@ -206,7 +206,9 @@
               </button>
             </div>
           </div>
-          <ul class="diary-item-list-area"></ul>
+          <ul class="diary-item-list-area">
+            <div id="diaryList"></div>
+          </ul>
         </main>
       </div>
 
