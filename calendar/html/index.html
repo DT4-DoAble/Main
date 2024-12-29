@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Doable Calendar</title>
+    <title>Doable Calendar (kbe)</title>
     <!-- Common CSS -->
     <link rel="stylesheet" href="../css/common/common.css" />
     <link rel="stylesheet" href="../css/common/reset.css" />
@@ -23,6 +23,11 @@
       <!-- Header -->
       <div class="center-align-wrapper header-wrapper">
         <header class="header site-header">
+          <button class="button btn-header-prev" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15 12H1M1 12L8 19M1 12L8 5" stroke="#18181B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
           <h2 class="calendarTitle page-title text-l-b">일정</h2>
           <button
             class="addScheduleButton button btn-add-schedule text-s-b bs-t-f bs-c-m bs-s-base-ti"
@@ -261,6 +266,16 @@
                 />
               </svg>
               마이페이지
+            </a>
+            <a href="../../nickname/html/login.html" class="tab-item tab-item-login">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                class="tab-icon"
+                viewBox="0 0 32 32"
+                fill="none"
+              >
+                <path d="M20.9 4H26.2334C26.9406 4 27.6189 4.28095 28.119 4.78105C28.6191 5.28115 28.9 5.95942 28.9 6.66667V25.3333C28.9 26.0406 28.6191 26.7189 28.119 27.219C27.6189 27.719 26.9406 28 26.2334 28H20.9M14.2334 22.6667L20.9 16M20.9 16L14.2334 9.33333M20.9 16H4.90002" stroke="#A6A6B0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              로그인
             </a>
           </nav>
         </div>

@@ -189,14 +189,10 @@ header {
   .nav {
     width: auto;
   }
-
-  .tab-icon {
-    display: none;
-  }
-
+  
   .tabs .tab-item {
     height: auto;
-    justify-content: flex-start;
+    justify-content: center;
     padding: 8px 12px;
     color: var(--color-gray-30);
     /* text-s-r */
@@ -204,12 +200,37 @@ header {
     font-weight: 400;
     line-height: 20px;
   }
-
+  
+  .tab-item.tab-item-login {
+    flex-direction: row-reverse;
+  }    
+  
   .tabs .tab-item:hover,
   .tabs .tab-item:active {
     font-weight: 500;
     color: var(--color-mint-40);
     background-color: var(--color-mint-bg);
+  }
+
+  .tab-icon {
+    display: none;
+  }
+
+  .nav .tab-item-login .tab-icon {
+    display: block;
+    width: 20px;
+  }
+
+  .nav .tab-item-login {
+    gap: 2px;
+  }
+
+  .nav .tab-item-login .tab-icon path {
+    stroke-width: 2;
+  }
+  
+  .nav .tab-item-login:hover .tab-icon path {
+    stroke: var(--color-mint-50);
   }
 
   .main-header-button-wrapper {
