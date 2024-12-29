@@ -19,7 +19,6 @@
   color: var(--color-gray-20);
 }
 
-
 /* 일기 아이템 목록 영역 */
 .diary-item-list-area {
   flex-grow: 1;
