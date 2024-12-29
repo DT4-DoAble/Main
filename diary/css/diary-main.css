@@ -1,0 +1,102 @@
+/* ----------------------------------------------------------
+  Main
+---------------------------------------------------------- */
+.diary-main-area {
+  padding-top: 24px;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+/* Header */
+.diary-header {
+  padding-bottom: 24px;
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--color-gray-30);
+}
+
+.page-title span {
+  color: var(--color-gray-20);
+}
+
+
+/* 일기 아이템 목록 영역 */
+.diary-item-list-area {
+  flex-grow: 1;
+  padding-top: 24px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px 12px;
+  overflow-y: auto;
+}
+
+/* 오늘, 토요일, 일요일 색상 변경 */
+.diary-day-number {
+  color: var(--color-gray-40);
+}
+
+.diary-day-number.saturday {
+  color: var(--color-blue-60);
+}
+
+.diary-day-number.sunday {
+  color: var(--color-red-60);
+}
+
+.diary-main-area .diary-item {
+  width: 100%;
+  max-height: 118px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: var(--color-white);
+  border-radius: 16px;
+  border: 1px solid var(--color-gray-80);
+}
+
+.diary-item-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.emoji-img {
+  width: 28px;
+  height: 28px;
+}
+
+.diary-main-area .diary-item .tag {
+  align-self: flex-start;
+}
+
+.diary-main-area .diary-item .diary-contents {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.diary-item:hover,
+.diary-item:active {
+  border-color: var(--color-gray-60);
+}
+
+/* ----------------------------------------------------------
+    Media Query
+---------------------------------------------------------- */
+@media screen and (min-width: 768px) {
+  body {
+    background: linear-gradient(180deg, #fff 0%, #f0f6ff 100%);
+  }
+
+  .diary-main-area .diary-item {
+    width: 49%;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .diary-main-area .diary-item {
+    width: 32.5%;
+  }
+}

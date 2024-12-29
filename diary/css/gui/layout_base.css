@@ -1,0 +1,241 @@
+/* -------------------------
+  Base | Header | Tabs(Nav)
+------------------------- */
+body {
+  min-width: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Layout */
+/*
+.center-align-wrappera
+  >> 레이아웃용 클래스이므로 커스텀시에는 아래 컴퍼넌트 클래스에 스타일을 적용해주시기 바랍니다.
+  header-wrapper
+  main-wrapper
+  tabs-wrapper
+*/
+.center-align-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+header,
+main,
+.tabs {
+  width: 100%;
+  min-width: 360px;
+  max-width: 1200px;
+  padding-left: 24px;
+  padding-right: 24px;
+  display: flex;
+}
+
+.header-wrapper,
+.tabs-wrapper {
+  z-index: 100;
+}
+
+/* Header */
+.header-wrapper {
+  padding-top: 59px;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-80);
+  box-shadow: var(--shadow-1);
+}
+
+header {
+  height: 60px;
+  align-items: center;
+}
+
+.header-sub-page {
+  padding-left: 0;
+}
+
+.btn-header-prev {
+  padding: 18px 8px 18px 24px;
+}
+
+.page-title {
+  flex-grow: 1;
+}
+
+/* Main | Contenst area */
+.main-wrapper {
+  position: relative;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+/* Tabs */
+.tabs-wrapper {
+  min-height: 106px;
+  padding-top: 8px;
+  padding-bottom: 34px;
+  border-top: 1px solid var(--color-gray-80);
+}
+
+.nav {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+}
+
+.nav .tab-item {
+  height: 64px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-gray-60);
+  border-radius: 8px;
+
+  /* text-2xs-b */
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 12px;
+}
+
+.nav .tab-item .tab-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.nav .tab-item .tab-icon path {
+  stroke-width: 1.5;
+  stroke: var(--color-gray-60);
+}
+
+.nav .tab-item:hover {
+  background-color: var(--color-gray-bg);
+}
+
+.nav .tab-item:active {
+  color: var(--color-gray-30);
+}
+
+.nav .tab-item:active .tab-icon path {
+  stroke-width: 2;
+  stroke: var(--color-gray-30);
+}
+
+.logo {
+  display: none;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--color-gray-20);
+}
+
+.logo-point-color {
+  color: var(--color-mint-50);
+}
+
+.main-header-button-wrapper {
+  display: none;
+}
+
+.modal {
+  width: 100%;
+  min-width: 360px;
+  height: 100%;
+  padding: 59px 24px 34px 24px;
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: #fff;
+  z-index: 101; /* 다른 요소 위에 표시 */
+  overflow: hidden;
+}
+
+/* Media Query */
+@media screen and (min-width: 768px) {
+  .container {
+    flex-direction: column-reverse;
+  }
+
+  .header-wrapper {
+    display: none;
+  }
+
+  .tabs-wrapper {
+    min-height: 80px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: 1px solid var(--color-gray-80);
+  }
+
+  .logo {
+    display: block;
+  }
+
+  .tabs {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav {
+    width: auto;
+  }
+
+  .tab-icon {
+    display: none;
+  }
+
+  .tabs .tab-item {
+    height: auto;
+    justify-content: flex-start;
+    padding: 8px 12px;
+    color: var(--color-gray-30);
+    /* text-s-r */
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .tabs .tab-item:hover,
+  .tabs .tab-item:active {
+    font-weight: 500;
+    color: var(--color-mint-40);
+    background-color: var(--color-mint-bg);
+  }
+
+  .main-header-button-wrapper {
+    margin-left: 16px;
+    display: block;
+  }
+
+  .modal {
+    max-width: 520px;
+    position: absolute;
+    left: auto;
+    right: 0; /* 화면 오른쪽 끝에 배치 */
+    padding: 40px 48px 56px 48px;
+    box-shadow: -8px 0px 16px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  .title h3 {
+    font-size: 24px;
+  }
+
+  .semiTitle {
+    font-size: 18px;
+  }
+
+  .modal-header-wrapper > .site-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
