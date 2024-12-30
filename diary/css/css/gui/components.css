@@ -1,0 +1,271 @@
+/* 
+button:focus {
+  outline: 1px solid var(--color-blue-50);
+  box-shadow: 0px 0px 0px 4px rgba(92, 149, 255, 0.4);
+} */
+
+/* Components */
+/* Button || Type | Size | Color | Icon(Leading/Trailing)
+  
+  1. Type
+    1)Filled
+    2)Outlined
+    
+  2. Color
+    1)mint
+    2)red
+    3)yellow
+    4)green
+    5)blue
+    6)purple
+    7)gray
+    7)black
+
+  3. Size
+    1)2xs
+    2)xs
+    3)base
+    4)s
+    5)m
+    6)l
+    7)xl
+    
+  4. Icon
+    1)Leading
+    2)Trailing
+
+*/
+
+/* Overlay */
+.bg-blur {
+  background-color: var(--color-white);
+  -webkit-backdrop-filter: blur(1.5px) brightness(0.5);
+  backdrop-filter: blur(1.5px) brightness(0.5);
+  mix-blend-mode: overlay;
+  transition: all 0.2s;
+}
+
+/* 0. Base */
+.button {
+  min-width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 1. Type */
+.bs-t-f {
+  color: var(--color-white);
+}
+
+.bs-t-o {
+}
+
+.bs-t-t {
+  background-color: none;
+}
+
+/* 2. Color */
+.bs-c-m {
+  background-color: var(--color-mint-50);
+}
+
+.bs-c-m:hover,
+.bs-c-m:active {
+  background-color: var(--color-mint-40);
+}
+
+.bs-c-bk {
+  background-color: var(--color-black);
+}
+
+.bs-c-bk:hover,
+.bs-c-bk:active {
+  background-color: var(--color-gray-80);
+}
+
+.bs-c-r {
+  color: var(--color-red-50);
+}
+
+.bs-c-r:hover,
+.bs-c-r:active {
+  background-color: var(--color-red-80);
+}
+
+/* 3. Size */
+.bs-s-base-ti {
+  padding: 8px 8px 8px 12px;
+  gap: 4px;
+  border-radius: 8px;
+}
+
+.bs-s-base {
+  padding: 8px;
+  gap: 4px;
+  border-radius: 8px;
+}
+
+.bs-s-xl {
+  height: 64px;
+  padding: 20px 24px;
+  border-radius: 16px;
+}
+
+/* 4. Icon */
+.bs-i-t {
+}
+
+/* Divide bar || direction(vertical, horizontal) | width(1, 2) */
+
+.divide-bar {
+  display: block;
+  background-color: var(--color-gray-80);
+}
+
+.vt-1 {
+  width: 1px;
+  height: 24px;
+}
+.vt-2 {
+  width: 1px;
+  height: 24px;
+}
+
+.hr-1 {
+  width: 24px;
+  height: 1px;
+}
+
+.hr-2 {
+  width: 24px;
+  height: 2px;
+}
+
+/* Form */
+/* Input */
+select,
+textarea,
+input[type='text'],
+input[type='datetime-local'] {
+  padding: 12px 16px;
+  color: var(--color-gray-40);
+  cursor: pointer;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border: 1px solid var(--color-gray-90);
+  border-radius: 8px;
+  background-color: var(--color-gray-bg);
+}
+
+textarea {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  resize: none;
+}
+
+/* 일정 등록 모달 내의 select 스타일링 */
+.scheduleModal select {
+  padding: 12px 16px;
+  appearance: none; /* 기본 디자인 제거 */
+  background-image: url('../../img/icon-chevron-down.svg');
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+input[type='datetime-local'] {
+  background-image: url('../../img/icon-calendar.svg');
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+input[type='datetime-local']::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+select:focus,
+textarea:focus,
+input[type='text']:focus,
+input[type='datetime-local']:focus {
+  border-color: var(--color-blue-50);
+  outline: 4px solid rgba(92, 149, 255, 0.3);
+}
+
+select::placeholder,
+textarea::placeholder,
+input[type='text']::placeholder,
+input[type='datetime-local']::placeholder {
+  color: var(--color-gray-60);
+}
+
+select:disabled,
+textarea:disabled,
+input:disabled {
+  color: var(--color-gray-70);
+  background-image: none;
+}
+
+/* Tag */
+.tag-s-s {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.tag-c-m {
+  color: var(--color-mint-50);
+  background-color: var(--color-mint-bg);
+}
+
+.tag-c-r {
+  color: var(--color-red-50);
+  background-color: var(--color-red-bg);
+}
+
+/* Date Controller */
+.date-controller {
+  height: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: var(--color-white);
+  border-radius: 20px;
+  border: 1.5px solid var(--color-gray-90);
+  overflow: hidden;
+}
+
+.date-controller button {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.date-controller button:hover,
+.date-controller button:active {
+  background-color: var(--color-gray-bg);
+}
+
+.date-controller .button-prev-month {
+  padding-left: 8px;
+  padding-right: 6px;
+}
+
+.date-controller .button-label {
+  padding-left: 12px;
+  padding-right: 12px;
+  color: var(--color-gray-30);
+}
+
+.date-controller .button-next-month {
+  padding-left: 6px;
+  padding-right: 8px;
+}
+
+.date-controller .divide-bar {
+  height: 16px;
+}
+
+.date-controller button svg path {
+  stroke: var(--color-gray-30);
+}
