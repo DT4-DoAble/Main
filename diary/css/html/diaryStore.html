@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>diaryStore</title>
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="../css/common/common.css" />
+    <link rel="stylesheet" href="../css/common/reset.css" />
+    <!-- GUI CSS -->
+    <link rel="stylesheet" href="../css/gui/root.css" />
+    <link rel="stylesheet" href="../css/gui/typography.css" />
+    <link rel="stylesheet" href="../css/gui/components.css" />
+    <link rel="stylesheet" href="../css/gui/layout_base.css" />
+    <!-- Page CSS -->    
+    <link rel="stylesheet" href="../css/diary-main.css"/>
+    <link rel="stylesheet" href="../css/diary-modal.css"/>
+    <!-- S : DB 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/dexie@3.2.4/dist/dexie.min.js"></script>
+    <!-- E : DB 라이브러리 -->
+    <script src="../js/diaryStore.js" defer></script>
+</head>
+<body>
+    <!--main-->
+    <div class="modal">
+        <!-- S : 모달 내부 내용 -->
+        <div class="title">
+            <h3>하루 저장하기</h3>
+            <div class="btn-close close">
+            <img class="img-close" src="../img/X.svg" onclick="goToMain()" />
+            </div>
+        </div>
+        <!--main-->
+        
+        <!--divFeeling-->
+        <div class="contents-area">
+            <div class="divDays">
+            <div>
+                <span class="ftMon" id="today-month"></span>
+                <span class="mon">월</span>
+                <!-- 월 표시할 곳 -->
+            </div>
+            <div>
+                <span class="ftDay" id="today-day"></span>
+                <span class="day">일</span>
+            </div>
+            </div>
+
+            <div class="box-contents-wrapper">
+            <div class="box-wrapper">
+                <h4 class="semiTitle">내가 느낀 감정을 선택해 본다면?</h4>
+                <div class="divFeeling">
+                <!--divEmoji-->
+                <div class="divEmoji">
+                <img
+                    class="emoji smile"
+                    src="../img/smile.svg"
+                    data-value="smile"
+                    data-default="../img/smile.svg"
+                    data-selected="../img/smileSt.svg"
+                />
+                <img
+                    class="emoji normal"
+                    src="../img/normal.svg"
+                    data-value="normal"
+                    data-default="../img/normal.svg"
+                    data-selected="../img/normalSt.svg"
+                />
+                <img
+                    class="emoji anger"
+                    src="../img/anger.svg"
+                    data-value="anger"
+                    data-default="../img/anger.svg"
+                    data-selected="../img/angerSt.svg"
+                />
+                <img
+                    class="emoji sad"
+                    src="../img/sad.svg"
+                    data-value="sad"
+                    data-default="../img/sad.svg"
+                    data-selected="../img/sadSt.svg"
+                />
+                </div>
+                <!--//divEmoji-->
+                <div class="emotions"></div>
+                </div>
+                <!--//divFeeling-->
+            </div>
+            <div class="box-wrapper">
+                <h4 class="semiTitle">오늘 하루를 표현한다면?</h4>
+                <textarea
+                class="txtDiary"
+                placeholder="당신의 오늘 하루는 어땠나요?"
+                ></textarea>
+            </div>
+            </div>
+        </div>
+        <button class="btnSave" value="submit">하루 저장하기</button>
+    </div>
+    <!--//main-->
+</html>

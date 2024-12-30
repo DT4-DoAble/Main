@@ -1,0 +1,155 @@
+* {font-family: 'pretendard';}
+
+body {
+    margin:24px;
+    color: #18181B; 
+}
+p {font-size: 20px;}
+label {
+    font-size: 12px;
+    color: #303036;
+}
+input[type="checkbox"] {
+    width: 16px; 
+    height: 16px;
+    margin: 0; 
+}
+
+.line {
+    width: 345px;
+    height: 2px;
+    background-color: #838391;
+}
+
+.title {
+    position: relative;
+    display: flex;
+    gap: 24px; 
+
+}
+
+/* .arrow{
+    display: inline-block;
+} */
+
+/* .close{
+    display: none;
+} */
+
+.semiTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #4D4D56;
+}
+
+.divDays {
+    display: flex;
+    justify-content: space-between;
+    width: 345px;
+    height: 58px;    
+    padding-bottom: 24px;
+    text-align: right;
+    font-weight: 400;    
+}
+
+.ftMon {
+    font-size: 56px;
+    font-weight: bold;    
+    color: #C6C6CD;
+    margin-right: 3px;
+}
+
+.mon{
+    color: #C6C6CD;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.ftDay {
+    font-size: 56px;
+    font-weight: bold;
+    margin-right: 3px;
+}
+
+.day{
+    font-size: 24px;
+    font-weight: 600; 
+}
+
+.divFeeling {
+    width: 297px;
+    height: 176px;
+    border: 1px solid #E1E1E5;
+    border-radius: 16px;
+    padding: 20px 24px;
+    text-align: center;    
+}
+
+.divEmoji {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 24px;
+}
+
+.row {
+    display: flex; /* 한 줄에 배치 */
+    width: 100%;
+    justify-content: space-between; /* 아이템 간의 공간 균등 배분 */
+    align-items: center; /* 세로 방향 중앙 정렬 */
+    gap: 12px; /* 아이템 간의 간격 */
+    margin-bottom: 10px; /* 행 간의 간격 */
+}
+
+.item {
+    display: flex; /* 내부 요소 정렬을 위해 flex 사용 */
+    justify-content: center;
+    gap: 5px; /* 체크박스와 라벨 간 간격 */
+}
+
+label{
+    font-size: 12px;
+}
+
+/* 각 유형에 따른 색상 */
+input[data-emotion-type="smile"]{
+  accent-color: #C3EEE6; 
+}
+input[data-emotion-type="anger"]{
+  accent-color: #FFC2BD; 
+}
+input[data-emotion-type="normal"]{
+  accent-color: #FFEC82; 
+}
+input[data-emotion-type="sad"]{
+  accent-color: #D6E7FF; 
+}
+
+.txtDiary {
+  width: 313px;
+  height: 112px;
+  color: #A6A6B0;
+  font-size: 16px;
+  border: 1px solid #E1E1E5;
+  border-radius: 15px;
+  outline: none;
+  resize: none;
+  padding: 16px;
+  background-color: #FAFAFA;
+}
+
+.btnSave {
+    font-size: 18px;
+    width: 345px;
+    height: 68px;
+    color: white;
+    background-color: #18181B;
+    border: 0;
+    border-radius: 16px;
+    margin-top: 65px;
+}
+
+.mt16 {margin-top:16px;}
+.mt32 {margin-top:32px;}
+.mt65 {margin-top:65px;}
+
+
