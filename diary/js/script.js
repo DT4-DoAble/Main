@@ -1,12 +1,118 @@
 import db from '../js/db.js';
+
 // 데이터베이스 열기
 db.open().catch((err) => {
   console.error('Failed to open database:', err);
 });
+
+// 더미 데이터 삽입 함수
+async function insertDummyData() {
+  const dummyData = [
+    {
+      date: "2024-12-01",
+      diary: "오늘은 아무 일 없이 잘 지나감",
+      selectedEmoji: "normal",
+      selectedEmotion: "normal:평범한",
+    },
+    {
+      date: "2024-12-02",
+      diary: "산책 갔다가 턱시도 고양이를 만났다! 너무 귀여워서 행복했다,,,",
+      selectedEmoji: "smile",
+      selectedEmotion: "smile:행복한",
+    },
+    {
+      date: "2024-12-04",
+      diary: "무난했던 오늘 하루 무탈하게 잘 지나가서 다행이다",
+      selectedEmoji: "normal",
+      selectedEmotion: "normal:따분한",
+    },
+    {
+      date: "2024-12-08",
+      diary:
+        "오늘 하루 너무 힘들다 . 회사에서도 일이 마음대로 진행되지 않아서 속상했는데 친구랑  싸우기까지,, 언제 화해하려나 ",
+      selectedEmoji: "sad",
+      selectedEmotion: "sad:실망한",
+    },
+    {
+      date: "2024-12-09",
+      diary:
+        "길 가다가 이상한 사람을 만난 오늘 진짜 세상에는 다양한 사람이 있는 것 같다",
+      selectedEmoji: "anger",
+      selectedEmotion: "anger:분노한",
+    },
+    {
+      date: "2024-12-10",
+      diary: "오늘 하루 진짜 시간 안 간다",
+      selectedEmoji: "normal",
+      selectedEmotion: "normal:따분한",
+    },
+    {
+      date: "2024-12-11",
+      diary:
+        "친구랑 해외여행 가려고 비행기 티켓 예매했다. 빨리 3월이 왔으면 좋겠다",
+      selectedEmoji: "smile",
+      selectedEmotion: "smile:설레는",
+    },
+    {
+      date: "2024-12-14",
+      diary:
+        "길을 걸어가다가 보행이 어려운 어르신을 도와주시는 분을 봤다. 선뜻 나서기 어려운데 앞서서 도와주셔서 너무 보기 좋았다",
+      selectedEmoji: "smile",
+      selectedEmotion: "smile:훈훈한",
+    },
+    {
+      date: "2024-12-17",
+      diary:
+        "출근길에 발을 밟혔는데 사과도 안 하고 가셔서 기분이 너무 안 좋았다..",
+      selectedEmoji: "anger",
+      selectedEmotion: "anger:분노한",
+    },
+    {
+      date: "2024-12-20",
+      diary:
+        "가족들이랑 크리스마스 날 오랜만에 다 같이 시간을 보내기로 했다. 크리스마스 언제 와",
+      selectedEmoji: "smile",
+      selectedEmotion: "smile:설레는",
+    },
+    {
+      date: "2024-12-26",
+      diary: "오늘 하마터면 빙판길에서 넘어질 뻔했다. 안 다쳐서 다행이야 ㅠㅠ",
+      selectedEmoji: "sad",
+      selectedEmotion: "sad:아찔한",
+    },
+    {
+      date: "2025-01-01",
+      diary: "새해 첫날!",
+      selectedEmoji: "smile",
+      selectedEmotion: "smile:행복한",
+    },
+
+  ];
+
+  // 데이터가 없으면 더미 데이터 삽입
+  const count = await db.dailyLogs.count();
+  if (count === 0) {
+    try {
+      await db.dailyLogs.bulkAdd(dummyData);
+      console.log('Dummy data inserted successfully!');
+    } catch (err) {
+      console.error('Failed to insert dummy data:', err);
+    }
+  } else {
+    console.log('Data already exists in the database.');
+  }
+}
+
 async function addEntry(entry) {
   await db.dailyLogs.add(entry);
   console.log('Entry added:', entry);
 }
+
+// 페이지 로드 시 더미 데이터 삽입
+window.addEventListener('DOMContentLoaded', async () => {
+  await insertDummyData(); // 페이지 로드 시 더미 데이터 삽입
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const openModalButton = document.getElementById('openModal');
   const openModalButtonWeb = document.getElementById('openModalWeb');
@@ -47,15 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.style.top = '-150%'; // 모달을 숨김
   }
 });
-// diaryMain 페이지로 이동
-// link = "../html/diary_main.html";
-// link = "../html/diary_main.html";
-// function goToMain() {
-//   location.assign(link);
-// }
-// function goToMain() {
-//   location.assign(link);
-// }
+
 // 날짜 정보 설정
 const today = new Date();
 const year = today.getFullYear();
@@ -64,9 +162,19 @@ const day = String(today.getDate()).padStart(2, '0');
 const formattedDate = `${year}-${month}-${day}`;
 document.getElementById('today-month').textContent = month;
 document.getElementById('today-day').textContent = day;
+
 // 이모지 클릭 이벤트 설정
 const images = document.querySelectorAll('.emoji');
 let selectedEmoji = null;
+
+// 첫 번째 이모지를 기본 선택 상태로 설정
+document.addEventListener('DOMContentLoaded', () => {
+  const defaultEmoji = images[0];
+  defaultEmoji.classList.add('selected');
+  defaultEmoji.src = defaultEmoji.dataset.selected; 
+  selectedEmoji = defaultEmoji.dataset.value; 
+});
+
 images.forEach((img) => {
   img.addEventListener('click', () => {
     images.forEach((image) => {
@@ -144,23 +252,24 @@ emotionCheckboxes.forEach((checkbox) => {
 // 일기 작성 여부 확인 함수
 const btnSave = document.querySelector('.btnSave');
 const txtDiary = document.querySelector('.txtDiary');
-// async function checkDiaryExists(date) {
-//   try {
-//     const existingDiary = await db.dailyLogs.where("date").equals(date).first(); // 현재 날짜로 조회
-//     if (existingDiary) {
-//       alert("이미 오늘 일기를 작성했습니다. 수정하거나 삭제 후 다시 시도해주세요.");
-//       btnSave.disabled = true;
-//       txtDiary.disabled = true;
-//     } else {
-//       btnSave.disabled = false;
-//       txtDiary.disabled = false;
-//     }
-//   } catch (err) {
-//     console.error("Failed to check diary:", err);
-//   }
-// }
+async function checkDiaryExists(date) {
+  try {
+    const existingDiary = await db.dailyLogs.where("date").equals(date).first(); // 현재 날짜로 조회
+    if (existingDiary) {
+      btnSave.disabled = true;
+      txtDiary.disabled = true;
+      btnSave.textContent = "일기를 이미 작성했어요.";
+    } else {
+      btnSave.disabled = false;
+      txtDiary.disabled = false;
+    }
+  } catch (err) {
+    console.error("Failed to check diary:", err);
+  }
+}
 // 초기 작성 여부 확인
-// checkDiaryExists(formattedDate);
+checkDiaryExists(formattedDate);
+
 // 데이터 저장 버튼 클릭 이벤트
 btnSave.addEventListener('click', async () => {
   const diary = document.querySelector('.txtDiary').value;
@@ -186,9 +295,10 @@ btnSave.addEventListener('click', async () => {
     alert('하루가 성공적으로 저장되었습니다!');
     btnSave.disabled = true; // 저장 버튼 비활성화
     txtDiary.disabled = true; // 텍스트 박스 비활성화
+    location.reload();
   } catch (err) {
     console.error('Failed to save daily log:', err);
     alert('저장 중 오류가 발생했습니다.');
   }
 });
-console.log(db);
+
