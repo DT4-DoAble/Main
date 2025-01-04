@@ -184,6 +184,13 @@ input[data-emotion-type='sad'] {
   border-radius: 16px;
 }
 
+.btnSave:disabled {
+  color: white; 
+  font-weight: 400;
+  background-color: #C6C6CD;
+  cursor: not-allowed; 
+}
+
 .mt16 {
   margin-top: 16px;
 }

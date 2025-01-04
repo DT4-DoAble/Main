@@ -1,4 +1,4 @@
-import db from '../js/db.js'; // db.js에서 공유된 객체 사용
+
 
 // 달력 초기화
 const today = new Date();
