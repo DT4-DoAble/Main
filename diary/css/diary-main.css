@@ -21,7 +21,7 @@
 
 /* 일기 아이템 목록 영역 */
 .diary-item-list-area {
-  flex-grow: 1;
+  /* flex-grow: 1; */
   padding-top: 24px;
   padding-bottom: 40px;
   display: flex;

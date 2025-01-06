@@ -61,7 +61,7 @@ async function displayDiariesByMonth(year, month) {
       const diaryItem = `
         <li class="diary-item">
           <h4 class="diary-item-title">
-            <span class="diary-day-number">${day}</span>
+            <span class="diary-day-number text-xl-b">${day}</span>
             <img src="${emojiImage}" alt="${entry.selectedEmoji}"  style="width:28px; height:28px;"/>
           </h4>
           <div class="diary-contents">
