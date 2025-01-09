@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// DOM이 완전히 로드된 후에 이벤트를 연결
+// DOM이 완전히 로드된 후에 이벤트를 연결 (웹 시작하기 버튼)
 document.addEventListener("DOMContentLoaded", function () {
   const button = document.querySelector(".start");
 
@@ -112,3 +112,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+
+// 모바일 버전 시작하기 버튼
+document.addEventListener("DOMContentLoaded", function () {
+  const button = document.querySelector(".phone_btn");
+
+  // 버튼이 존재하는 경우에만 이벤트 추가
+  if (button) {
+    button.addEventListener("click", function () {
+      window.location.href = "../../login/html/login.html"; // 이동할 URL
+    });
+  }
+});
+
+

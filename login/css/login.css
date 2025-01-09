@@ -66,7 +66,6 @@ a {
   overflow: hidden;
   white-space: nowrap;
   z-index: 10; /* 메뉴가 다른 요소보다 위에 오도록 설정 */
-
 }
 
 .logo {
@@ -133,8 +132,6 @@ a {
   display: flex;
 }
 
-
-
 @media (max-width: 1500px) {
   .all {
     margin-left: 0;
@@ -143,49 +140,50 @@ a {
     padding-right: 0;
   }
   .navbar {
-  
-      padding: 0 240px; /* 좌우 여백 */
-      text-align: center;
-    }
-    
-  }
-  /* 65, 40, 24 */
-
-  .first_ment {
-    font-size: 55px;
-  }
-  .second_ment {
-    font-size: 35px;
-  }
-
-  .third_ment {
-    font-size: 19px;
-    padding-top: 100px;
-  }
-  .login_txt {
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+    padding: 0 240px; /* 좌우 여백 */
     text-align: center;
-    transform: translateY(-10%); /* 텍스트를 위로 20% 올림 */
   }
+}
+/* 65, 40, 24 */
 
-  .login_btn {
-    display: flex; /* flexbox 사용 */
-    justify-content: center; /* 수평 중앙 정렬 */
-    align-items: center; /* 수직 중앙 정렬 */
-    gap: 20px; /* 아이콘 간 간격 */
-    
+.first_ment {
+  font-size: 55px;
+}
+.second_ment {
+  font-size: 35px;
+}
+
+.third_ment {
+  font-size: 19px;
+  padding-top: 100px;
+}
+.login_txt {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  transform: translateY(-10%); /* 텍스트를 위로 20% 올림 */
+}
+
+.login_btn {
+  display: flex; /* flexbox 사용 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 20px; /* 아이콘 간 간격 */
+}
+
+.kakao {
+  width: 80%;
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    display: none;
   }
-
-  .kakao{
-    width: 80%;
-  }
-
-
+}
 
 @media (max-width: 500px) {
   .all {
@@ -195,39 +193,32 @@ a {
     padding-right: 0;
   }
 
-    .navbar{
-        display: none;
-    }
+  .navbar {
+    display: none;
+  }
 
-    .first_ment {
-        margin-top: 100px;
-        font-size: 45px;
-      }
-      .second_ment {
-        font-size: 20px;
-      }
-    
-      .third_ment {
-        font-size: 15px;
-        padding-top: 150px;
-        margin-bottom: 5px;
-      }
+  .first_ment {
+    margin-top: 100px;
+    font-size: 45px;
+  }
+  .second_ment {
+    font-size: 20px;
+  }
 
-      .login_btn {
-        display: flex; /* flexbox 사용 */
-        justify-content: center; /* 수평 중앙 정렬 */
-        align-items: center; /* 수직 중앙 정렬 */
-        gap: 20px; /* 아이콘 간 간격 */
-        
-      }
-    
-      .kakao{
-        width: 80%;
-      }
-      
+  .third_ment {
+    font-size: 15px;
+    padding-top: 150px;
+    margin-bottom: 5px;
+  }
 
+  .login_btn {
+    display: flex; /* flexbox 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    gap: 20px; /* 아이콘 간 간격 */
+  }
+
+  .kakao {
+    width: 80%;
+  }
 }
-
-
-
-
