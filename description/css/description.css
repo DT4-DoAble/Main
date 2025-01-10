@@ -160,7 +160,7 @@ a {
   position: absolute; /* 고정 위치 */
   width: 490px;
   height: auto;
-  top: 50%; /* .right 기준 중앙 */
+  top: 55%; /* .right 기준 중앙 */
   left: 60%; /* .right 내부 중앙 */
   transform: translate(-50%, -50%); /* 완벽한 중앙 정렬 */
 }
@@ -204,7 +204,7 @@ button,
   display: none; /* 기본적으로 안보이게 설정 */
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1800px) {
   .all,
   .navbar {
     padding: 0 240px; /* 좌우 여백 */
@@ -248,7 +248,7 @@ button,
     position: absolute; /* 고정 위치 */
     width: 400px;
     height: auto;
-    top: 49%; /* .right 기준 중앙 */
+    top: 50%; /* .right 기준 중앙 */
     left: 60%; /* .right 내부 중앙 */
     transform: translate(-50%, -50%); /* 완벽한 중앙 정렬 */
   }
@@ -258,6 +258,167 @@ button,
     position: fixed;
   }
 }
+
+@media (max-width: 1400px) {
+  .all,
+  .navbar {
+    padding: 0 180px; /* 좌우 여백 */
+  }
+
+  .txt1 {
+    font-size: 30px;
+  }
+  .txt2 {
+    font-size: 40px;
+  }
+  .txt3 {
+    font-size: 25px;
+  }
+
+  .des {
+    margin: 5px 0;
+    white-space: nowrap; /* 줄바꿈 방지 */
+  }
+
+  .btn {
+    width: 400px;
+    height: 30px;
+    padding: 32px 40px;
+    font-size: 22px;
+  }
+
+  .left,
+  .right {
+    justify-content: space-between;
+  }
+
+  .right {
+    position: relative;
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .main1 {
+    position: absolute; /* 고정 위치 */
+    width: 400px;
+    height: auto;
+    top: 50%; /* .right 기준 중앙 */
+    left: 60%; /* .right 내부 중앙 */
+    transform: translate(-50%, -50%); /* 완벽한 중앙 정렬 */
+  }
+
+  .icon-container {
+    right: 30px;
+    position: fixed;
+  }
+
+  .bi {
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .all,
+  .navbar {
+    display: none; /* 기존 디자인 숨기기 */
+  }
+
+  .iphone {
+    font-family: pretendard;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* 세로로 배치 */
+    justify-content: flex-start; /* 상단 정렬 */
+    padding: 24px; /* 좌우 여백 */
+    box-sizing: border-box;
+    overflow-y: hidden;
+  }
+
+  .slider {
+    justify-content: center;
+    justify-items: center;
+  }
+  .ttt {
+    margin-top: 10%;
+    margin-bottom: 5%;
+  }
+  .pe {
+    margin: 8px; /* 위아래 간격 */
+    /* margin-bottom: 10px; */
+  }
+
+  .txtt1 {
+    color: var(--Mint-50, #3fc9ae);
+    font-weight: 400;
+    font-size: 25px;
+    margin-bottom: -5px;
+  }
+  .txtt2 {
+    color: var(--Gray-20, #303036);
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 70px; /* 116.667% */
+  }
+  .txtt3 {
+    color: var(--Gray-40, #676774);
+    font-size: 23px;
+    font-weight: 380;
+  }
+
+  .m1 {
+    display: flex;
+    width: 450px;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* 가로 중앙 정렬 */
+    margin-top: 15px;
+  }
+
+  .phone_btn {
+    border: none;
+    border-radius: 15px;
+    background: var(--Mint-50, #3fc9ae);
+    display: flex;
+    width: 500px;
+    height: 40px;
+    padding: 30px 30px;
+    justify-content: center;
+    align-items: center;
+    color: var(--White, #fff);
+    text-align: center;
+    font-size: 22px;
+    margin-top: -22px;
+  }
+
+  .end {
+    justify-items: center;
+  }
+
+  .phone_b {
+    display: flex;
+    flex-direction: row; /* 세로로 배치 */
+    align-items: flex-end; /* 가로 가운데 정렬 */
+    justify-content: center; /* 세로 가운데 정렬 */
+  }
+
+  .ip {
+    margin-top: 30px;
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    font-size: 30px;
+    color: #a6a6b0;
+    cursor: pointer;
+  }
+
+  .ip.active {
+    color: #ffffff; /* 활성화 상태 (초록색) */
+  }
+}
+
 @media screen and (max-width: 500px) {
   .all,
   .navbar {
@@ -295,7 +456,7 @@ button,
     color: var(--Gray-20, #303036);
     font-size: 28px;
     font-weight: 600;
-  line-height: 70px; /* 116.667% */
+    line-height: 70px; /* 116.667% */
   }
   .txtt3 {
     color: var(--Gray-40, #676774);
@@ -313,7 +474,6 @@ button,
   }
 
   .phone_btn {
-    
     justify-content: flex-end;
     border: none;
     border-radius: 15px;
@@ -328,18 +488,16 @@ button,
     text-align: center;
     font-size: 18px;
     margin-top: -17px;
-    
-    
   }
 
   .phone_b {
-  display: flex;
-  flex-direction: row; /* 세로로 배치 */
-  align-items: flex-end; /* 가로 가운데 정렬 */
-  justify-content: center; /* 세로 가운데 정렬 */
-}
+    display: flex;
+    flex-direction: row; /* 세로로 배치 */
+    align-items: flex-end; /* 가로 가운데 정렬 */
+    justify-content: center; /* 세로 가운데 정렬 */
+  }
 
-  .ip{
+  .ip {
     margin-top: 15px;
     display: inline-block;
     border: none;
@@ -347,13 +505,9 @@ button,
     font-size: 20px;
     color: #a6a6b0;
     cursor: pointer;
-
   }
 
   .ip.active {
     color: #ffffff; /* 활성화 상태 (초록색) */
   }
-  
 }
-
-  
