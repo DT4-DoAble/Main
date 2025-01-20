@@ -6,7 +6,14 @@
 ## 배포 주소
 > https://doable1.netlify.app/
 
-## 프로젝트 소개
+## 서비스 개요
+
+## 문제 정의 (서비스 목적)
+## 해결 방안, 기대효과
+## 요구사항 정의서
+## 주요 기능
+## 시연 영상
+## 트래블 슈팅
 
 
 ## stacks
@@ -19,7 +26,3 @@
 ![js](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![js](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-
-## 화면 구성
-
-## 주요 기능
