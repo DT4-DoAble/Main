@@ -1,8 +1,10 @@
 
-# Main
+# DoAble
+> 강동 dt기 2차 팀프로젝트
+> 개발기간 : 2024.12.13~2024.12.30 
 
 ## 배포 주소
-(https://doable1.netlify.app/)
+> https://doable1.netlify.app/
 
 ## stacks
 
