@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입 |:Doable과 오늘 하루 시작하기</title>
     <link rel="stylesheet" href="../css/loginForm.css" />
     <script src="../js/loginForm.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
       <div class="navbar">
-        <a href="/main/html/index.html" class="logo">:Doable</a>
+        <a href="" class="logo">:Doable</a>
         <nav>
           <ul>
             <li class="menu btn1">
-              <a href="/calendar/html/index.html">일정</a>
+              <a href="#" onclick="checkLogin('/calendar/html/index.html')"
+                >일정</a
+              >
             </li>
             <li class="menu btn2">
-              <a href="/diary/html/diary_main.html">일기</a>
+              <a href="#" onclick="checkLogin('/diary/html/diary_main.html')"
+                >일기</a
+              >
             </li>
             <li class="menu btn3">
-              <a href="/nickname/html/nickname.html">마이페이지</a> 
+              <a href="#" onclick="checkLogin('/mypage/html/mypage.html')"
+                >마이페이지</a
+              >
             </li>
             <li class="menu btn4">
               <a href="/login/html/login.html">로그인</a>
@@ -30,27 +36,36 @@
       </div>
     </header>
     <div class="all">
-        <div class="login_txt">
-            <div class="first_ment">
-                회원가입
-            </div>
-        </div>
+      <div class="login_txt">
+        <div class="first_ment">회원가입</div>
+      </div>
 
-        <label for="username">아이디</label>
-        <input type="text" id="username" name="username" placeholder="example@domain.com" required>
-        <span class="error" id="userError"></span>
+      <label for="username">아이디</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="example@domain.com"
+        required
+      />
+      <span class="error" id="userError"></span>
 
-        <label for="password">비밀번호</label>
-        <input type="password" id="password" name="password" required>
-        <span class="error" id="passwordError"></span>
+      <label for="password">비밀번호</label>
+      <input type="password" id="password" name="password" required />
+      <span class="error" id="passwordError"></span>
 
-        <label for="confirmPassword">비밀번호 확인</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required>
-        <span class="error" id="confirmPasswordError"></span>
+      <label for="confirmPassword">비밀번호 확인</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        required
+      />
+      <span class="error" id="confirmPasswordError"></span>
 
-        <button type="submit" class="login_btn1" id="submitButton">
-            이메일로 가입하기
-        </button>
+      <button type="submit" class="login_btn1" id="submitButton">
+        이메일로 가입하기
+      </button>
     </div>
-</body>
+  </body>
 </html>
