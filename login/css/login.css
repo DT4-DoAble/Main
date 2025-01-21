@@ -175,6 +175,26 @@ a {
   gap: 20px; /* 아이콘 간 간격 */
 }
 
+.login_btn1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 32px;
+  width: 64%;
+  height: 58px;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  font-family: pretendard;
+  font-weight: 300;
+}
+
+button.login_btn1:hover {
+    background-color: #333333;
+}
+
 .kakao {
   width: 80%;
 }
@@ -220,5 +240,12 @@ a {
 
   .kakao {
     width: 80%;
+  }
+
+  .login_btn1{
+    margin-top: 24px;
+    border-radius: 5px;
+    height: 38px;
+    font-size: 12px;
   }
 }
