@@ -12,17 +12,23 @@
   <body>
     <header>
       <div class="navbar">
-        <a href="/main/html/index.html" class="logo">:Doable</a>
+        <a href="/description/html/description.html" class="logo">:Doable</a>
         <nav>
           <ul>
             <li class="menu btn1">
-              <a href="/calendar/html/index.html">일정</a>
+              <a href="#" onclick="checkLogin('/calendar/html/index.html')"
+                >일정</a
+              >
             </li>
             <li class="menu btn2">
-              <a href="/diary/html/diary_main.html">일기</a>
+              <a href="#" onclick="checkLogin('/diary/html/diary_main.html')"
+                >일기</a
+              >
             </li>
             <li class="menu btn3">
-              <a href="/nickname/html/nickname.html">마이페이지</a>
+              <a href="#" onclick="checkLogin('/mypage/html/mypage.html')"
+                >마이페이지</a
+              >
             </li>
             <li class="menu btn4">
               <a href="/login/html/login.html">로그인</a>
@@ -45,7 +51,11 @@
             />
           </a>
         </div>
-        <button type="button" class="login_btn1" onclick="location.href='/login/html/loginEmail.html'" >
+        <button
+          type="button"
+          class="login_btn1"
+          onclick="location.href='/login/html/loginEmail.html'"
+        >
           Login
         </button>
       </div>

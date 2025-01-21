@@ -468,3 +468,12 @@ const closeModalButton = document.querySelector(".close");
 closeModalButton.addEventListener("click", () => {
   modal.style.display = "none"; // 모달 숨기기
 });
+
+// URL에서 닉네임 값 가져오기
+const params = new URLSearchParams(window.location.search);
+const nickname = params.get("nickname");
+
+// 닉네임이 있으면 화면에 표시
+if (nickname) {
+  document.getElementById("userName").textContent = nickname;
+}
