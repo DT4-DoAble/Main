@@ -74,6 +74,6 @@ function checkLogin(redirectUrl) {
   } else {
     // 로그인되지 않았으면 로그인 페이지로 리디렉션
     alert('로그인 후 이용 가능합니다.');
-    window.location.href = '/login/html/login.html'; // 로그인 페이지로 리디렉션
+
   }
 }
