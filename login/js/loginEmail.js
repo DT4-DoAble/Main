@@ -63,3 +63,17 @@ loginButton.addEventListener("click", () => {
   window.location.href = "/nickname/html/nickname.html";
 });
 
+
+// 로그인 상태를 확인하는 함수
+function checkLogin(redirectUrl) {
+  const isLoggedIn = localStorage.getItem('isLoggedIn'); // 로그인 여부 체크
+
+  if (isLoggedIn === 'true') {
+    // 로그인되어 있으면 해당 페이지로 리디렉션
+    window.location.href = redirectUrl;
+  } else {
+    // 로그인되지 않았으면 로그인 페이지로 리디렉션
+    alert('로그인 후 이용 가능합니다.');
+    window.location.href = '/login/html/login.html'; // 로그인 페이지로 리디렉션
+  }
+}
