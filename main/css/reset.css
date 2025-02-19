@@ -1,0 +1,57 @@
+/* CSS Reset */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: var(--color-gray-10);
+}
+
+ul {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+a {
+  color: var(--color-gray-10);
+  text-decoration: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+button {
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+table,
+th,
+td {
+  border-collapse: collapse;
+}
+
+td {
+  padding: 0;
+}

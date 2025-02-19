@@ -1,0 +1,34 @@
+/* Typography */
+.text-2xs-r { font-size: 10px; font-weight: 400; line-height: 14px; }
+.text-2xs-m { font-size: 10px; font-weight: 500; line-height: 14px; }
+.text-2xs-b { font-size: 10px; font-weight: 600; line-height: 14px; }
+.text-xs-r { font-size: 12px; font-weight: 400; line-height: 16px; }
+.text-xs-m { font-size: 12px; font-weight: 500; line-height: 16px; }
+.text-xs-b { font-size: 12px; font-weight: 600; line-height: 16px; }
+.text-base-r { font-size: 14px; font-weight: 400; line-height: 18px; }
+.text-base-m { font-size: 14px; font-weight: 500; line-height: 18px; }
+.text-base-b { font-size: 14px; font-weight: 600; line-height: 18px; }
+.text-s-r { font-size: 16px; font-weight: 400; line-height: 20px; }
+.text-s-m { font-size: 16px; font-weight: 500; line-height: 20px; }
+.text-s-b { font-size: 16px; font-weight: 600; line-height: 20px; }
+.text-m-r { font-size: 18px; font-weight: 400; line-height: 22px; }
+.text-m-m { font-size: 18px; font-weight: 500; line-height: 22px; }
+.text-m-b { font-size: 18px; font-weight: 600; line-height: 22px; }
+.text-l-r { font-size: 20px; font-weight: 400; line-height: 24px; }
+.text-l-m { font-size: 20px; font-weight: 500; line-height: 24px; }
+.text-l-b { font-size: 20px; font-weight: 600; line-height: 24px; }
+.text-xl-r { font-size: 24px; font-weight: 400; line-height: 30px; }
+.text-xl-m { font-size: 24px; font-weight: 500; line-height: 30px; }
+.text-xl-b { font-size: 24px; font-weight: 600; line-height: 30px; }
+.text-2xl-r { font-size: 32px; font-weight: 400; line-height: 40px; }
+.text-2xl-m { font-size: 32px; font-weight: 500; line-height: 40px; }
+.text-2xl-b { font-size: 32px; font-weight: 600; line-height: 40px; }
+.text-3xl-r { font-size: 40px; font-weight: 400; line-height: 50px; }
+.text-3xl-m { font-size: 40px; font-weight: 500; line-height: 50px; }
+.text-3xl-b { font-size: 40px; font-weight: 600; line-height: 50px; }
+.text-4xl-r { font-size: 48px; font-weight: 400; line-height: 60px; }
+.text-4xl-m { font-size: 48px; font-weight: 500; line-height: 60px; }
+.text-4xl-b { font-size: 48px; font-weight: 600; line-height: 60px; }
+.text-8xl-b { font-size: 80px; font-weight: 600; line-height: 60px; }
+
+.capitalize { text-transform: capitalize; }
