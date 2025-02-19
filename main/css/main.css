@@ -500,6 +500,7 @@ body {
 
   .main-wrapper {
     padding-top: 0;
+    overflow: auto;
   }
 
   .main {
@@ -602,12 +603,13 @@ body {
 
   .emotion-tracker-area {
     padding: 24px 32px;
-    gap: 60px;
+    gap: 40px;
   }
 
   #graph {
     flex-grow: 1;
     flex-direction: column;
+    gap: 10px;
   }
 
   #graph li {
